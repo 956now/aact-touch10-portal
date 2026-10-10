@@ -372,26 +372,39 @@
       display: none;
     }
     .row-inputs-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .subrow {
       display: grid;
-      grid-template-columns: 20% 20% 16% 22% 12% 10%;
       gap: 6px;
     }
+    .subrow-identity {
+      grid-template-columns: 1.15fr 1.15fr 1fr 1fr;
+    }
+    .subrow-location {
+      grid-template-columns: 1.3fr 1fr 0.7fr 1.1fr 0.9fr;
+    }
     @media (max-width: 900px) {
-      .row-inputs-grid { grid-template-columns: 1fr 1fr; }
+      .subrow-identity, .subrow-location { grid-template-columns: 1fr 1fr; }
     }
     .row-inputs-grid input, .row-inputs-grid select {
       font-family: var(--font-sans);
-      font-size: 12px;
-      padding: 4px 8px;
+      font-size: 11.5px;
+      padding: 4px 7px;
+      height: 28px;
       border: 1px solid var(--slate-300);
       border-radius: 5px;
       background: #fff;
       color: var(--slate-900);
       width: 100%;
+      box-sizing: border-box;
     }
     .row-inputs-grid input:focus, .row-inputs-grid select:focus {
       outline: none;
       border-color: var(--blue-accent);
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.12);
     }
 
     .verification-footer {
@@ -1114,16 +1127,23 @@
             <button type="button" class="tool-btn" style="padding: 1px 6px; font-size: 10px;" onclick="clearRow(${i})">Clear Row</button>
           </div>
           <div class="row-inputs-grid">
-            <input type="text" id="fn_${i}" class="in-fn" placeholder="First Name" oninput="autoCapitalize(this); handleNameInput(${i})" onkeydown="handleRowKeydown(event, ${i}, 'fn')">
-            <input type="text" id="ln_${i}" class="in-ln" placeholder="Last Name" oninput="autoCapitalize(this); handleNameInput(${i})" onkeydown="handleRowKeydown(event, ${i}, 'ln')">
-            <input type="text" id="ph_${i}" class="in-ph" placeholder="(956) XXX-XXXX" oninput="formatPhoneInput(this)" onkeydown="handleRowKeydown(event, ${i}, 'ph')">
-            <input type="text" id="addr_${i}" class="in-addr" placeholder="Street Address" onkeydown="handleRowKeydown(event, ${i}, 'addr')">
-            <select id="city_${i}" class="in-city">
-              ${cities.map(c => `<option value="${c}">${c}</option>`).join("")}
-            </select>
-            <select id="rel_${i}" class="in-rel">
-              ${relationships.map(r => `<option value="${r}">${r}</option>`).join("")}
-            </select>
+            <div class="subrow subrow-identity">
+              <input type="text" id="fn_${i}" class="in-fn" placeholder="First Name" oninput="autoCapitalize(this); handleNameInput(${i})" onkeydown="handleRowKeydown(event, ${i}, 'fn')">
+              <input type="text" id="ln_${i}" class="in-ln" placeholder="Last Name" oninput="autoCapitalize(this); handleNameInput(${i})" onkeydown="handleRowKeydown(event, ${i}, 'ln')">
+              <input type="text" id="ph_${i}" class="in-ph" placeholder="Phone (956) XXX-XXXX" oninput="formatPhoneInput(this)" onkeydown="handleRowKeydown(event, ${i}, 'ph')">
+              <input type="text" id="dob_${i}" class="in-dob" placeholder="DOB (MM/DD/YYYY)" maxlength="10" oninput="formatDobInput(this); handleNameInput(${i})" onkeydown="handleRowKeydown(event, ${i}, 'dob')">
+            </div>
+            <div class="subrow subrow-location">
+              <input type="text" id="addr_${i}" class="in-addr" placeholder="Street Address" onkeydown="handleRowKeydown(event, ${i}, 'addr')">
+              <select id="city_${i}" class="in-city">
+                ${cities.map(c => `<option value="${c}">${c}</option>`).join("")}
+              </select>
+              <input type="text" id="zip_${i}" class="in-zip" placeholder="Zip (78501)" maxlength="5" onkeydown="handleRowKeydown(event, ${i}, 'zip')">
+              <input type="email" id="email_${i}" class="in-email" placeholder="Email Address (Optional)" onkeydown="handleRowKeydown(event, ${i}, 'email')">
+              <select id="rel_${i}" class="in-rel">
+                ${relationships.map(r => `<option value="${r}">${r}</option>`).join("")}
+              </select>
+            </div>
           </div>
         `;
         container.appendChild(row);
@@ -1262,12 +1282,15 @@ Each page or card contains:
    - First Name
    - Last Name
    - Phone Number
+   - Date of Birth (DOB, e.g. "06/13/1966" or birth year)
    - Street Address
    - City (e.g. McAllen, Edinburg, Mission, Pharr, Weslaco, Brownsville, etc.)
+   - Zip Code (e.g. 78501, 78572)
+   - Email Address
    - Relationship (e.g. Family, Friend, Co-Worker, Neighbor, Church, Student, etc.)
 
 Examine every single handwritten word across ALL pages.
-Transcribe names, numbers, and addresses with extreme precision.
+Transcribe names, numbers, DOBs, and addresses with extreme precision.
 Expand South Texas compound surnames and common abbreviations if clear from context:
 - 'Gza' -> 'Garza', 'Hdz' -> 'Hernandez', 'Mtz' -> 'Martinez', 'Rdz' -> 'Rodriguez', 'Ma.' -> 'Maria', 'Xim' -> 'Ximena'
 
@@ -1287,8 +1310,11 @@ Return a clean, structured JSON object:
           "first_name": "...",
           "last_name": "...",
           "phone": "...",
+          "dob": "...",
           "address": "...",
           "city": "...",
+          "zip": "...",
+          "email": "...",
           "relationship": "...",
           "raw_handwriting_reading": "..."
         }
@@ -1426,15 +1452,21 @@ Return ONLY valid JSON.`;
         const fnInput = document.getElementById(`fn_${rowNum}`);
         const lnInput = document.getElementById(`ln_${rowNum}`);
         const phInput = document.getElementById(`ph_${rowNum}`);
+        const dobInput = document.getElementById(`dob_${rowNum}`);
         const addrInput = document.getElementById(`addr_${rowNum}`);
         const citySelect = document.getElementById(`city_${rowNum}`);
+        const zipInput = document.getElementById(`zip_${rowNum}`);
+        const emailInput = document.getElementById(`email_${rowNum}`);
         const relSelect = document.getElementById(`rel_${rowNum}`);
         const aiBadge = document.getElementById(`ai_badge_${rowNum}`);
 
         if (fnInput) fnInput.value = c.first_name || "";
         if (lnInput) lnInput.value = c.last_name || "";
         if (phInput) phInput.value = c.phone || "";
+        if (dobInput) dobInput.value = c.dob || "";
         if (addrInput) addrInput.value = c.address || "";
+        if (zipInput) zipInput.value = c.zip || "";
+        if (emailInput) emailInput.value = c.email || "";
 
         if (citySelect && c.city) {
           let matched = false;
@@ -1488,9 +1520,19 @@ Return ONLY valid JSON.`;
       el.value = `(${nums.slice(0,3)}) ${nums.slice(3,6)}-${nums.slice(6)}`;
     }
 
+    function formatDobInput(el) {
+      let nums = el.value.replace(/\D/g, "");
+      if (nums.length > 8) nums = nums.slice(0, 8);
+      if (nums.length === 0) { el.value = ""; return; }
+      if (nums.length <= 2) { el.value = nums; return; }
+      if (nums.length <= 4) { el.value = `${nums.slice(0,2)}/${nums.slice(2)}`; return; }
+      el.value = `${nums.slice(0,2)}/${nums.slice(2,4)}/${nums.slice(4)}`;
+    }
+
     function handleNameInput(rowNum) {
-      const fn = document.getElementById(`fn_${rowNum}`).value.trim();
-      const ln = document.getElementById(`ln_${rowNum}`).value.trim();
+      const fn = document.getElementById(`fn_${rowNum}`)?.value.trim() || "";
+      const ln = document.getElementById(`ln_${rowNum}`)?.value.trim() || "";
+      const dob = document.getElementById(`dob_${rowNum}`)?.value.trim() || "";
       const pill = document.getElementById(`voterLookupPill_${rowNum}`);
       if (!pill) return;
 
@@ -1500,16 +1542,23 @@ Return ONLY valid JSON.`;
         return;
       }
 
-      pill.textContent = "✓ Verified Contact";
-      pill.style.color = "var(--emerald-dark)";
+      if (dob) {
+        pill.textContent = `✓ Target Registered (DOB: ${dob})`;
+        pill.style.color = "var(--emerald-dark)";
+      } else {
+        pill.textContent = "✓ Verified Contact";
+        pill.style.color = "var(--emerald-dark)";
+      }
     }
 
     function clearRow(rowNum) {
-      document.getElementById(`fn_${rowNum}`).value = "";
-      document.getElementById(`ln_${rowNum}`).value = "";
-      document.getElementById(`ph_${rowNum}`).value = "";
-      document.getElementById(`addr_${rowNum}`).value = "";
-      document.getElementById(`ai_badge_${rowNum}`).style.display = "none";
+      const fieldIds = [`fn_${rowNum}`, `ln_${rowNum}`, `ph_${rowNum}`, `dob_${rowNum}`, `addr_${rowNum}`, `zip_${rowNum}`, `email_${rowNum}`];
+      fieldIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = "";
+      });
+      const aiBadge = document.getElementById(`ai_badge_${rowNum}`);
+      if (aiBadge) aiBadge.style.display = "none";
       handleNameInput(rowNum);
     }
 
@@ -1586,10 +1635,10 @@ Return ONLY valid JSON.`;
       if (key === "eduardo") {
         selectAmbassador("Eduardo Gonzalez", "eduardo.gonzalez@southtexascollege.edu", "South Texas College");
         const sampleContacts = [
-          { fn: "Karina", ln: "Galvan", ph: "(956) 432-8812", addr: "412 E 4th St", city: "Sullivan City", rel: "Family" },
-          { fn: "Erik", ln: "Solis", ph: "(956) 580-2190", addr: "109 N Sullivan Blvd", city: "Sullivan City", rel: "Friend" },
-          { fn: "Sofia", ln: "Reyes", ph: "(956) 686-4401", addr: "800 N 10th St", city: "McAllen", rel: "Co-Worker" },
-          { fn: "Aron", ln: "Galvan", ph: "(956) 781-9922", addr: "318 S Alamo Rd", city: "Alamo", rel: "Neighbor" }
+          { fn: "Karina", ln: "Galvan", ph: "(956) 432-8812", dob: "05/18/1991", addr: "412 E 4th St", city: "Sullivan City", zip: "78595", email: "karina.galvan@gmail.com", rel: "Family" },
+          { fn: "Erik", ln: "Solis", ph: "(956) 580-2190", dob: "08/19/1988", addr: "109 N Sullivan Blvd", city: "Sullivan City", zip: "78595", email: "erik.solis@yahoo.com", rel: "Friend" },
+          { fn: "Sofia", ln: "Reyes", ph: "(956) 686-4401", dob: "02/14/1995", addr: "800 N 10th St", city: "McAllen", zip: "78501", email: "sofia.reyes@stc.edu", rel: "Co-Worker" },
+          { fn: "Aron", ln: "Galvan", ph: "(956) 781-9922", dob: "10/30/1972", addr: "318 S Alamo Rd", city: "Alamo", zip: "78516", email: "aron.galvan@hotmail.com", rel: "Neighbor" }
         ];
         renderTranscriberRows();
         sampleContacts.forEach((c, idx) => {
@@ -1597,8 +1646,11 @@ Return ONLY valid JSON.`;
           document.getElementById(`fn_${rowNum}`).value = c.fn;
           document.getElementById(`ln_${rowNum}`).value = c.ln;
           document.getElementById(`ph_${rowNum}`).value = c.ph;
+          document.getElementById(`dob_${rowNum}`).value = c.dob;
           document.getElementById(`addr_${rowNum}`).value = c.addr;
           document.getElementById(`city_${rowNum}`).value = c.city;
+          document.getElementById(`zip_${rowNum}`).value = c.zip;
+          document.getElementById(`email_${rowNum}`).value = c.email;
           document.getElementById(`rel_${rowNum}`).value = c.rel;
           handleNameInput(rowNum);
         });
@@ -1606,9 +1658,9 @@ Return ONLY valid JSON.`;
       } else if (key === "laura") {
         selectAmbassador("Laura Venecia", "laura.v@dhrhealth.com", "DHR Health System");
         const sampleContacts = [
-          { fn: "Linda", ln: "Cerda", ph: "(956) 381-1200", addr: "5501 S McColl Rd", city: "Edinburg", rel: "Co-Worker" },
-          { fn: "Delia", ln: "Miranda", ph: "(956) 362-8000", addr: "1100 E Dove Ave", city: "McAllen", rel: "Friend" },
-          { fn: "Nabor", ln: "Zamarripa", ph: "(956) 548-6000", addr: "1000 E Expressway 83", city: "Brownsville", rel: "Family" }
+          { fn: "Linda", ln: "Cerda", ph: "(956) 381-1200", dob: "06/13/1966", addr: "2720 E Mile 5 Rd", city: "Mission", zip: "78573", email: "linda.cerda@dhrhealth.com", rel: "Co-Worker" },
+          { fn: "Delia", ln: "Miranda", ph: "(956) 362-8000", dob: "11/24/1978", addr: "1100 E Dove Ave", city: "McAllen", zip: "78504", email: "delia.m@dhrhealth.com", rel: "Friend" },
+          { fn: "Nabor", ln: "Zamarripa", ph: "(956) 548-6000", dob: "03/05/1954", addr: "1000 E Expressway 83", city: "Brownsville", zip: "78520", email: "nabor.z@gmail.com", rel: "Family" }
         ];
         renderTranscriberRows();
         sampleContacts.forEach((c, idx) => {
@@ -1616,8 +1668,11 @@ Return ONLY valid JSON.`;
           document.getElementById(`fn_${rowNum}`).value = c.fn;
           document.getElementById(`ln_${rowNum}`).value = c.ln;
           document.getElementById(`ph_${rowNum}`).value = c.ph;
+          document.getElementById(`dob_${rowNum}`).value = c.dob;
           document.getElementById(`addr_${rowNum}`).value = c.addr;
           document.getElementById(`city_${rowNum}`).value = c.city;
+          document.getElementById(`zip_${rowNum}`).value = c.zip;
+          document.getElementById(`email_${rowNum}`).value = c.email;
           document.getElementById(`rel_${rowNum}`).value = c.rel;
           handleNameInput(rowNum);
         });
@@ -1649,20 +1704,26 @@ Return ONLY valid JSON.`;
       const rows = document.querySelectorAll("#transcriberRowsContainer .row-card");
       const contacts = [];
       rows.forEach((r, idx) => {
-        const fn = r.querySelector(".in-fn").value.trim();
-        const ln = r.querySelector(".in-ln").value.trim();
-        const ph = r.querySelector(".in-ph").value.trim();
-        const addr = r.querySelector(".in-addr").value.trim();
-        const city = r.querySelector(".in-city").value;
-        const rel = r.querySelector(".in-rel").value;
+        const fn = r.querySelector(".in-fn")?.value.trim() || "";
+        const ln = r.querySelector(".in-ln")?.value.trim() || "";
+        const ph = r.querySelector(".in-ph")?.value.trim() || "";
+        const dob = r.querySelector(".in-dob")?.value.trim() || "";
+        const addr = r.querySelector(".in-addr")?.value.trim() || "";
+        const city = r.querySelector(".in-city")?.value || "";
+        const zip = r.querySelector(".in-zip")?.value.trim() || "";
+        const email = r.querySelector(".in-email")?.value.trim() || "";
+        const rel = r.querySelector(".in-rel")?.value || "";
 
         if (fn || ln) {
           contacts.push({
             first_name: fn,
             last_name: ln,
             phone: ph,
+            dob: dob,
             address: addr,
             city: city,
+            zip: zip,
+            email: email,
             relationship: rel,
             turnout_status: "VERIFIED_ACTIVE"
           });
@@ -1783,9 +1844,12 @@ Return ONLY valid JSON.`;
             <tr>
               <th>#</th>
               <th>Full Name</th>
+              <th>DOB</th>
               <th>Phone</th>
               <th>Address</th>
               <th>City</th>
+              <th>Zip</th>
+              <th>Email</th>
               <th>Relationship</th>
             </tr>
           </thead>
@@ -1794,9 +1858,12 @@ Return ONLY valid JSON.`;
               <tr>
                 <td>${i + 1}</td>
                 <td><strong>${c.first_name} ${c.last_name}</strong></td>
+                <td><span style="font-family: var(--font-mono); font-size: 11px; background: #e0f2fe; color: #0369a1; padding: 1px 5px; border-radius: 4px;">${c.dob || 'N/A'}</span></td>
                 <td>${c.phone || 'N/A'}</td>
                 <td>${c.address || 'N/A'}</td>
                 <td>${c.city || 'McAllen'}</td>
+                <td>${c.zip || 'N/A'}</td>
+                <td style="font-size: 10.5px; color: var(--slate-600);">${c.email || 'N/A'}</td>
                 <td>${c.relationship || 'Contact'}</td>
               </tr>
             `).join("")}
@@ -1856,10 +1923,10 @@ Return ONLY valid JSON.`;
     }
 
     function exportCSVBackup(payload) {
-      const headers = ["Ambassador", "Ambassador_Email", "Organization", "Contact_First", "Contact_Last", "Phone", "Address", "City", "Relationship", "Turnout_Status", "Batch_ID", "Timestamp"];
+      const headers = ["Ambassador", "Ambassador_Email", "Organization", "Contact_First", "Contact_Last", "Phone", "DOB", "Address", "City", "ZIP", "Email", "Relationship", "Turnout_Status", "Batch_ID", "Timestamp"];
       const rows = (payload.contacts || []).map(c => [
         `"${payload.ambassador_name}"`, `"${payload.ambassador_email}"`, `"${payload.organization}"`,
-        `"${c.first_name}"`, `"${c.last_name}"`, `"${c.phone}"`, `"${c.address}"`, `"${c.city}"`, `"${c.relationship}"`,
+        `"${c.first_name}"`, `"${c.last_name}"`, `"${c.phone}"`, `"${c.dob || ''}"`, `"${c.address}"`, `"${c.city}"`, `"${c.zip || ''}"`, `"${c.email || ''}"`, `"${c.relationship}"`,
         `"${c.turnout_status || 'ACTIVE_TARGET'}"`, `"${payload.submission_id}"`, `"${payload.timestamp}"`
       ]);
       const csv = [headers.join(",")].concat(rows.map(r => r.join(","))).join("\n");
@@ -2090,8 +2157,11 @@ Return ONLY valid JSON.`;
           first_name: document.getElementById(`fn_${i}`)?.value || "",
           last_name: document.getElementById(`ln_${i}`)?.value || "",
           phone: document.getElementById(`ph_${i}`)?.value || "",
+          dob: document.getElementById(`dob_${i}`)?.value || "",
           address: document.getElementById(`addr_${i}`)?.value || "",
           city: document.getElementById(`city_${i}`)?.value || "",
+          zip: document.getElementById(`zip_${i}`)?.value || "",
+          email: document.getElementById(`email_${i}`)?.value || "",
           relationship: document.getElementById(`rel_${i}`)?.value || ""
         });
       }
@@ -2104,9 +2174,9 @@ ${JSON.stringify(currentRowsData, null, 2)}
 User Instruction: "${query}"
 
 Guidelines:
-1. If user asks to update or fix any entry (e.g. "Entry 2 is 1966 not 1993", "Row 1 city is Alton", "Row 5 phone is (956) 555-1234", "Add 956 area code to all phones", "First name of row 3 is Ashton"):
+1. If user asks to update or fix any entry (e.g. "Entry 2 DOB is 06/13/1966 not 1993", "Row 1 city is Alton", "Row 5 phone is (956) 555-1234", "Entry 3 zip is 78572", "Add 956 area code to all phones", "First name of row 3 is Ashton"):
    Provide field updates.
-   Supported fields: "fn", "ln", "phone", "address", "city", "relationship".
+   Supported fields: "fn", "ln", "phone", "dob", "address", "city", "zip", "email", "relationship".
 2. If user says "Approve card" or "Save card":
    action: "APPROVE".
 3. If user says "Clear form" or "Reset":
@@ -2118,7 +2188,7 @@ Return ONLY a valid JSON object:
 {
   "reply": "Conversational explanation of what was changed or answered",
   "updates": [
-    { "row": 2, "field": "fn" | "ln" | "phone" | "address" | "city" | "relationship", "value": "..." }
+    { "row": 2, "field": "fn" | "ln" | "phone" | "dob" | "address" | "city" | "zip" | "email" | "relationship", "value": "..." }
   ],
   "action": "UPDATE" | "APPROVE" | "CLEAR" | "ANSWER"
 }`;
@@ -2158,8 +2228,11 @@ Return ONLY a valid JSON object:
             if (u.field === "fn" || u.field === "first_name") el = document.getElementById(`fn_${row}`);
             else if (u.field === "ln" || u.field === "last_name") el = document.getElementById(`ln_${row}`);
             else if (u.field === "phone" || u.field === "ph") el = document.getElementById(`ph_${row}`);
+            else if (u.field === "dob" || u.field === "date_of_birth" || u.field === "birth_date") el = document.getElementById(`dob_${row}`);
             else if (u.field === "address" || u.field === "addr") el = document.getElementById(`addr_${row}`);
             else if (u.field === "city") el = document.getElementById(`city_${row}`);
+            else if (u.field === "zip" || u.field === "zip_code") el = document.getElementById(`zip_${row}`);
+            else if (u.field === "email" || u.field === "mail") el = document.getElementById(`email_${row}`);
             else if (u.field === "relationship" || u.field === "rel") el = document.getElementById(`rel_${row}`);
 
             if (el) {
