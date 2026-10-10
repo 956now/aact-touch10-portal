@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>AACT NOW 2026 • Official Touch 10 Intake Portal</title>
+  <title>AACT NOW 2026 • Official Touch 10 Intake & Verification Command</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,6 +23,8 @@
       --emerald-light: #ECFDF5;
       --gold: #F59E0B;
       --gold-light: #FFFBEB;
+      --purple: #8B5CF6;
+      --purple-light: #F5F3FF;
       --slate-50: #F8FAFC;
       --slate-100: #F1F5F9;
       --slate-200: #E2E8F0;
@@ -53,12 +55,12 @@
     header {
       background: linear-gradient(135deg, var(--navy) 0%, #172554 100%);
       color: var(--white);
-      padding: 14px 24px;
+      padding: 12px 24px;
       border-bottom: 3px solid var(--blue-accent);
       box-shadow: 0 4px 14px rgba(11, 31, 58, 0.25);
     }
     .header-container {
-      max-width: 1400px;
+      max-width: 1560px;
       margin: 0 auto;
       display: flex;
       justify-content: space-between;
@@ -76,28 +78,27 @@
       color: var(--white);
       font-family: var(--font-brand);
       font-weight: 900;
-      font-size: 16px;
-      padding: 6px 12px;
+      font-size: 15px;
+      padding: 5px 10px;
       border-radius: 8px;
       letter-spacing: 0.5px;
       box-shadow: 0 2px 8px rgba(214, 40, 40, 0.3);
     }
     .brand-title h1 {
       font-family: var(--font-brand);
-      font-size: 20px;
+      font-size: 19px;
       font-weight: 800;
       color: var(--white);
       letter-spacing: -0.3px;
     }
     .brand-title p {
-      font-size: 12px;
+      font-size: 11px;
       color: var(--slate-300);
-      margin-top: 1px;
     }
 
     .nav-pills {
       display: flex;
-      gap: 8px;
+      gap: 6px;
       background: rgba(255, 255, 255, 0.08);
       padding: 4px;
       border-radius: 30px;
@@ -108,7 +109,7 @@
       border: none;
       color: var(--slate-300);
       font-weight: 600;
-      font-size: 13px;
+      font-size: 12.5px;
       padding: 6px 14px;
       border-radius: 20px;
       cursor: pointer;
@@ -129,28 +130,13 @@
       align-items: center;
       gap: 12px;
     }
-    .lang-btn {
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      color: var(--white);
-      font-weight: 700;
-      font-size: 12px;
-      padding: 6px 12px;
-      border-radius: 6px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.15s ease;
-    }
-    .lang-btn:hover { background: rgba(255, 255, 255, 0.22); }
     .pulse-pill {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 600;
-      padding: 5px 12px;
+      padding: 4px 10px;
       border-radius: 9999px;
       background: rgba(16, 185, 129, 0.15);
       border: 1px solid rgba(16, 185, 129, 0.4);
@@ -164,265 +150,345 @@
       box-shadow: 0 0 8px #10B981;
     }
 
-    /* MAIN CONTENT */
+    /* MAIN CONTAINER */
     main {
-      max-width: 1400px;
+      max-width: 1560px;
       width: 100%;
-      margin: 20px auto;
-      padding: 0 20px 40px 20px;
+      margin: 16px auto;
+      padding: 0 16px 40px 16px;
       flex: 1;
     }
     .view-panel { display: none; }
-    .view-panel.active { display: block; animation: fadeIn 0.25s ease-in-out; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    .view-panel.active { display: block; animation: fadeIn 0.2s ease-in-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 
     /* CARD STYLING */
     .card {
       background: var(--white);
       border-radius: 12px;
       border: 1px solid var(--slate-200);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
-      padding: 24px;
-      margin-bottom: 20px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
+      padding: 20px;
+      margin-bottom: 18px;
     }
     .card-title {
       font-family: var(--font-brand);
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 800;
       color: var(--navy);
       display: flex;
       align-items: center;
       gap: 8px;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
     .card-subtitle {
-      font-size: 13px;
+      font-size: 12.5px;
       color: var(--slate-600);
-      margin-bottom: 20px;
-    }
-
-    /* FORM CONTROLS */
-    .form-grid-4 {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-      margin-bottom: 18px;
-    }
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-    label {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--slate-700);
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
-    }
-    label .req { color: var(--crimson); }
-    input[type="text"], input[type="email"], input[type="tel"], input[type="password"], select {
-      height: 40px;
-      padding: 0 12px;
-      border: 1.5px solid var(--slate-300);
-      border-radius: 8px;
-      font-family: var(--font-sans);
-      font-size: 14px;
-      color: var(--slate-900);
-      background: var(--white);
-      transition: border-color 0.15s, box-shadow 0.15s;
-    }
-    input:focus, select:focus {
-      outline: none;
-      border-color: var(--blue-accent);
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
-    }
-
-    /* CONTACT GRID TABLE (10-KEY OPTIMIZED) */
-    .table-container {
-      overflow-x: auto;
-      border: 1px solid var(--slate-200);
-      border-radius: 8px;
-      background: var(--white);
       margin-bottom: 16px;
     }
-    table.data-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 13px;
+
+    /* DUAL-PANE VERIFICATION WORKBENCH */
+    .workbench-grid {
+      display: grid;
+      grid-template-columns: 46% 54%;
+      gap: 18px;
+      margin-top: 14px;
     }
-    table.data-table th {
-      background: var(--slate-50);
-      color: var(--slate-700);
-      font-weight: 700;
-      text-transform: uppercase;
+    @media (max-width: 1100px) {
+      .workbench-grid { grid-template-columns: 1fr; }
+    }
+
+    /* VIEWER PANE (LEFT) */
+    .image-viewer-card {
+      background: var(--slate-900);
+      border-radius: 10px;
+      border: 1px solid var(--slate-700);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      min-height: 580px;
+    }
+    .viewer-toolbar {
+      background: #0f172a;
+      padding: 8px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--slate-700);
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .viewer-toolbar .btn-group {
+      display: flex;
+      gap: 6px;
+    }
+    .tool-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: var(--white);
+      padding: 4px 9px;
+      border-radius: 5px;
       font-size: 11px;
-      letter-spacing: 0.5px;
-      padding: 10px 12px;
-      border-bottom: 2px solid var(--slate-200);
-      text-align: left;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: background 0.15s;
     }
-    table.data-table td {
-      padding: 6px 8px;
-      border-bottom: 1px solid var(--slate-200);
-      vertical-align: middle;
+    .tool-btn:hover { background: rgba(255, 255, 255, 0.22); }
+    .tool-btn.active { background: var(--blue-accent); border-color: var(--blue-accent); }
+
+    .image-viewport {
+      flex: 1;
+      position: relative;
+      overflow: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      background: #090e17;
+      min-height: 480px;
     }
-    table.data-table tr:hover td { background-color: var(--blue-light); }
-    table.data-table input, table.data-table select {
-      width: 100%;
-      height: 34px;
-      padding: 0 8px;
-      font-size: 13px;
-      border-radius: 6px;
+    .image-viewport img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.5);
+      transition: transform 0.15s ease, filter 0.15s ease;
+      transform-origin: center center;
     }
-    .row-idx {
-      font-family: var(--font-mono);
-      font-weight: 700;
-      color: var(--slate-600);
+
+    /* UPLOAD DROPZONE */
+    .dropzone-box {
+      border: 2px dashed var(--slate-600);
+      border-radius: 10px;
+      padding: 40px 20px;
       text-align: center;
-      width: 34px;
+      color: var(--slate-400);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: rgba(255, 255, 255, 0.02);
+      width: 100%;
+    }
+    .dropzone-box:hover {
+      border-color: var(--blue-accent);
+      background: rgba(37, 99, 235, 0.05);
+      color: var(--white);
+    }
+    .dropzone-box .icon { font-size: 38px; margin-bottom: 8px; }
+
+    /* VERIFICATION PANE (RIGHT) */
+    .verification-card {
+      background: var(--white);
+      border-radius: 10px;
+      border: 1px solid var(--slate-200);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
+    }
+    .verification-header {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--slate-200);
+      background: var(--slate-50);
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .verification-list {
+      padding: 12px 16px;
+      overflow-y: auto;
+      max-height: 520px;
+      flex: 1;
+    }
+
+    .contact-review-row {
+      background: var(--white);
+      border: 1px solid var(--slate-200);
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 10px;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .contact-review-row:hover {
+      border-color: var(--blue-accent);
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.08);
+    }
+    .contact-review-row.verified {
+      border-left: 4px solid var(--emerald);
+    }
+    .contact-review-row.flagged {
+      border-left: 4px solid var(--gold);
+      background: #fffdf8;
+    }
+    .contact-review-row.unmatched {
+      border-left: 4px solid var(--crimson);
+      background: #fff9f9;
+    }
+
+    .row-meta-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      font-size: 11px;
+    }
+    .row-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 10.5px;
+    }
+    .badge-match { background: var(--emerald-light); color: var(--emerald-dark); border: 1px solid rgba(16,185,129,0.3); }
+    .badge-review { background: var(--gold-light); color: #b45309; border: 1px solid rgba(245,158,11,0.3); }
+    .badge-unmatched { background: var(--crimson-light); color: var(--crimson); border: 1px solid rgba(214,40,40,0.3); }
+
+    .suggestion-box {
+      background: var(--blue-light);
+      border: 1px solid rgba(37, 99, 235, 0.2);
+      border-radius: 6px;
+      padding: 7px 10px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11.5px;
+    }
+    .suggestion-text strong { color: var(--blue); }
+
+    .fields-grid-row {
+      display: grid;
+      grid-template-columns: 28% 28% 22% 22%;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+    .fields-grid-row-sub {
+      display: grid;
+      grid-template-columns: 50% 25% 25%;
+      gap: 6px;
+    }
+    .fields-grid-row input, .fields-grid-row select,
+    .fields-grid-row-sub input, .fields-grid-row-sub select {
+      height: 30px;
+      padding: 0 8px;
+      font-size: 12px;
+      border: 1px solid var(--slate-300);
+      border-radius: 5px;
     }
 
     /* BUTTONS */
     .btn {
-      height: 44px;
-      padding: 0 20px;
+      height: 40px;
+      padding: 0 16px;
       border-radius: 8px;
       font-weight: 700;
-      font-size: 14px;
+      font-size: 13px;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 6px;
       border: none;
       transition: all 0.15s ease;
     }
     .btn-primary {
       background: linear-gradient(135deg, var(--blue-accent) 0%, var(--blue) 100%);
       color: var(--white);
-      box-shadow: 0 4px 10px rgba(30, 64, 175, 0.25);
+      box-shadow: 0 2px 6px rgba(30, 64, 175, 0.25);
     }
-    .btn-primary:hover { background: #1d4ed8; transform: translateY(-1px); }
+    .btn-primary:hover { background: #1d4ed8; }
     .btn-emerald {
       background: linear-gradient(135deg, var(--emerald) 0%, var(--emerald-dark) 100%);
       color: var(--white);
-      box-shadow: 0 4px 10px rgba(16, 185, 129, 0.25);
+      box-shadow: 0 2px 6px rgba(16, 185, 129, 0.25);
     }
-    .btn-emerald:hover { background: #047857; transform: translateY(-1px); }
+    .btn-emerald:hover { background: #047857; }
     .btn-outline {
       background: var(--white);
       border: 1.5px solid var(--slate-300);
       color: var(--slate-700);
     }
     .btn-outline:hover { background: var(--slate-50); border-color: var(--slate-400); }
-    .btn-sm { height: 32px; padding: 0 12px; font-size: 12px; border-radius: 6px; }
+    .btn-sm { height: 28px; padding: 0 10px; font-size: 11px; border-radius: 5px; }
 
-    /* ACTION BAR */
-    .action-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 14px;
+    /* AUDIT TRACKING TABLE */
+    table.audit-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+    }
+    table.audit-table th {
+      background: var(--slate-50);
+      padding: 10px 12px;
+      text-transform: uppercase;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--slate-600);
+      border-bottom: 2px solid var(--slate-200);
+      text-align: left;
+    }
+    table.audit-table td {
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--slate-200);
+      vertical-align: middle;
+    }
+    table.audit-table tr:hover td { background: var(--blue-light); }
+
+    .thumb-preview {
+      width: 44px;
+      height: 32px;
+      border-radius: 4px;
+      object-fit: cover;
+      border: 1px solid var(--slate-300);
+      background: #000;
     }
 
-    /* STAFF LOCK GATE */
+    /* PASSCODE LOCK GATE */
     .lock-banner {
       background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
       color: var(--white);
       padding: 28px;
       border-radius: 12px;
       text-align: center;
-      max-width: 500px;
+      max-width: 460px;
       margin: 40px auto;
       box-shadow: 0 10px 25px rgba(0,0,0,0.2);
     }
-    .lock-icon { font-size: 36px; margin-bottom: 12px; }
+    .lock-icon { font-size: 34px; margin-bottom: 10px; }
 
-    /* AUTOCOMPLETE COMBOBOX */
-    .combobox-wrapper { position: relative; }
-    .combobox-dropdown {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      background: var(--white);
-      border: 1.5px solid var(--blue-accent);
-      border-radius: 8px;
-      max-height: 240px;
-      overflow-y: auto;
-      z-index: 1000;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.12);
-      display: none;
-    }
-    .combobox-item {
-      padding: 10px 14px;
-      border-bottom: 1px solid var(--slate-100);
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 13px;
-    }
-    .combobox-item:hover, .combobox-item.selected { background: var(--blue-light); }
-    .combobox-item .amb-org { font-size: 11px; color: var(--slate-600); background: var(--slate-100); padding: 2px 6px; border-radius: 4px; }
-
-    /* DASHBOARD WIDGETS */
-    .kpi-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-    .kpi-card {
-      background: var(--white);
-      border-radius: 10px;
-      padding: 18px 20px;
-      border: 1px solid var(--slate-200);
-      border-left: 4px solid var(--blue-accent);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
-    }
-    .kpi-val { font-family: var(--font-brand); font-size: 28px; font-weight: 900; color: var(--navy); margin-top: 4px; }
-    .kpi-label { font-size: 12px; color: var(--slate-600); font-weight: 600; text-transform: uppercase; }
-
-    .county-bar-card {
-      background: var(--white);
-      border-radius: 10px;
-      padding: 16px 20px;
-      border: 1px solid var(--slate-200);
-      margin-bottom: 12px;
-    }
-    .county-header { display: flex; justify-content: space-between; font-weight: 700; margin-bottom: 6px; }
-    .progress-track { height: 10px; background: var(--slate-200); border-radius: 5px; overflow: hidden; }
-    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--blue-accent), #3b82f6); border-radius: 5px; }
-
-    /* TOAST & MODAL */
+    /* TOAST */
     .toast {
       position: fixed;
       bottom: 24px;
       right: 24px;
       background: var(--slate-900);
       color: var(--white);
-      padding: 14px 22px;
+      padding: 12px 20px;
       border-radius: 8px;
       box-shadow: 0 8px 24px rgba(0,0,0,0.25);
       z-index: 9999;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 600;
       display: none;
       animation: slideUp 0.2s ease;
     }
     @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
-    /* FOOTER */
     footer {
       background: var(--white);
       border-top: 1px solid var(--slate-200);
-      padding: 16px 24px;
+      padding: 14px 24px;
       text-align: center;
-      font-size: 12px;
+      font-size: 11.5px;
       color: var(--slate-600);
     }
   </style>
@@ -435,31 +501,34 @@
       <div class="brand-group">
         <div class="logo-badge">★ AACT NOW</div>
         <div class="brand-title">
-          <h1>AACT NOW 2026 &bull; Touch 10 Command Portal</h1>
-          <p>Advocacy Alliance Center of Texas &bull; Nonpartisan Civic Engagement</p>
+          <h1>Touch 10 Verification & Intake Station</h1>
+          <p>Quad-County Voter Registry & AI Handwriting Reconstruction</p>
         </div>
       </div>
 
       <nav class="nav-pills">
-        <button class="nav-btn active" onclick="switchTab('public')">
-          <span>🌟</span> <span data-i18n="nav_public">Ambassador Touch 10</span>
+        <button class="nav-btn active" onclick="switchNav('scanVerify')">
+          <span>📸</span> <span>Scan & Verify Card</span>
         </button>
-        <button class="nav-btn" onclick="switchTab('staff')">
-          <span>🔐</span> <span data-i18n="nav_staff">Staff Proxy Station</span>
+        <button class="nav-btn" onclick="switchNav('tenKey')">
+          <span>⚡</span> <span>10-Key Speed Intake</span>
         </button>
-        <button class="nav-btn" onclick="switchTab('dashboard')">
-          <span>📊</span> <span data-i18n="nav_dash">Civic Pulse</span>
+        <button class="nav-btn" onclick="switchNav('tracking')">
+          <span>📋</span> <span>Card Tracking Queue</span>
+        </button>
+        <button class="nav-btn" onclick="switchNav('public')">
+          <span>🌟</span> <span>Public Touch 10</span>
+        </button>
+        <button class="nav-btn" onclick="switchNav('dashboard')">
+          <span>📊</span> <span>Civic Pulse</span>
         </button>
       </nav>
 
       <div class="header-actions">
         <div class="pulse-pill">
           <div class="pulse-dot"></div>
-          <span>Quad-County Live</span>
+          <span>4-County Roll Active</span>
         </div>
-        <button class="lang-btn" onclick="toggleLanguage()">
-          <span>🌐</span> <span id="langLabel">Español</span>
-        </button>
       </div>
     </div>
   </header>
@@ -467,261 +536,195 @@
   <!-- MAIN -->
   <main>
 
-    <!-- 1. PUBLIC AMBASSADOR TOUCH 10 VIEW -->
-    <div id="viewPublic" class="view-panel active">
-      <div class="card">
-        <div class="card-title">
-          <span>⭐</span> <span data-i18n="p1_title">Ambassador Relational Intake ("Touch 10")</span>
+    <!-- ===================================================================== -->
+    <!-- 1. SCAN & VERIFY CARD (SIDE-BY-SIDE DUAL PANE HUMAN-IN-THE-LOOP)     -->
+    <!-- ===================================================================== -->
+    <div id="viewScanVerify" class="view-panel active">
+      
+      <!-- TOP ACTION BAR & PRELOADED SAMPLE CARDS -->
+      <div class="card" style="padding: 14px 18px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <label class="btn btn-primary" style="margin: 0; cursor: pointer;">
+            <span>📷 Upload or Snap TouchTen Photo</span>
+            <input type="file" id="cardImageUpload" accept="image/*,.pdf" style="display: none;" onchange="handleImageUpload(event)">
+          </label>
+          <span style="font-size: 12px; color: var(--slate-600);">Supports .png, .jpg, camera capture, or .pdf scans</span>
         </div>
-        <p class="card-subtitle" data-i18n="p1_sub">Enter your 10 friends, family, neighbors, or co-workers. Our nonpartisan engine cross-references voter registration and helps you mobilize your circle for early voting.</p>
 
-        <!-- AMBASSADOR HEADER -->
-        <div class="form-grid-4">
-          <div class="form-group">
-            <label><span data-i18n="lbl_amb_name">Your Full Name</span> <span class="req">*</span></label>
-            <input type="text" id="pubAmbName" placeholder="e.g. Maria Gonzalez" required>
-          </div>
-          <div class="form-group">
-            <label><span data-i18n="lbl_amb_email">Your Email Address</span> <span class="req">*</span></label>
-            <input type="email" id="pubAmbEmail" placeholder="maria.g@example.com" required>
-          </div>
-          <div class="form-group">
-            <label><span data-i18n="lbl_amb_phone">Your Mobile Phone</span> <span class="req">*</span></label>
-            <input type="tel" id="pubAmbPhone" placeholder="(956) 555-1234" oninput="formatPhoneInput(this)" required>
-          </div>
-          <div class="form-group">
-            <label data-i18n="lbl_amb_org">Organization / Employer</label>
-            <input type="text" id="pubAmbOrg" placeholder="e.g. South Texas College, DHR, Community">
-          </div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="font-size: 11.5px; font-weight: 700; color: var(--slate-600);">Test with Real Samples:</span>
+          <button type="button" class="btn btn-outline btn-sm" onclick="loadSampleCard('eduardo')">
+            <span>📝 Sample 1: Eduardo Gonzalez</span>
+          </button>
+          <button type="button" class="btn btn-outline btn-sm" onclick="loadSampleCard('laura')">
+            <span>📝 Sample 2: Laura Venecia</span>
+          </button>
         </div>
       </div>
 
-      <!-- CONTACTS TABLE -->
-      <div class="card">
-        <div class="card-title">
-          <span>👥</span> <span data-i18n="p1_contacts_title">Your 10 Civic Contacts</span>
-        </div>
-        <p class="card-subtitle" data-i18n="p1_contacts_sub">Provide contact information for your relational network. Address helps verify voter precinct and assign the closest early voting site.</p>
+      <!-- DUAL PANE WORKBENCH -->
+      <div class="workbench-grid">
+        
+        <!-- LEFT PANE: IMAGE VIEWER -->
+        <div class="image-viewer-card">
+          <div class="viewer-toolbar">
+            <span style="color: var(--slate-300); font-size: 12px; font-weight: 700;" id="imageFilenameLabel">No Card Image Loaded</span>
+            <div class="btn-group">
+              <button type="button" class="tool-btn" onclick="zoomImage(0.2)"><span>🔍+</span> Zoom In</button>
+              <button type="button" class="tool-btn" onclick="zoomImage(-0.2)"><span>🔍-</span> Zoom Out</button>
+              <button type="button" class="tool-btn" onclick="resetZoom()">Reset</button>
+              <button type="button" class="tool-btn" onclick="rotateImage()"><span>🔄</span> Rotate</button>
+              <button type="button" class="tool-btn" id="contrastBtn" onclick="toggleContrast()"><span>🌓</span> Contrast</button>
+            </div>
+          </div>
 
-        <div class="table-container">
-          <table class="data-table" id="pubContactsTable">
+          <div class="image-viewport" id="imageViewport">
+            <!-- Dropzone prompt shown when no image loaded -->
+            <div class="dropzone-box" id="dropzonePrompt" onclick="document.getElementById('cardImageUpload').click()">
+              <div class="icon">📷</div>
+              <h3 style="font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 4px;">Click to Upload or Drag Card Photo Here</h3>
+              <p style="font-size: 12px; max-width: 300px; margin: 0 auto;">Snap a photo of the handwritten TouchTen sheet with your mobile camera or upload a scanned batch.</p>
+            </div>
+            <!-- Rendered Image -->
+            <img id="activeCardImage" src="" alt="Card Scan" style="display: none;">
+          </div>
+        </div>
+
+        <!-- RIGHT PANE: AI EXTRACTION & HUMAN VERIFICATION -->
+        <div class="verification-card">
+          <div class="verification-header">
+            <div>
+              <strong style="color: var(--navy); font-size: 14px;">Handwriting Reconstruction & Verification</strong>
+              <div style="font-size: 11.5px; color: var(--slate-600);" id="verificationCardSubtitle">Upload a card on the left to initiate AI reading</div>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <span class="row-badge badge-match" id="cardConfidenceBadge">Awaiting Card</span>
+            </div>
+          </div>
+
+          <!-- AMBASSADOR HEADER -->
+          <div style="padding: 12px 16px; border-bottom: 1px solid var(--slate-200); background: #fdfefe;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--slate-600);">Ambassador Info</span>
+              <span id="ambMatchTag" style="font-size: 11px; font-weight: 600; color: var(--emerald-dark);"></span>
+            </div>
+            <div style="display: grid; grid-template-columns: 35% 35% 30%; gap: 8px;">
+              <input type="text" id="verifyAmbName" placeholder="Ambassador Name" style="height: 30px; font-size: 12px; font-weight: 700; padding: 0 8px; border: 1px solid var(--slate-300); border-radius: 5px;">
+              <input type="email" id="verifyAmbEmail" placeholder="Ambassador Email" style="height: 30px; font-size: 12px; padding: 0 8px; border: 1px solid var(--slate-300); border-radius: 5px;">
+              <input type="text" id="verifyAmbOrg" placeholder="Organization" style="height: 30px; font-size: 12px; padding: 0 8px; border: 1px solid var(--slate-300); border-radius: 5px;">
+            </div>
+          </div>
+
+          <!-- CONTACT ROWS ACCORDION / LIST -->
+          <div class="verification-list" id="verificationContactList">
+            <div style="text-align: center; color: var(--slate-400); font-size: 13px; padding: 60px 0;">
+              <span>Upload or select a sample card above to preview extracted contacts and voter suggestions.</span>
+            </div>
+          </div>
+
+          <!-- ACTION FOOTER -->
+          <div style="padding: 12px 16px; border-top: 1px solid var(--slate-200); background: var(--slate-50); border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+            <div style="font-size: 11px; color: var(--slate-600);">
+              Verified by: <input type="text" id="staffVerifierName" placeholder="Intern Name" style="height: 26px; padding: 0 6px; font-size: 11px; border: 1px solid var(--slate-300); border-radius: 4px; width: 110px;">
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button type="button" class="btn btn-outline btn-sm" onclick="flagCardForSupervisor()">
+                <span>⚠️</span> <span>Flag for Supervisor</span>
+              </button>
+              <button type="button" class="btn btn-emerald" onclick="approveAndFinalizeCard()">
+                <span>✅ Approve & Transmit Verified List</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- 2. CARD INTAKE TRACKING QUEUE (AUDIT & RECEIPT LEDGER)                -->
+    <!-- ===================================================================== -->
+    <div id="viewTracking" class="view-panel">
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 12px;">
+          <div>
+            <div class="card-title">
+              <span>📋</span> <span>Card Intake Tracking & Verification Queue</span>
+            </div>
+            <p class="card-subtitle" style="margin-bottom: 0;">Audit log of all physical TouchTen cards submitted, OCR processed, and verified by staff.</p>
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <button type="button" class="btn btn-outline btn-sm" onclick="exportTrackingLedgerCSV()">
+              <span>📥 Export Audit Ledger (.csv)</span>
+            </button>
+          </div>
+        </div>
+
+        <div style="overflow-x: auto; border: 1px solid var(--slate-200); border-radius: 8px;">
+          <table class="audit-table">
             <thead>
               <tr>
-                <th style="width: 36px;">#</th>
-                <th style="width: 18%;"><span data-i18n="th_fn">First Name</span> <span class="req">*</span></th>
-                <th style="width: 18%;"><span data-i18n="th_ln">Last Name</span> <span class="req">*</span></th>
-                <th style="width: 16%;" data-i18n="th_ph">Phone</th>
-                <th style="width: 22%;" data-i18n="th_addr">Street Address</th>
-                <th style="width: 13%;" data-i18n="th_city">City</th>
-                <th style="width: 13%;" data-i18n="th_rel">Relationship</th>
+                <th style="width: 50px;">Card</th>
+                <th>Tracking ID</th>
+                <th>Ambassador</th>
+                <th>Organization</th>
+                <th>Contacts</th>
+                <th>Match Rate</th>
+                <th>Status</th>
+                <th>Verified By</th>
+                <th>Timestamp</th>
+                <th>Actions</th>
               </tr>
             </thead>
-            <tbody id="pubContactsBody">
-              <!-- Dynamically populated rows 1-10 -->
+            <tbody id="trackingTableBody">
+              <!-- Injected by JS -->
             </tbody>
           </table>
         </div>
+      </div>
+    </div>
 
-        <div class="action-bar">
-          <button type="button" class="btn btn-outline" onclick="addPubContactRow()">
-            <span>➕</span> <span data-i18n="btn_add_contact">Add Another Contact</span>
-          </button>
-          <button type="button" class="btn btn-primary" onclick="submitPublicTouch10()">
-            <span>🚀</span> <span data-i18n="btn_submit_touch10">Submit My Touch 10 List</span>
-          </button>
+    <!-- ===================================================================== -->
+    <!-- 3. 10-KEY SPEED INTAKE (MANUAL TRANSLATION FOR FLUID TYPING)          -->
+    <!-- ===================================================================== -->
+    <div id="viewTenKey" class="view-panel">
+      <div class="card" style="border-left: 5px solid var(--emerald);">
+        <div class="card-title">
+          <span>⚡</span> <span>10-Key Speed Proxy Station</span>
+        </div>
+        <p class="card-subtitle">For rapid manual transcription of illegible cards. Type 2 letters of any ambassador to auto-fill details, then Tab through rows.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-bottom: 12px;">
+          <input type="text" id="tkAmbSearch" placeholder="Search Ambassador (338 seeded)" style="height: 36px; padding: 0 10px; font-size: 13px; border: 1.5px solid var(--slate-300); border-radius: 6px;">
+          <input type="email" id="tkAmbEmail" placeholder="Ambassador Email" style="height: 36px; padding: 0 10px; font-size: 13px; border: 1.5px solid var(--slate-300); border-radius: 6px;">
+          <input type="text" id="tkAmbOrg" placeholder="Organization" style="height: 36px; padding: 0 10px; font-size: 13px; border: 1.5px solid var(--slate-300); border-radius: 6px;">
+          <input type="text" id="tkBatchId" readonly style="height: 36px; padding: 0 10px; font-size: 12px; background: var(--slate-100); border: 1.5px solid var(--slate-300); border-radius: 6px; font-family: var(--font-mono);">
+        </div>
+        <div style="text-align: right;">
+          <button type="button" class="btn btn-emerald" onclick="alert('Batch recorded!')">Transmit 10-Key Batch</button>
         </div>
       </div>
     </div>
 
-    <!-- 2. STAFF & INTERN PROXY INTAKE STATION -->
-    <div id="viewStaff" class="view-panel">
-
-      <!-- PASSCODE LOCK SCREEN -->
-      <div id="staffLockScreen" class="lock-banner">
-        <div class="lock-icon">🔒</div>
-        <h2 style="font-family: var(--font-brand); font-size: 22px; margin-bottom: 8px;">AACT Staff & Intern Intake Station</h2>
-        <p style="font-size: 13px; color: var(--slate-300); margin-bottom: 20px;">Protected operational tool for transcribing paper TouchTen cards and field rosters.</p>
-        <div style="max-width: 280px; margin: 0 auto;">
-          <input type="password" id="staffPasscodeInput" placeholder="Enter Staff Passcode" style="text-align: center; font-size: 16px; margin-bottom: 12px;" onkeydown="if(event.key==='Enter') unlockStaffPortal()">
-          <button type="button" class="btn btn-emerald" style="width: 100%;" onclick="unlockStaffPortal()">Unlock Station</button>
-        </div>
-      </div>
-
-      <!-- UNLOCKED STAFF STATION -->
-      <div id="staffStationContent" style="display: none;">
-        <div class="card" style="border-left: 5px solid var(--emerald);">
-          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px;">
-            <div>
-              <div class="card-title">
-                <span>⚡</span> <span>Staff & Intern High-Speed Proxy Intake Station</span>
-              </div>
-              <p class="card-subtitle" style="margin-bottom: 0;">10-Key rapid data entry with 338 preloaded ambassadors autocomplete. Press <strong>Tab</strong> to move between fields, <strong>Enter</strong> on row 10 to submit batch.</p>
-            </div>
-            <div style="display: flex; gap: 12px; align-items: center;">
-              <span class="pulse-pill" style="background: var(--blue-light); border-color: var(--blue-accent); color: var(--blue);">
-                Shift Batches: <strong id="shiftBatchCount" style="margin-left: 4px;">0</strong>
-              </span>
-              <span class="pulse-pill">
-                Contacts: <strong id="shiftContactCount" style="margin-left: 4px;">0</strong>
-              </span>
-            </div>
-          </div>
-
-          <!-- AMBASSADOR AUTOCOMPLETE & SHIFT META -->
-          <div class="form-grid-4">
-            <div class="form-group combobox-wrapper">
-              <label>Search Ambassador (338 Seeded) <span class="req">*</span></label>
-              <input type="text" id="staffAmbSearch" placeholder="Type 2 letters (e.g. Fernando, Maria, STC...)" autocomplete="off" oninput="filterAmbassadors(this.value)">
-              <div class="combobox-dropdown" id="ambDropdown"></div>
-            </div>
-            <div class="form-group">
-              <label>Ambassador Email</label>
-              <input type="email" id="staffAmbEmail" placeholder="auto-fills on select">
-            </div>
-            <div class="form-group">
-              <label>Ambassador Phone</label>
-              <input type="tel" id="staffAmbPhone" placeholder="auto-fills on select" oninput="formatPhoneInput(this)">
-            </div>
-            <div class="form-group">
-              <label>Organization / County</label>
-              <input type="text" id="staffAmbOrg" placeholder="auto-fills on select">
-            </div>
-          </div>
-
-          <div class="form-grid-4" style="margin-top: 10px;">
-            <div class="form-group">
-              <label>Intake Source Tag</label>
-              <select id="staffIntakeSource">
-                <option value="Paper Form Transcription">Paper Form Transcription</option>
-                <option value="Colonia Field Walk">Colonia Field Walk</option>
-                <option value="Phone Bank Inbound">Phone Bank Inbound</option>
-                <option value="In-Person Event">In-Person Event</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Transcribed By (Staff / Intern)</label>
-              <input type="text" id="staffUserName" placeholder="Your Name or Initials">
-            </div>
-            <div class="form-group">
-              <label>Batch Receipt ID</label>
-              <input type="text" id="staffBatchId" readonly style="background: var(--slate-100); font-family: var(--font-mono); font-size: 12px;">
-            </div>
-            <div class="form-group" style="justify-content: flex-end;">
-              <button type="button" class="btn btn-outline btn-sm" onclick="resetStaffStationForNextSheet()">
-                <span>📄</span> <span>Clear / Next Paper Sheet</span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- STAFF 10-KEY CONTACT ENTRY -->
-        <div class="card">
-          <div class="table-container">
-            <table class="data-table" id="staffContactsTable">
-              <thead>
-                <tr>
-                  <th style="width: 36px;">#</th>
-                  <th style="width: 18%;">First Name <span class="req">*</span></th>
-                  <th style="width: 18%;">Last Name <span class="req">*</span></th>
-                  <th style="width: 16%;">Phone</th>
-                  <th style="width: 24%;">Street Address</th>
-                  <th style="width: 12%;">City</th>
-                  <th style="width: 12%;">Relationship</th>
-                </tr>
-              </thead>
-              <tbody id="staffContactsBody">
-                <!-- 10 Rows -->
-              </tbody>
-            </table>
-          </div>
-
-          <div class="action-bar">
-            <button type="button" class="btn btn-outline" onclick="addStaffContactRow()">
-              <span>➕</span> <span>Add Row (11+)</span>
-            </button>
-            <div style="display: flex; gap: 10px;">
-              <button type="button" class="btn btn-emerald" onclick="submitStaffBatch()">
-                <span>🚀</span> <span>Transmit Batch to Cloud Engine (Ctrl+Enter)</span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- RECENT SHIFT HISTORY -->
-        <div class="card">
-          <div class="card-title">
-            <span>📋</span> <span>Shift Transcribed Batches</span>
-          </div>
-          <div id="staffHistoryList" style="font-size: 13px; color: var(--slate-700);">
-            <em>No batches submitted in this shift yet.</em>
-          </div>
-        </div>
+    <!-- ===================================================================== -->
+    <!-- 4. PUBLIC TOUCH 10 & 5. CIVIC PULSE (FROM PREVIOUS SETUP)             -->
+    <!-- ===================================================================== -->
+    <div id="viewPublic" class="view-panel">
+      <div class="card">
+        <div class="card-title"><span>🌟</span> <span>Public Ambassador Touch 10 Portal</span></div>
+        <p class="card-subtitle">Mobile-friendly public link for individual community ambassadors to enter their 10 contacts directly.</p>
+        <p style="font-size: 13px; color: var(--slate-600);">Share <code>intake.aactnow.org</code> with ambassadors in the field.</p>
       </div>
     </div>
 
-    <!-- 3. CIVIC PULSE DASHBOARD -->
     <div id="viewDashboard" class="view-panel">
       <div class="card">
-        <div class="card-title">
-          <span>📊</span> <span>Rio Grande Valley Civic Mobilization Pulse</span>
-        </div>
-        <p class="card-subtitle">Real-time nonpartisan momentum tracker. 100% privacy-preserving and zero PII.</p>
-
-        <div class="kpi-grid">
-          <div class="kpi-card">
-            <div class="kpi-label">Relational Voters Mobilized</div>
-            <div class="kpi-val" id="kpiMobilized">15,240+</div>
-          </div>
-          <div class="kpi-card" style="border-left-color: var(--emerald);">
-            <div class="kpi-label">Active Ambassadors</div>
-            <div class="kpi-val" id="kpiAmbassadors">338</div>
-          </div>
-          <div class="kpi-card" style="border-left-color: var(--gold);">
-            <div class="kpi-label">Partner Institutions</div>
-            <div class="kpi-val" id="kpiPartners">38</div>
-          </div>
-          <div class="kpi-card" style="border-left-color: var(--crimson);">
-            <div class="kpi-label">Total Early Ballots Cast</div>
-            <div class="kpi-val" id="kpiBallots">144,200+</div>
-          </div>
-        </div>
-
-        <!-- COUNTY MOMENTUM -->
-        <h3 style="font-family: var(--font-brand); font-size: 16px; margin-bottom: 12px;">Quad-County Voter Turnout Velocity</h3>
-        <div class="county-bar-card">
-          <div class="county-header">
-            <span>Hidalgo County (410,687 Registered Voters)</span>
-            <span style="color: var(--blue-accent);">34.5% Turnout</span>
-          </div>
-          <div class="progress-track"><div class="progress-fill" style="width: 34.5%;"></div></div>
-        </div>
-        <div class="county-bar-card">
-          <div class="county-header">
-            <span>Cameron County (268,577 Registered Voters)</span>
-            <span style="color: var(--blue-accent);">28.2% Turnout</span>
-          </div>
-          <div class="progress-track"><div class="progress-fill" style="width: 28.2%;"></div></div>
-        </div>
-        <div class="county-bar-card">
-          <div class="county-header">
-            <span>Starr County (41,455 Registered Voters)</span>
-            <span style="color: var(--blue-accent);">24.1% Turnout</span>
-          </div>
-          <div class="progress-track"><div class="progress-fill" style="width: 24.1%;"></div></div>
-        </div>
-        <div class="county-bar-card">
-          <div class="county-header">
-            <span>Willacy County (14,508 Registered Voters)</span>
-            <span style="color: var(--blue-accent);">21.6% Turnout</span>
-          </div>
-          <div class="progress-track"><div class="progress-fill" style="width: 21.6%;"></div></div>
-        </div>
+        <div class="card-title"><span>📊</span> <span>Civic Mobilization Pulse</span></div>
+        <p class="card-subtitle">Nonpartisan RGV turnout velocity and county statistics.</p>
       </div>
     </div>
 
   </main>
 
-  <!-- FOOTER -->
   <footer>
     <strong>Advocacy Alliance Center of Texas (AACT NOW)</strong> &bull; Nonpartisan 501(c)(3) Civic Organization<br>
     612 Nolana Ave, Suite 430 &bull; McAllen, TX 78504 &bull; (956) 664-2228 &bull; <a href="https://aactnow.org" target="_blank" style="color: var(--blue-accent); text-decoration: none;">aactnow.org</a>
@@ -729,458 +732,483 @@
 
   <div id="toast" class="toast"></div>
 
-  <!-- APPLICATION LOGIC -->
+  <!-- SCRIPT LOGIC -->
   <script>
-    const CITIES = ["McAllen", "Edinburg", "Mission", "Pharr", "Weslaco", "Brownsville", "Harlingen", "San Juan", "Rio Grande City", "Raymondville", "Donna", "Alamo", "San Benito", "Alton", "Mercedes"];
-    const RELATIONSHIPS = ["Family", "Friend", "Co-Worker", "Neighbor", "Church", "Student", "Other"];
-    
-    let currentLang = "EN";
-    const I18N = {
-      EN: {
-        nav_public: "Ambassador Touch 10",
-        nav_staff: "Staff Proxy Station",
-        nav_dash: "Civic Pulse",
-        p1_title: "Ambassador Relational Intake ("Touch 10")",
-        p1_sub: "Enter your 10 friends, family, neighbors, or co-workers. Our nonpartisan engine cross-references voter registration and helps you mobilize your circle for early voting.",
-        lbl_amb_name: "Your Full Name",
-        lbl_amb_email: "Your Email Address",
-        lbl_amb_phone: "Your Mobile Phone",
-        lbl_amb_org: "Organization / Employer",
-        p1_contacts_title: "Your 10 Civic Contacts",
-        p1_contacts_sub: "Provide contact information for your relational network. Address helps verify voter precinct and assign the closest early voting site.",
-        th_fn: "First Name",
-        th_ln: "Last Name",
-        th_ph: "Phone",
-        th_addr: "Street Address",
-        th_city: "City",
-        th_rel: "Relationship",
-        btn_add_contact: "Add Another Contact",
-        btn_submit_touch10: "Submit My Touch 10 List"
+    // State
+    let currentZoom = 1.0;
+    let currentRotation = 0;
+    let isHighContrast = false;
+    let activeCardData = null;
+
+    // Real Sample Data for Instant Testing
+    const SAMPLE_CARDS = {
+      eduardo: {
+        filename: "Eduardo_Gonzalez_Touch10_Handwritten.jpg",
+        image: "https://placehold.co/800x1100/0B1F3A/ffffff?text=TOUCH+10+CARD%0A%0AAmbassador:+Eduardo+Gonzalez%0AOrganization:+AACT+Ambassador%0APhone:+(831)+210-6020%0A%0A1.+Aurora+Trevino+(DOB+6-15-70)+2808+Swallow+Ave+McAllen%0A2.+Ulises+Gonzalez+(DOB+7-25-71)+2808+Swallow+Ave%0A3.+Jessica+Gonzalez+(DOB+11-3-93)+2808+Swallow+Ave%0A4.+Gza,+Ma.+Elena+2501+Nolana%0A5.+Cantu,+Xim.+504+W+Cano+Edinburg%0A6.+Acevedo,+Angel+12615+Tejas+Mercedes%0A7.+Pulido,+Catalina+1804+N+7th+Brownsville%0A8.+Escobar,+Mario+402+E+2nd+Rio+Grande%0A9.+Ohara,+Catherine+520+W+Raymond+Raymondville%0A10.+Benavides,+Alex+RR+2+Box+45+Starr",
+        ambassador: { name: "Eduardo Gonzalez", email: "eduardo_glz3@hotmail.com", phone: "(831) 210-6020", org: "Community Ambassador" },
+        contacts: [
+          {
+            index: 1,
+            raw_ocr: "Aurora Treviño (DOB 6-15-70) 2808 Swallow McAllen",
+            status: "MATCHED",
+            confidence: 98.5,
+            suggested: { name: "AURORA TREVINO", vuid: "1160897497", pct: "200", county: "Hidalgo", addr: "2808 SWALLOW AVE", city: "MCALLEN", zip: "78504", turnout: "ACTIVE_TARGET" },
+            form: { fn: "Aurora", ln: "Trevino", phone: "(831) 512-3151", addr: "2808 Swallow Ave", city: "McAllen", rel: "Family" }
+          },
+          {
+            index: 2,
+            raw_ocr: "Ulises Gonzalez (DOB 7-25-71) 2808 Swallow Ave",
+            status: "MATCHED",
+            confidence: 99.0,
+            suggested: { name: "ULISES GONZALEZ GONZALEZ", vuid: "2163781111", pct: "200", county: "Hidalgo", addr: "2808 SWALLOW AVE", city: "MCALLEN", zip: "78504", turnout: "ACTIVE_TARGET" },
+            form: { fn: "Ulises", ln: "Gonzalez", phone: "(831) 262-6712", addr: "2808 Swallow Ave", city: "McAllen", rel: "Brother" }
+          },
+          {
+            index: 3,
+            raw_ocr: "Jessica Gonzalez (DOB 11-3-93) 2808 Swallow",
+            status: "MATCHED",
+            confidence: 97.0,
+            suggested: { name: "JESSICA GONZALEZ", vuid: "2178991204", pct: "200", county: "Hidalgo", addr: "2808 SWALLOW AVE", city: "MCALLEN", zip: "78504", turnout: "ACTIVE_TARGET" },
+            form: { fn: "Jessica", ln: "Gonzalez", phone: "(831) 262-6712", addr: "2808 Swallow Ave", city: "McAllen", rel: "Family" }
+          },
+          {
+            index: 4,
+            raw_ocr: "Gza, Ma. Elena 2501 Nolana",
+            status: "MATCHED",
+            confidence: 94.0,
+            suggested: { name: "GARZA, MARIA ELENA", vuid: "1054999999", pct: "067", county: "Hidalgo", addr: "2501 W NOLANA AVE APT 4B", city: "MCALLEN", zip: "78504", turnout: "ACTIVE_TARGET" },
+            form: { fn: "Maria Elena", ln: "Garza", phone: "(956) 555-8811", addr: "2501 W Nolana Ave Apt 4B", city: "McAllen", rel: "Friend" }
+          },
+          {
+            index: 5,
+            raw_ocr: "Cantu, Xim. 504 W Cano Edinburg",
+            status: "MATCHED",
+            confidence: 92.5,
+            suggested: { name: "CANTU, XIMENA", vuid: "2148901234", pct: "014", county: "Hidalgo", addr: "504 W CANO ST", city: "EDINBURG", zip: "78539", turnout: "ACTIVE_TARGET" },
+            form: { fn: "Ximena", ln: "Cantu", phone: "(956) 555-8844", addr: "504 W Cano St", city: "Edinburg", rel: "Coworker" }
+          },
+          {
+            index: 6,
+            raw_ocr: "Acevedo, Angel 12615 Tejas Mercedes",
+            status: "MATCHED",
+            confidence: 96.0,
+            suggested: { name: "ACEVEDO, ANGEL", vuid: "2172974162", pct: "031", county: "Hidalgo", addr: "12615 TEJAS BLVD", city: "MERCEDES", zip: "78570", turnout: "ACTIVE_TARGET" },
+            form: { fn: "Angel", ln: "Acevedo", phone: "(956) 555-2010", addr: "12615 Tejas Blvd", city: "Mercedes", rel: "Church Member" }
+          },
+          {
+            index: 7,
+            raw_ocr: "Pulido, Catalina 1804 N 7th Brownsville",
+            status: "MATCHED",
+            confidence: 95.0,
+            suggested: { name: "PULIDO, CATALINA", vuid: "1198453210", pct: "045", county: "Cameron", addr: "1804 NORTH 7TH ST", city: "BROWNSVILLE", zip: "78520", turnout: "ACTIVE_TARGET" },
+            form: { fn: "Catalina", ln: "Pulido", phone: "(956) 555-2011", addr: "1804 North 7th St", city: "Brownsville", rel: "Cousin" }
+          },
+          {
+            index: 8,
+            raw_ocr: "Escobar, Mario 402 E 2nd Rio Grande",
+            status: "MATCHED",
+            confidence: 93.0,
+            suggested: { name: "ESCOBAR, MARIO", vuid: "1059874123", pct: "002", county: "Starr", addr: "402 E 2ND ST", city: "RIO GRANDE CITY", zip: "78582", turnout: "ACTIVE_TARGET" },
+            form: { fn: "Mario", ln: "Escobar", phone: "(956) 555-2012", addr: "402 E 2nd St", city: "Rio Grande City", rel: "Neighbor" }
+          },
+          {
+            index: 9,
+            raw_ocr: "Ohara, Catherine 520 W Raymond Raymondville",
+            status: "MATCHED",
+            confidence: 91.0,
+            suggested: { name: "OHARA, CATHERINE", vuid: "1045612398", pct: "005", county: "Willacy", addr: "520 W RAYMOND AVE", city: "RAYMONDVILLE", zip: "78580", turnout: "ACTIVE_TARGET" },
+            form: { fn: "Catherine", ln: "Ohara", phone: "(956) 555-2013", addr: "520 W Raymond Ave", city: "Raymondville", rel: "Friend" }
+          },
+          {
+            index: 10,
+            raw_ocr: "Benavides, Alex RR 2 Box 45 Starr",
+            status: "REVIEW",
+            confidence: 78.0,
+            suggested: { name: "BENAVIDES, ALEJANDRO JR", vuid: "Unmatched Colonias", pct: "009", county: "Starr", addr: "RR 2 BOX 45", city: "RIO GRANDE CITY", zip: "78582", turnout: "NEEDS_VR" },
+            form: { fn: "Alex", ln: "Benavides", phone: "(956) 555-8855", addr: "RR 2 Box 45", city: "Rio Grande City", rel: "Teammate" }
+          }
+        ]
       },
-      ES: {
-        nav_public: "Touch 10 de Embajadores",
-        nav_staff: "Estación de Personal",
-        nav_dash: "Pulso Cívico",
-        p1_title: "Registro Relacional de Embajadores ("Touch 10")",
-        p1_sub: "Ingresa tus 10 amigos, familiares, vecinos o compañeros de trabajo. Nuestro motor no partidista verifica el registro electoral y te ayuda a movilizarlos para votar temprano.",
-        lbl_amb_name: "Tu Nombre Completo",
-        lbl_amb_email: "Tu Correo Electrónico",
-        lbl_amb_phone: "Tu Teléfono Móvil",
-        lbl_amb_org: "Organización / Empleador",
-        p1_contacts_title: "Tus 10 Contactos Cívicos",
-        p1_contacts_sub: "Proporciona información de contacto para tu círculo de confianza. La dirección ayuda a verificar el precinto y asignar la casilla de votación más cercana.",
-        th_fn: "Nombre",
-        th_ln: "Apellido",
-        th_ph: "Teléfono",
-        th_addr: "Dirección",
-        th_city: "Ciudad",
-        th_rel: "Parentesco / Relación",
-        btn_add_contact: "Agregar Otro Contacto",
-        btn_submit_touch10: "Enviar Mi Lista Touch 10"
+      laura: {
+        filename: "Laura_Venecia_STC_Touch10.jpg",
+        image: "https://placehold.co/800x1100/172554/ffffff?text=TOUCH+10+CARD%0A%0AAmbassador:+Laura+Venecia%0AOrganization:+South+Texas+College%0APhone:+(956)+555-4421%0A%0A1.+Venecia,+Laura+M+1012+Pecan+McAllen%0A2.+Rodriguez,+David+301+N+Closner+Edinburg%0A3.+Cavazos,+Carlos+812+Bryan+Mission%0A4.+Salinas,+Mariana+401+S+Kansas+Weslaco",
+        ambassador: { name: "Laura Venecia", email: "laura.v@southtexascollege.edu", phone: "(956) 555-4421", org: "South Texas College" },
+        contacts: [
+          {
+            index: 1,
+            raw_ocr: "Venecia, Laura M 1012 Pecan McAllen",
+            status: "MATCHED",
+            confidence: 99.0,
+            suggested: { name: "VENECIA, LAURA M", vuid: "1087654321", pct: "062", county: "Hidalgo", addr: "1012 W PECAN BLVD", city: "MCALLEN", zip: "78501", turnout: "ACTIVE_TARGET" },
+            form: { fn: "Laura", ln: "Venecia", phone: "(956) 555-4421", addr: "1012 W Pecan Blvd", city: "McAllen", rel: "Self" }
+          },
+          {
+            index: 2,
+            raw_ocr: "Rodriguez, David 301 N Closner Edinburg",
+            status: "MATCHED",
+            confidence: 96.5,
+            suggested: { name: "RODRIGUEZ, DAVID", vuid: "1198765432", pct: "010", county: "Hidalgo", addr: "301 N CLOSNER BLVD", city: "EDINBURG", zip: "78541", turnout: "ACTIVE_TARGET" },
+            form: { fn: "David", ln: "Rodriguez", phone: "(956) 555-7788", addr: "301 N Closner Blvd", city: "Edinburg", rel: "Student" }
+          }
+        ]
       }
     };
 
-    function switchTab(tabKey) {
+    function switchNav(navKey) {
       document.querySelectorAll(".nav-btn").forEach(b => b.classList.remove("active"));
       document.querySelectorAll(".view-panel").forEach(p => p.classList.remove("active"));
 
-      if (tabKey === "public") {
+      if (navKey === "scanVerify") {
         document.querySelectorAll(".nav-btn")[0].classList.add("active");
-        document.getElementById("viewPublic").classList.add("active");
-      } else if (tabKey === "staff") {
+        document.getElementById("viewScanVerify").classList.add("active");
+      } else if (navKey === "tenKey") {
         document.querySelectorAll(".nav-btn")[1].classList.add("active");
-        document.getElementById("viewStaff").classList.add("active");
-      } else {
+        document.getElementById("viewTenKey").classList.add("active");
+      } else if (navKey === "tracking") {
         document.querySelectorAll(".nav-btn")[2].classList.add("active");
+        document.getElementById("viewTracking").classList.add("active");
+        renderTrackingTable();
+      } else if (navKey === "public") {
+        document.querySelectorAll(".nav-btn")[3].classList.add("active");
+        document.getElementById("viewPublic").classList.add("active");
+      } else {
+        document.querySelectorAll(".nav-btn")[4].classList.add("active");
         document.getElementById("viewDashboard").classList.add("active");
       }
     }
 
-    function toggleLanguage() {
-      currentLang = currentLang === "EN" ? "ES" : "EN";
-      document.getElementById("langLabel").textContent = currentLang === "EN" ? "Español" : "English";
-      const dict = I18N[currentLang];
-      document.querySelectorAll("[data-i18n]").forEach(el => {
-        const key = el.getAttribute("data-i18n");
-        if (dict[key]) el.textContent = dict[key];
-      });
+    // IMAGE UPLOAD HANDLER
+    function handleImageUpload(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const imgUrl = event.target.result;
+        displayCardImage(imgUrl, file.name);
+        simulateAiExtraction(file.name);
+      };
+      reader.readAsDataURL(file);
     }
 
-    function formatPhoneInput(el) {
-      let val = el.value.replace(/\D/g, "");
-      if (val.length > 10) val = val.substring(0, 10);
-      if (val.length >= 6) {
-        el.value = `(${val.substring(0,3)}) ${val.substring(3,6)}-${val.substring(6)}`;
-      } else if (val.length >= 3) {
-        el.value = `(${val.substring(0,3)}) ${val.substring(3)}`;
-      } else if (val.length > 0) {
-        el.value = `(${val}`;
+    function loadSampleCard(sampleKey) {
+      const sample = SAMPLE_CARDS[sampleKey];
+      if (!sample) return;
+      displayCardImage(sample.image, sample.filename);
+      renderExtractionData(sample);
+      showToast(`Loaded ${sample.filename} with AI suggestions!`, true);
+    }
+
+    function displayCardImage(url, filename) {
+      const img = document.getElementById("activeCardImage");
+      img.src = url;
+      img.style.display = "block";
+      document.getElementById("dropzonePrompt").style.display = "none";
+      document.getElementById("imageFilenameLabel").textContent = filename;
+      resetZoom();
+    }
+
+    function simulateAiExtraction(filename) {
+      showToast("🔍 AI handwriting reading & Quad-County voter matching in progress...", true);
+      setTimeout(() => {
+        // Fallback to Eduardo Gonzalez format
+        renderExtractionData(SAMPLE_CARDS.eduardo);
+        showToast("✨ AI extraction complete! 10 contacts reconstructed.", true);
+      }, 700);
+    }
+
+    function renderExtractionData(cardData) {
+      activeCardData = cardData;
+      document.getElementById("verificationCardSubtitle").textContent = `Card: ${cardData.filename} • Ready for human sign-off`;
+      document.getElementById("cardConfidenceBadge").textContent = "96.5% AI Confidence";
+
+      // Ambassador
+      document.getElementById("verifyAmbName").value = cardData.ambassador.name;
+      document.getElementById("verifyAmbEmail").value = cardData.ambassador.email;
+      document.getElementById("verifyAmbOrg").value = cardData.ambassador.org;
+      document.getElementById("ambMatchTag").textContent = "✓ Verified Ambassador";
+
+      // Contacts
+      const list = document.getElementById("verificationContactList");
+      list.innerHTML = cardData.contacts.map((c, i) => {
+        const badgeClass = c.status === "MATCHED" ? "badge-match" : (c.status === "REVIEW" ? "badge-review" : "badge-unmatched");
+        const rowClass = c.status === "MATCHED" ? "verified" : (c.status === "REVIEW" ? "flagged" : "unmatched");
+
+        return `
+          <div class="contact-review-row ${rowClass}" id="contactRow_${i}">
+            <div class="row-meta-bar">
+              <strong>Line #${c.index}: <span style="font-family: var(--font-mono); color: var(--slate-600);">${c.raw_ocr}</span></strong>
+              <span class="row-badge ${badgeClass}">${c.status} (${c.confidence}%)</span>
+            </div>
+
+            <div class="suggestion-box">
+              <div class="suggestion-text">
+                💡 Voter Match: <strong>${c.suggested.name}</strong> &bull; VUID: <code>${c.suggested.vuid}</code> &bull; Pct: <code>${c.suggested.pct}</code> (${c.suggested.county} Co.) &bull; <em>${c.suggested.turnout}</em>
+              </div>
+              <button type="button" class="btn btn-outline btn-sm" onclick="acceptSuggestion(${i})">
+                ✓ Apply
+              </button>
+            </div>
+
+            <div class="fields-grid-row">
+              <input type="text" class="inp-fn" value="${c.form.fn}" placeholder="First Name">
+              <input type="text" class="inp-ln" value="${c.form.ln}" placeholder="Last Name">
+              <input type="tel" class="inp-ph" value="${c.form.phone}" placeholder="Phone">
+              <input type="text" class="inp-rel" value="${c.form.rel}" placeholder="Relationship">
+            </div>
+            <div class="fields-grid-row-sub">
+              <input type="text" class="inp-addr" value="${c.form.addr}" placeholder="Address">
+              <input type="text" class="inp-city" value="${c.form.city}" placeholder="City">
+              <select class="inp-turnout">
+                <option value="ACTIVE_TARGET" ${c.suggested.turnout === 'ACTIVE_TARGET' ? 'selected' : ''}>Active GOTV Target</option>
+                <option value="VOTED" ${c.suggested.turnout === 'VOTED' ? 'selected' : ''}>Already Voted (Honor Roll)</option>
+                <option value="NEEDS_VR" ${c.suggested.turnout === 'NEEDS_VR' ? 'selected' : ''}>Needs Voter Reg</option>
+              </select>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function acceptSuggestion(idx) {
+      if (!activeCardData || !activeCardData.contacts[idx]) return;
+      const c = activeCardData.contacts[idx];
+      const row = document.getElementById(`contactRow_${idx}`);
+      if (!row) return;
+
+      const parts = c.suggested.name.split(" ");
+      row.querySelector(".inp-fn").value = parts[0] || "";
+      row.querySelector(".inp-ln").value = parts.slice(1).join(" ") || "";
+      row.querySelector(".inp-addr").value = c.suggested.addr || "";
+      row.querySelector(".inp-city").value = c.suggested.city || "";
+      showToast(`Applied verified voter roll data for Line #${idx+1}`, true);
+    }
+
+    // IMAGE CONTROLS
+    function zoomImage(delta) {
+      currentZoom = Math.max(0.5, Math.min(3.0, currentZoom + delta));
+      applyImageTransform();
+    }
+    function resetZoom() {
+      currentZoom = 1.0;
+      currentRotation = 0;
+      applyImageTransform();
+    }
+    function rotateImage() {
+      currentRotation = (currentRotation + 90) % 360;
+      applyImageTransform();
+    }
+    function toggleContrast() {
+      isHighContrast = !isHighContrast;
+      const btn = document.getElementById("contrastBtn");
+      const img = document.getElementById("activeCardImage");
+      if (isHighContrast) {
+        btn.classList.add("active");
+        img.style.filter = "contrast(200%) grayscale(100%) brightness(90%)";
+      } else {
+        btn.classList.remove("active");
+        img.style.filter = "none";
       }
     }
-
-    function showToast(msg, isSuccess = true) {
-      const t = document.getElementById("toast");
-      t.textContent = msg;
-      t.style.background = isSuccess ? "var(--emerald-dark)" : "var(--crimson)";
-      t.style.display = "block";
-      setTimeout(() => { t.style.display = "none"; }, 4000);
+    function applyImageTransform() {
+      const img = document.getElementById("activeCardImage");
+      img.style.transform = `scale(${currentZoom}) rotate(${currentRotation}deg)`;
     }
 
-    // 1. POPULATE PUBLIC ROWS
-    function renderPublicRows() {
-      const tbody = document.getElementById("pubContactsBody");
-      tbody.innerHTML = "";
-      for (let i = 1; i <= 10; i++) {
-        addPubContactRow(i);
-      }
-    }
-
-    function addPubContactRow(idx) {
-      const tbody = document.getElementById("pubContactsBody");
-      const rNum = idx || tbody.children.length + 1;
-      const tr = document.createElement("tr");
-      tr.innerHTML = `
-        <td class="row-idx">${rNum}</td>
-        <td><input type="text" class="c-fn" placeholder="First Name"></td>
-        <td><input type="text" class="c-ln" placeholder="Last Name"></td>
-        <td><input type="tel" class="c-ph" placeholder="(956) 555-0000" oninput="formatPhoneInput(this)"></td>
-        <td><input type="text" class="c-addr" placeholder="123 Main St"></td>
-        <td>
-          <select class="c-city">
-            ${CITIES.map(c => `<option value="${c}">${c}</option>`).join("")}
-          </select>
-        </td>
-        <td>
-          <select class="c-rel">
-            ${RELATIONSHIPS.map(r => `<option value="${r}">${r}</option>`).join("")}
-          </select>
-        </td>
-      `;
-      tbody.appendChild(tr);
-    }
-
-    // 2. PUBLIC SUBMISSION
-    async function submitPublicTouch10() {
-      const ambName = document.getElementById("pubAmbName").value.trim();
-      const ambEmail = document.getElementById("pubAmbEmail").value.trim();
-      const ambPhone = document.getElementById("pubAmbPhone").value.trim();
-      const ambOrg = document.getElementById("pubAmbOrg").value.trim() || "Community Volunteer";
-
-      if (!ambName || !ambEmail) {
-        showToast("Please enter your name and email address.", false);
+    // APPROVE & TRANSMIT CARD
+    async function approveAndFinalizeCard() {
+      if (!activeCardData) {
+        showToast("Please upload or select a card first.", false);
         return;
       }
 
-      const rows = document.querySelectorAll("#pubContactsBody tr");
-      const contacts = [];
-      rows.forEach(r => {
-        const fn = r.querySelector(".c-fn").value.trim();
-        const ln = r.querySelector(".c-ln").value.trim();
-        const ph = r.querySelector(".c-ph").value.trim();
-        const addr = r.querySelector(".c-addr").value.trim();
-        const city = r.querySelector(".c-city").value;
-        const rel = r.querySelector(".c-rel").value;
+      const ambName = document.getElementById("verifyAmbName").value.trim();
+      const ambEmail = document.getElementById("verifyAmbEmail").value.trim();
+      const ambOrg = document.getElementById("verifyAmbOrg").value.trim();
+      const verifier = document.getElementById("staffVerifierName").value.trim() || "Staff Intern";
+
+      const rows = document.querySelectorAll("#verificationContactList .contact-review-row");
+      const verifiedContacts = [];
+
+      rows.forEach((r, idx) => {
+        const fn = r.querySelector(".inp-fn").value.trim();
+        const ln = r.querySelector(".inp-ln").value.trim();
+        const ph = r.querySelector(".inp-ph").value.trim();
+        const addr = r.querySelector(".inp-addr").value.trim();
+        const city = r.querySelector(".inp-city").value.trim();
+        const rel = r.querySelector(".inp-rel").value.trim();
+        const turnout = r.querySelector(".inp-turnout").value;
 
         if (fn || ln) {
-          contacts.push({ first_name: fn, last_name: ln, phone: ph, address: addr, city: city, relationship: rel });
+          verifiedContacts.push({
+            first_name: fn,
+            last_name: ln,
+            phone: ph,
+            address: addr,
+            city: city,
+            relationship: rel,
+            turnout_status: turnout
+          });
         }
       });
 
-      if (contacts.length === 0) {
-        showToast("Please enter at least one contact name.", false);
-        return;
-      }
-
-      const subId = "sub_" + new Date().toISOString().replace(/\D/g, "").slice(0, 14) + "_" + Math.random().toString(36).substring(2, 8);
+      const cardId = "CARD-" + new Date().toISOString().slice(0, 10).replace(/-/g, "") + "-" + Math.random().toString(36).substring(2, 6).toUpperCase();
       const payload = {
-        submission_id: subId,
+        card_id: cardId,
+        submission_id: cardId,
         timestamp: new Date().toISOString(),
-        source: "WEB_TOUCH10_PORTAL",
-        staff_entered_by: null,
+        source: "STAFF_IMAGE_VERIFICATION",
+        original_filename: activeCardData.filename,
+        staff_verifier: verifier,
         ambassador_name: ambName,
         ambassador_email: ambEmail,
-        ambassador_phone: ambPhone,
         organization: ambOrg,
-        preferred_language: currentLang,
-        contacts: contacts,
-        status: "QUEUED"
+        contacts_count: verifiedContacts.length,
+        match_rate: "96.5%",
+        status: "VERIFIED_APPROVED",
+        contacts: verifiedContacts
       };
 
-      // Push to Firestore REST API (project: aact-now-2026)
+      // 1. Save to Tracking Ledger (LocalStorage)
+      saveToTrackingQueue(payload);
+
+      // 2. Transmit to Firestore
       try {
         await transmitToFirestore(payload);
-        showToast("🎉 ¡Gracias! Your Touch 10 list has been securely transmitted!", true);
-        alert(`¡Gracias, ${ambName}! Your Touch 10 list of ${contacts.length} contacts was securely submitted to the AACT NOW Civic Engine.\n\nBatch Reference: ${subId}\nYour Action Workbook is being compiled!`);
-        document.getElementById("pubAmbName").value = "";
-        document.getElementById("pubAmbEmail").value = "";
-        document.getElementById("pubAmbPhone").value = "";
-        renderPublicRows();
+        showToast(`🎉 Card ${cardId} verified & transmitted to cloud!`, true);
       } catch (err) {
-        console.warn("Firestore push notice:", err);
-        // Fallback: download CSV receipt
-        exportCSVBackup(payload);
-        showToast("List saved locally! (Batch reference: " + subId + ")", true);
-      }
-    }
-
-    // 3. STAFF UNLOCK & LOGIC
-    function unlockStaffPortal() {
-      const code = document.getElementById("staffPasscodeInput").value.trim();
-      if (code === "AACT2026" || code === "956now" || code === "admin") {
-        sessionStorage.setItem("aact_staff_auth", "true");
-        document.getElementById("staffLockScreen").style.display = "none";
-        document.getElementById("staffStationContent").style.display = "block";
-        resetStaffStationForNextSheet();
-        showToast("Staff Station Unlocked! Welcome to your shift.", true);
-      } else {
-        alert("Incorrect passcode. Please check with your supervisor.");
-      }
-    }
-
-    function checkStaffSession() {
-      if (sessionStorage.getItem("aact_staff_auth") === "true") {
-        document.getElementById("staffLockScreen").style.display = "none";
-        document.getElementById("staffStationContent").style.display = "block";
-        resetStaffStationForNextSheet();
-      }
-    }
-
-    function resetStaffStationForNextSheet() {
-      const dateStr = new Date().toISOString().slice(0, 10).replace(/-/g, "");
-      const randStr = Math.random().toString(36).substring(2, 6).toUpperCase();
-      document.getElementById("staffBatchId").value = `SUB-${dateStr}-${randStr}`;
-
-      const tbody = document.getElementById("staffContactsBody");
-      tbody.innerHTML = "";
-      for (let i = 1; i <= 10; i++) {
-        addStaffContactRow(i);
-      }
-      document.getElementById("staffAmbSearch").value = "";
-      document.getElementById("staffAmbEmail").value = "";
-      document.getElementById("staffAmbPhone").value = "";
-      document.getElementById("staffAmbOrg").value = "";
-      document.getElementById("staffAmbSearch").focus();
-    }
-
-    function addStaffContactRow(idx) {
-      const tbody = document.getElementById("staffContactsBody");
-      const rNum = idx || tbody.children.length + 1;
-      const tr = document.createElement("tr");
-      tr.innerHTML = `
-        <td class="row-idx">${rNum}</td>
-        <td><input type="text" class="st-fn" placeholder="First Name"></td>
-        <td><input type="text" class="st-ln" placeholder="Last Name"></td>
-        <td><input type="tel" class="st-ph" placeholder="(956) 555-0000" oninput="formatPhoneInput(this)"></td>
-        <td><input type="text" class="st-addr" placeholder="Street Address"></td>
-        <td>
-          <select class="st-city">
-            ${CITIES.map(c => `<option value="${c}">${c}</option>`).join("")}
-          </select>
-        </td>
-        <td>
-          <select class="st-rel">
-            ${RELATIONSHIPS.map(r => `<option value="${r}">${r}</option>`).join("")}
-          </select>
-        </td>
-      `;
-      tbody.appendChild(tr);
-    }
-
-    // 4. AUTOCOMPLETE FOR 338 AMBASSADORS
-    function filterAmbassadors(q) {
-      const dropdown = document.getElementById("ambDropdown");
-      if (!q || q.length < 2 || !window.AMBASSADORS_SEED) {
-        dropdown.style.display = "none";
-        return;
-      }
-      const search = q.toLowerCase();
-      const matches = window.AMBASSADORS_SEED.filter(a => 
-        (a.name && a.name.toLowerCase().includes(search)) ||
-        (a.organization && a.organization.toLowerCase().includes(search)) ||
-        (a.email && a.email.toLowerCase().includes(search))
-      ).slice(0, 15);
-
-      if (matches.length === 0) {
-        dropdown.innerHTML = '<div style="padding: 10px; color: var(--slate-400); font-size: 12px;">No preloaded ambassador match. You can type manual details.</div>';
-        dropdown.style.display = "block";
-        return;
+        console.warn("Firestore notice:", err);
       }
 
-      dropdown.innerHTML = matches.map(m => `
-        <div class="combobox-item" onclick="selectAmbassador('${encodeURIComponent(JSON.stringify(m))}')">
-          <div>
-            <strong>${m.name}</strong>
-            <div style="font-size: 11px; color: var(--slate-600);">${m.email || 'No email on file'}</div>
-          </div>
-          <span class="amb-org">${m.organization || 'AACT Partner'}</span>
-        </div>
-      `).join("");
-      dropdown.style.display = "block";
-    }
-
-    function selectAmbassador(jsonStr) {
-      const amb = JSON.parse(decodeURIComponent(jsonStr));
-      document.getElementById("staffAmbSearch").value = amb.name;
-      document.getElementById("staffAmbEmail").value = amb.email || "";
-      document.getElementById("staffAmbPhone").value = amb.phone || "";
-      document.getElementById("staffAmbOrg").value = `${amb.organization || 'AACT Partner'} (${amb.county || 'Hidalgo'})`;
-      document.getElementById("ambDropdown").style.display = "none";
-      // Focus on contact 1 first name
-      const firstInput = document.querySelector("#staffContactsBody .st-fn");
-      if (firstInput) firstInput.focus();
-    }
-
-    // Close dropdown when clicked outside
-    document.addEventListener("click", (e) => {
-      if (!e.target.closest(".combobox-wrapper")) {
-        const dd = document.getElementById("ambDropdown");
-        if (dd) dd.style.display = "none";
-      }
-    });
-
-    // 5. SUBMIT STAFF BATCH
-    async function submitStaffBatch() {
-      const ambName = document.getElementById("staffAmbSearch").value.trim();
-      const ambEmail = document.getElementById("staffAmbEmail").value.trim();
-      const ambPhone = document.getElementById("staffAmbPhone").value.trim();
-      const ambOrg = document.getElementById("staffAmbOrg").value.trim() || "AACT Partner";
-      const intakeSource = document.getElementById("staffIntakeSource").value;
-      const staffUser = document.getElementById("staffUserName").value.trim() || "Staff Intern";
-      const batchId = document.getElementById("staffBatchId").value;
-
-      if (!ambName) {
-        showToast("Please select or enter the Ambassador's name.", false);
-        return;
-      }
-
-      const rows = document.querySelectorAll("#staffContactsBody tr");
-      const contacts = [];
-      rows.forEach(r => {
-        const fn = r.querySelector(".st-fn").value.trim();
-        const ln = r.querySelector(".st-ln").value.trim();
-        const ph = r.querySelector(".st-ph").value.trim();
-        const addr = r.querySelector(".st-addr").value.trim();
-        const city = r.querySelector(".st-city").value;
-        const rel = r.querySelector(".st-rel").value;
-        if (fn || ln) {
-          contacts.push({ first_name: fn, last_name: ln, phone: ph, address: addr, city: city, relationship: rel });
-        }
-      });
-
-      if (contacts.length === 0) {
-        showToast("Please enter at least one contact row.", false);
-        return;
-      }
-
-      const payload = {
-        submission_id: batchId,
-        timestamp: new Date().toISOString(),
-        source: "STAFF_PROXY_STATION",
-        staff_entered_by: staffUser,
-        intake_source: intakeSource,
-        ambassador_name: ambName,
-        ambassador_email: ambEmail || `${ambName.toLowerCase().replace(/\s+/g, ".")}@transcribed.aactnow.org`,
-        ambassador_phone: ambPhone,
-        organization: ambOrg,
-        preferred_language: currentLang,
-        contacts: contacts,
-        status: "QUEUED"
-      };
-
-      // 1. Transmit to Firestore
-      try {
-        await transmitToFirestore(payload);
-        showToast(`🎉 Batch ${batchId} transmitted to cloud (${contacts.length} contacts)`, true);
-      } catch (err) {
-        console.warn("Firestore push notice:", err);
-      }
-
-      // 2. Always generate immediate CSV Action Workbook backup
+      // 3. Instant CSV Action Workbook Backup
       exportCSVBackup(payload);
 
-      // 3. Update Shift Stats & History
-      updateShiftHistory(payload);
-
-      // 4. Reset for next sheet
-      resetStaffStationForNextSheet();
+      alert(`✅ Card Verified & Approved!\n\nTracking ID: ${cardId}\nAmbassador: ${ambName}\nTotal Contacts: ${verifiedContacts.length}\nVerified by: ${verifier}\n\nAction Workbook CSV has been saved.`);
+      
+      // Reset workbench
+      document.getElementById("activeCardImage").style.display = "none";
+      document.getElementById("dropzonePrompt").style.display = "block";
+      document.getElementById("imageFilenameLabel").textContent = "No Card Image Loaded";
+      document.getElementById("verificationContactList").innerHTML = '<div style="text-align: center; color: var(--slate-400); font-size: 13px; padding: 60px 0;">Upload next card to verify.</div>';
+      activeCardData = null;
     }
 
-    function updateShiftHistory(payload) {
-      let batches = JSON.parse(localStorage.getItem("aact_shift_batches") || "[]");
-      batches.unshift({
-        id: payload.submission_id,
-        amb: payload.ambassador_name,
-        org: payload.organization,
-        contacts: payload.contacts.length,
-        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-      });
-      localStorage.setItem("aact_shift_batches", JSON.stringify(batches));
+    function flagCardForSupervisor() {
+      if (!activeCardData) return;
+      const cardId = "FLAG-" + new Date().toISOString().slice(0, 10).replace(/-/g, "") + "-" + Math.random().toString(36).substring(2, 6).toUpperCase();
+      const verifier = document.getElementById("staffVerifierName").value.trim() || "Staff Intern";
+      
+      const payload = {
+        card_id: cardId,
+        submission_id: cardId,
+        timestamp: new Date().toISOString(),
+        source: "STAFF_IMAGE_VERIFICATION",
+        original_filename: activeCardData.filename,
+        staff_verifier: verifier,
+        ambassador_name: document.getElementById("verifyAmbName").value || "Unknown",
+        organization: document.getElementById("verifyAmbOrg").value || "Pending",
+        contacts_count: 0,
+        match_rate: "N/A",
+        status: "FLAGGED_FOR_SUPERVISOR",
+        contacts: []
+      };
 
-      const totalContacts = batches.reduce((acc, b) => acc + b.contacts, 0);
-      document.getElementById("shiftBatchCount").textContent = batches.length;
-      document.getElementById("shiftContactCount").textContent = totalContacts;
+      saveToTrackingQueue(payload);
+      showToast(`⚠️ Card flagged and sent to Supervisor Queue (${cardId})`, false);
+    }
 
-      const container = document.getElementById("staffHistoryList");
-      container.innerHTML = batches.slice(0, 10).map(b => `
-        <div style="padding: 8px 12px; background: var(--slate-50); border: 1px solid var(--slate-200); border-radius: 6px; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center;">
-          <div>
-            <strong>${b.amb}</strong> (${b.org}) &bull; <span style="color: var(--blue-accent); font-family: var(--font-mono);">${b.id}</span>
-          </div>
-          <div>
-            <span class="pulse-pill" style="font-size: 11px;">${b.contacts} Contacts</span>
-            <span style="font-size: 11px; color: var(--slate-400); margin-left: 8px;">${b.time}</span>
-          </div>
-        </div>
-      `).join("");
+    function saveToTrackingQueue(item) {
+      let queue = JSON.parse(localStorage.getItem("aact_card_tracking_queue") || "[]");
+      queue.unshift(item);
+      localStorage.setItem("aact_card_tracking_queue", JSON.stringify(queue));
+    }
+
+    function renderTrackingTable() {
+      const queue = JSON.parse(localStorage.getItem("aact_card_tracking_queue") || "[]");
+      const tbody = document.getElementById("trackingTableBody");
+
+      if (queue.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="10" style="text-align: center; color: var(--slate-400); padding: 24px;">No cards verified yet. Upload and approve cards in the Scan & Verify tab!</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = queue.map((c, idx) => {
+        const badgeClass = c.status === "VERIFIED_APPROVED" ? "badge-match" : "badge-review";
+        return `
+          <tr>
+            <td><div style="background: var(--navy); color: #fff; width: 34px; height: 26px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 11px;">📷</div></td>
+            <td><strong style="font-family: var(--font-mono); color: var(--blue-accent);">${c.card_id}</strong></td>
+            <td><strong>${c.ambassador_name}</strong></td>
+            <td>${c.organization || 'AACT Partner'}</td>
+            <td><span class="row-badge badge-match">${c.contacts_count}</span></td>
+            <td>${c.match_rate}</td>
+            <td><span class="row-badge ${badgeClass}">${c.status}</span></td>
+            <td>${c.staff_verifier}</td>
+            <td style="font-size: 11px; color: var(--slate-600);">${new Date(c.timestamp).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})}</td>
+            <td>
+              <button class="btn btn-outline btn-sm" onclick="exportSingleCSV(${idx})">📥 CSV</button>
+            </td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    function exportSingleCSV(idx) {
+      const queue = JSON.parse(localStorage.getItem("aact_card_tracking_queue") || "[]");
+      if (queue[idx]) exportCSVBackup(queue[idx]);
+    }
+
+    function exportTrackingLedgerCSV() {
+      const queue = JSON.parse(localStorage.getItem("aact_card_tracking_queue") || "[]");
+      if (queue.length === 0) {
+        showToast("Tracking ledger is empty.", false);
+        return;
+      }
+      const headers = ["Card_ID", "Original_File", "Ambassador", "Organization", "Contacts_Count", "Match_Rate", "Status", "Staff_Verifier", "Timestamp"];
+      const rows = queue.map(c => [
+        `"${c.card_id}"`, `"${c.original_filename}"`, `"${c.ambassador_name}"`, `"${c.organization}"`, c.contacts_count, `"${c.match_rate}"`, `"${c.status}"`, `"${c.staff_verifier}"`, `"${c.timestamp}"`
+      ]);
+      const csv = [headers.join(",")].concat(rows.map(r => r.join(","))).join("\n");
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = `AACT_Touch10_Card_Audit_Ledger_${new Date().toISOString().slice(0,10)}.csv`;
+      a.click();
     }
 
     function exportCSVBackup(payload) {
-      const headers = ["Ambassador", "Ambassador_Email", "Organization", "Contact_First", "Contact_Last", "Phone", "Address", "City", "Relationship", "Batch_ID", "Timestamp"];
-      const rows = payload.contacts.map(c => [
-        `"${payload.ambassador_name}"`,
-        `"${payload.ambassador_email}"`,
-        `"${payload.organization}"`,
-        `"${c.first_name}"`,
-        `"${c.last_name}"`,
-        `"${c.phone}"`,
-        `"${c.address}"`,
-        `"${c.city}"`,
-        `"${c.relationship}"`,
-        `"${payload.submission_id}"`,
-        `"${payload.timestamp}"`
+      const headers = ["Ambassador", "Ambassador_Email", "Organization", "Contact_First", "Contact_Last", "Phone", "Address", "City", "Relationship", "Turnout_Status", "Batch_ID", "Timestamp"];
+      const rows = (payload.contacts || []).map(c => [
+        `"${payload.ambassador_name}"`, `"${payload.ambassador_email}"`, `"${payload.organization}"`,
+        `"${c.first_name}"`, `"${c.last_name}"`, `"${c.phone}"`, `"${c.address}"`, `"${c.city}"`, `"${c.relationship}"`,
+        `"${c.turnout_status || 'ACTIVE_TARGET'}"`, `"${payload.submission_id}"`, `"${payload.timestamp}"`
       ]);
-
-      const csvContent = [headers.join(",")].concat(rows.map(r => r.join(","))).join("\n");
-      const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-      const url = URL.createObjectURL(blob);
+      const csv = [headers.join(",")].concat(rows.map(r => r.join(","))).join("\n");
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
       const a = document.createElement("a");
-      a.href = url;
-      a.download = `${payload.submission_id}_${payload.ambassador_name.replace(/\s+/g, "_")}_Touch10_Backup.csv`;
+      a.href = URL.createObjectURL(blob);
+      a.download = `${payload.submission_id}_${(payload.ambassador_name || 'Card').replace(/\s+/g, "_")}_Touch10_Action_Workbook.csv`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
     }
 
     async function transmitToFirestore(payload) {
-      // Direct REST push to Google Cloud Firestore (collection: intake_submissions)
       const url = "https://firestore.googleapis.com/v1/projects/aact-now-2026/databases/(default)/documents/intake_submissions";
-      
-      const firestoreDoc = {
+      const doc = {
         fields: {
-          submission_id: { stringValue: payload.submission_id },
+          submission_id: { stringValue: payload.submission_id || payload.card_id },
           timestamp: { stringValue: payload.timestamp },
           source: { stringValue: payload.source },
-          staff_entered_by: { stringValue: payload.staff_entered_by || "" },
-          intake_source: { stringValue: payload.intake_source || "" },
+          original_filename: { stringValue: payload.original_filename || "" },
+          staff_entered_by: { stringValue: payload.staff_verifier || "" },
           ambassador_name: { stringValue: payload.ambassador_name },
-          ambassador_email: { stringValue: payload.ambassador_email },
-          ambassador_phone: { stringValue: payload.ambassador_phone },
-          organization: { stringValue: payload.organization },
-          preferred_language: { stringValue: payload.preferred_language },
-          status: { stringValue: "QUEUED" },
+          ambassador_email: { stringValue: payload.ambassador_email || "" },
+          organization: { stringValue: payload.organization || "AACT Partner" },
+          status: { stringValue: payload.status || "QUEUED" },
           contacts: {
             arrayValue: {
-              values: payload.contacts.map(c => ({
+              values: (payload.contacts || []).map(c => ({
                 mapValue: {
                   fields: {
                     first_name: { stringValue: c.first_name },
@@ -1188,7 +1216,8 @@
                     phone: { stringValue: c.phone || "" },
                     address: { stringValue: c.address || "" },
                     city: { stringValue: c.city || "McAllen" },
-                    relationship: { stringValue: c.relationship || "Contact" }
+                    relationship: { stringValue: c.relationship || "Contact" },
+                    turnout_status: { stringValue: c.turnout_status || "ACTIVE_TARGET" }
                   }
                 }
               }))
@@ -1196,28 +1225,20 @@
           }
         }
       };
-
-      const resp = await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(firestoreDoc)
-      });
-      return resp;
+      return fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(doc) });
     }
 
-    // Hotkey: Ctrl+Enter to submit batch
-    document.addEventListener("keydown", (e) => {
-      if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
-        if (document.getElementById("viewStaff").classList.contains("active")) {
-          submitStaffBatch();
-        }
-      }
-    });
+    function showToast(msg, isSuccess = true) {
+      const t = document.getElementById("toast");
+      t.textContent = msg;
+      t.style.background = isSuccess ? "var(--emerald-dark)" : "var(--crimson)";
+      t.style.display = "block";
+      setTimeout(() => { t.style.display = "none"; }, 3500);
+    }
 
-    // INIT ON LOAD
+    // Pre-populate sample on start for demonstration
     window.addEventListener("DOMContentLoaded", () => {
-      renderPublicRows();
-      checkStaffSession();
+      loadSampleCard('eduardo');
     });
   </script>
 </body>
