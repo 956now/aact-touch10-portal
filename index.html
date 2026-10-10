@@ -554,6 +554,141 @@
     .pencil-pop {
       filter: contrast(280%) brightness(95%) grayscale(100%) !important;
     }
+
+    /* GEMINI LIVE VERIFICATION COPILOT DOCK */
+    .copilot-dock {
+      background: #f8fafc;
+      border-top: 1.5px solid #bfdbfe;
+      background: linear-gradient(180deg, #f0f7ff 0%, #ffffff 100%);
+      display: flex;
+      flex-direction: column;
+      border-radius: 0 0 10px 10px;
+    }
+    .copilot-header {
+      padding: 7px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+      background: #e0f2fe;
+      border-bottom: 1px solid #bae6fd;
+    }
+    .copilot-badge {
+      background: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 100%);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 12px;
+      box-shadow: 0 1px 4px rgba(37,99,235,0.3);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .copilot-chat-history {
+      max-height: 160px;
+      overflow-y: auto;
+      padding: 10px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      background: #f8fafc;
+      border-bottom: 1px solid var(--slate-200);
+      font-size: 12px;
+    }
+    .copilot-msg {
+      padding: 8px 12px;
+      border-radius: 8px;
+      line-height: 1.4;
+      max-width: 90%;
+    }
+    .copilot-msg.bot {
+      background: #ffffff;
+      border: 1px solid #bfdbfe;
+      color: var(--slate-800);
+      align-self: flex-start;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    }
+    .copilot-msg.user {
+      background: var(--blue-accent);
+      color: #ffffff;
+      align-self: flex-end;
+    }
+    .copilot-pills {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+    .copilot-pills span {
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+      font-size: 10.5px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .copilot-pills span:hover {
+      background: #dbeafe;
+      border-color: #93c5fd;
+    }
+    .copilot-input-bar {
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #ffffff;
+    }
+    .copilot-input-bar input {
+      flex: 1;
+      height: 32px;
+      font-size: 12px;
+      padding: 0 10px;
+      border: 1.5px solid var(--slate-300);
+      border-radius: 6px;
+      outline: none;
+    }
+    .copilot-input-bar input:focus {
+      border-color: var(--blue-accent);
+      box-shadow: 0 0 0 2px rgba(37,99,235,0.15);
+    }
+    .copilot-mic-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      border: 1px solid var(--slate-300);
+      background: #ffffff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      transition: all 0.2s ease;
+    }
+    .copilot-mic-btn:hover { background: #f1f5f9; }
+    .copilot-mic-btn.listening {
+      background: #fef2f2;
+      border-color: #ef4444;
+      animation: micPulse 1.2s infinite;
+    }
+    @keyframes micPulse {
+      0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+      70% { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+    }
+    .field-flash {
+      animation: flashGreen 1.4s ease-out;
+    }
+    @keyframes flashGreen {
+      0% { background-color: #86efac; border-color: #16a34a; transform: scale(1.02); }
+      50% { background-color: #bbf7d0; border-color: #22c55e; }
+      100% { background-color: #ffffff; border-color: var(--slate-300); transform: scale(1); }
+    }
+
   </style>
 </head>
 <body>
@@ -704,6 +839,45 @@
           <!-- 10 CONTACT ROWS -->
           <div class="transcriber-body" id="transcriberRowsContainer">
             <!-- Injected via JavaScript -->
+          </div>
+
+
+          <!-- LIVE GEMINI VERIFICATION COPILOT DOCK -->
+          <div class="copilot-dock" id="copilotDock">
+            <div class="copilot-header" onclick="toggleCopilotExpanded()">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span class="copilot-badge">✨ Gemini AI Copilot</span>
+                <span style="font-size: 11px; color: var(--slate-600);" id="copilotStatusHint">Speak or type natural corrections (e.g. "Row 2 DOB is 1966 not 1993", "Row 1 city is Alton")</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <button type="button" class="tool-btn" id="copilotExpandBtn" style="font-size: 10px;">Chat History ▾</button>
+              </div>
+            </div>
+
+            <!-- EXPANDABLE CHAT HISTORY -->
+            <div class="copilot-chat-history" id="copilotChatHistory" style="display: none;">
+              <div class="copilot-msg bot">
+                <strong>🤖 Gemini Copilot:</strong> I'm live with you on this card sheet! You can tell me corrections in plain English or Spanish:
+                <div class="copilot-pills">
+                  <span onclick="sendCopilotSuggestion('Entry 2 DOB is 06/13/1966 not 1993')">"Entry 2 DOB is 06/13/1966"</span>
+                  <span onclick="sendCopilotSuggestion('Row 1 city is Alton, not Alamo')">"Row 1 city is Alton"</span>
+                  <span onclick="sendCopilotSuggestion('What does Row 8 handwriting say?')">"What does Row 8 say?"</span>
+                  <span onclick="sendCopilotSuggestion('Format all phone numbers with 956 area code')">"Add 956 to all phones"</span>
+                  <span onclick="sendCopilotSuggestion('Approve this card and save')">"Approve and save"</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- COPILOT INPUT BAR -->
+            <div class="copilot-input-bar">
+              <button type="button" class="copilot-mic-btn" id="copilotMicBtn" onclick="toggleSpeechRecognition()" title="Voice Dictation (Speak corrections)">
+                <span id="micIcon">🎙️</span>
+              </button>
+              <input type="text" id="copilotInput" placeholder="Tell Gemini: 'Row 2 is 1966', 'Row 1 city is Alton', 'Approve card'..." onkeydown="handleCopilotKeydown(event)">
+              <button type="button" class="btn btn-primary btn-sm" id="btnCopilotSend" onclick="sendCopilotMessage()">
+                <span>Send</span>
+              </button>
+            </div>
           </div>
 
           <!-- FOOTER ACTIONS -->
@@ -1797,6 +1971,234 @@ Return ONLY valid JSON.`;
       t.style.background = isSuccess ? "var(--emerald-dark)" : "var(--crimson)";
       t.style.display = "block";
       setTimeout(() => { t.style.display = "none"; }, 3500);
+    }
+
+
+    // =========================================================================
+    // LIVE GEMINI COPILOT AGENT FOR INTERN VERIFICATION WORKBENCH
+    // =========================================================================
+    let copilotChatOpen = false;
+    let isVoiceListening = false;
+    let speechRecognizer = null;
+
+    function toggleCopilotExpanded() {
+      const chatDiv = document.getElementById("copilotChatHistory");
+      const expandBtn = document.getElementById("copilotExpandBtn");
+      copilotChatOpen = !copilotChatOpen;
+      chatDiv.style.display = copilotChatOpen ? "flex" : "none";
+      expandBtn.textContent = copilotChatOpen ? "Hide Chat ▴" : "Chat History ▾";
+    }
+
+    function handleCopilotKeydown(event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        sendCopilotMessage();
+      }
+    }
+
+    function sendCopilotSuggestion(text) {
+      document.getElementById("copilotInput").value = text;
+      sendCopilotMessage();
+    }
+
+    // Voice Dictation (Speech Recognition)
+    function toggleSpeechRecognition() {
+      if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
+        showToast("Voice recognition not supported in this browser. Please use Chrome or Edge.", false);
+        return;
+      }
+
+      const micBtn = document.getElementById("copilotMicBtn");
+      if (isVoiceListening) {
+        if (speechRecognizer) speechRecognizer.stop();
+        isVoiceListening = false;
+        micBtn.classList.remove("listening");
+        return;
+      }
+
+      const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+      speechRecognizer = new SpeechRec();
+      speechRecognizer.continuous = false;
+      speechRecognizer.interimResults = false;
+      speechRecognizer.lang = "en-US";
+
+      micBtn.classList.add("listening");
+      isVoiceListening = true;
+      showToast("🎙️ Listening... Speak your correction now (e.g. 'Row 2 is 1966 not 1993')", true);
+
+      speechRecognizer.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        document.getElementById("copilotInput").value = transcript;
+        micBtn.classList.remove("listening");
+        isVoiceListening = false;
+        sendCopilotMessage();
+      };
+
+      speechRecognizer.onerror = (event) => {
+        console.warn("Speech error:", event.error);
+        micBtn.classList.remove("listening");
+        isVoiceListening = false;
+      };
+
+      speechRecognizer.onend = () => {
+        micBtn.classList.remove("listening");
+        isVoiceListening = false;
+      };
+
+      speechRecognizer.start();
+    }
+
+    // Send Message to Gemini Copilot
+    async function sendCopilotMessage() {
+      const input = document.getElementById("copilotInput");
+      const query = input.value.trim();
+      if (!query) return;
+
+      const apiKey = getGeminiApiKey();
+      if (!apiKey) {
+        openApiKeyModal();
+        showToast("Please provide your Gemini API key to activate Copilot.", false);
+        return;
+      }
+
+      appendCopilotMessage(query, "user");
+      input.value = "";
+      document.getElementById("copilotChatHistory").style.display = "flex";
+      copilotChatOpen = true;
+      document.getElementById("copilotExpandBtn").textContent = "Hide Chat ▴";
+
+      const sendBtn = document.getElementById("btnCopilotSend");
+      sendBtn.disabled = true;
+      sendBtn.textContent = "Thinking...";
+
+      // Collect current 10 rows state
+      const currentRowsData = [];
+      for (let i = 1; i <= 10; i++) {
+        currentRowsData.push({
+          row: i,
+          first_name: document.getElementById(`fn_${i}`)?.value || "",
+          last_name: document.getElementById(`ln_${i}`)?.value || "",
+          phone: document.getElementById(`ph_${i}`)?.value || "",
+          address: document.getElementById(`addr_${i}`)?.value || "",
+          city: document.getElementById(`city_${i}`)?.value || "",
+          relationship: document.getElementById(`rel_${i}`)?.value || ""
+        });
+      }
+
+      const prompt = `You are the interactive AACT NOW 2026 Live Verification Copilot.
+You assist human interns reviewing handwritten voter intake cards.
+Current 10 rows on screen:
+${JSON.stringify(currentRowsData, null, 2)}
+
+User Instruction: "${query}"
+
+Guidelines:
+1. If user asks to update or fix any entry (e.g. "Entry 2 is 1966 not 1993", "Row 1 city is Alton", "Row 5 phone is (956) 555-1234", "Add 956 area code to all phones", "First name of row 3 is Ashton"):
+   Provide field updates.
+   Supported fields: "fn", "ln", "phone", "address", "city", "relationship".
+2. If user says "Approve card" or "Save card":
+   action: "APPROVE".
+3. If user says "Clear form" or "Reset":
+   action: "CLEAR".
+4. If user asks a question about South Texas names, abbreviations (e.g. Gza -> Garza), or the card:
+   action: "ANSWER".
+
+Return ONLY a valid JSON object:
+{
+  "reply": "Conversational explanation of what was changed or answered",
+  "updates": [
+    { "row": 2, "field": "fn" | "ln" | "phone" | "address" | "city" | "relationship", "value": "..." }
+  ],
+  "action": "UPDATE" | "APPROVE" | "CLEAR" | "ANSWER"
+}`;
+
+      try {
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${apiKey}`;
+        const payload = {
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: {
+            responseMimeType: "application/json",
+            temperature: 0.1
+          }
+        };
+
+        const resp = await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        if (!resp.ok) {
+          const errT = await resp.text();
+          throw new Error(`HTTP ${resp.status}: ${errT.slice(0, 100)}`);
+        }
+
+        const data = await resp.json();
+        const candidateText = data.candidates?.[0]?.content?.parts?.[0]?.text;
+        const parsed = JSON.parse(candidateText);
+
+        appendCopilotMessage(parsed.reply || "Done!", "bot");
+
+        // Apply updates to form inputs with visual pulse
+        if (parsed.updates && Array.isArray(parsed.updates)) {
+          parsed.updates.forEach(u => {
+            const row = u.row;
+            let el = null;
+            if (u.field === "fn" || u.field === "first_name") el = document.getElementById(`fn_${row}`);
+            else if (u.field === "ln" || u.field === "last_name") el = document.getElementById(`ln_${row}`);
+            else if (u.field === "phone" || u.field === "ph") el = document.getElementById(`ph_${row}`);
+            else if (u.field === "address" || u.field === "addr") el = document.getElementById(`addr_${row}`);
+            else if (u.field === "city") el = document.getElementById(`city_${row}`);
+            else if (u.field === "relationship" || u.field === "rel") el = document.getElementById(`rel_${row}`);
+
+            if (el) {
+              if (el.tagName === "SELECT") {
+                let found = false;
+                for (let opt of el.options) {
+                  if (opt.value.toUpperCase() === String(u.value).toUpperCase()) {
+                    el.value = opt.value;
+                    found = true;
+                    break;
+                  }
+                }
+                if (!found) {
+                  const newOpt = new Option(u.value, u.value, true, true);
+                  el.add(newOpt);
+                }
+              } else {
+                el.value = u.value;
+              }
+
+              // Trigger visual pulse
+              el.classList.remove("field-flash");
+              void el.offsetWidth;
+              el.classList.add("field-flash");
+              handleNameInput(row);
+            }
+          });
+        }
+
+        if (parsed.action === "APPROVE") {
+          submitFinalizedCardBatch();
+        } else if (parsed.action === "CLEAR") {
+          clearFormForNextCard();
+        }
+
+      } catch (err) {
+        appendCopilotMessage(`⚠️ Error: ${err.message}`, "bot");
+      } finally {
+        sendBtn.disabled = false;
+        sendBtn.textContent = "Send";
+      }
+    }
+
+    function appendCopilotMessage(text, sender) {
+      const chatDiv = document.getElementById("copilotChatHistory");
+      const msgDiv = document.createElement("div");
+      msgDiv.className = `copilot-msg ${sender}`;
+      msgDiv.innerHTML = sender === "bot" ? `<strong>🤖 Copilot:</strong> ${text}` : `<strong>You:</strong> ${text}`;
+      chatDiv.appendChild(msgDiv);
+      chatDiv.scrollTop = chatDiv.scrollHeight;
     }
 
     // INITIALIZATION
