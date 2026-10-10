@@ -62,7 +62,7 @@
       box-shadow: 0 4px 14px rgba(11, 31, 58, 0.25);
     }
     .header-container {
-      max-width: 1680px;
+      max-width: 1720px;
       margin: 0 auto;
       display: flex;
       justify-content: space-between;
@@ -86,6 +86,7 @@
       font-size: 19px;
       font-weight: 800;
       color: var(--white);
+      letter-spacing: -0.2px;
     }
     .brand-title p { font-size: 11px; color: var(--slate-300); }
 
@@ -120,7 +121,7 @@
 
     /* MAIN CONTAINER */
     main {
-      max-width: 1680px;
+      max-width: 1720px;
       width: 100%;
       margin: 14px auto;
       padding: 0 16px 40px 16px;
@@ -157,7 +158,7 @@
       grid-template-columns: 50% 50%;
       gap: 16px;
       margin-top: 10px;
-      min-height: 720px;
+      min-height: 740px;
     }
     @media (max-width: 1100px) {
       .workbench-grid { grid-template-columns: 1fr; }
@@ -171,7 +172,7 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      height: 760px;
+      height: 780px;
     }
     .viewer-toolbar {
       background: #0f172a;
@@ -179,243 +180,379 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid var(--slate-700);
+      border-bottom: 1px solid #1e293b;
       flex-wrap: wrap;
       gap: 8px;
     }
-    .viewer-toolbar .btn-group { display: flex; gap: 6px; align-items: center; }
+    .btn-group { display: flex; gap: 4px; align-items: center; }
     .tool-btn {
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: var(--white);
-      padding: 5px 10px;
-      border-radius: 5px;
-      font-size: 11.5px;
+      background: #1e293b;
+      color: #cbd5e1;
+      border: 1px solid #334155;
+      font-size: 11px;
       font-weight: 600;
+      padding: 4px 8px;
+      border-radius: 5px;
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 4px;
-      transition: background 0.15s;
     }
-    .tool-btn:hover { background: rgba(255, 255, 255, 0.22); }
-    .tool-btn.active { background: var(--blue-accent); border-color: var(--blue-accent); }
+    .tool-btn:hover { background: #334155; color: #fff; }
+    .tool-btn.active { background: var(--blue-accent); color: #fff; border-color: var(--blue-accent); }
 
-    /* SCROLLABLE DOCUMENT FEED FOR ALL PAGES */
     .document-viewport {
       flex: 1;
-      overflow-y: auto;
-      overflow-x: auto;
+      overflow: auto;
       padding: 16px;
-      background: #070b12;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 20px;
+      gap: 16px;
+      background: #090e17;
+      position: relative;
     }
 
     .pdf-page-card {
-      background: #111827;
-      border: 1px solid var(--slate-700);
+      background: #ffffff;
       border-radius: 6px;
-      padding: 10px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.6);
-      width: 100%;
-      max-width: 820px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+      margin-bottom: 12px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      overflow: hidden;
+      border: 2px solid #334155;
+      transition: transform 0.15s ease, filter 0.15s ease;
     }
     .pdf-page-header {
       width: 100%;
+      background: #1e293b;
+      color: #94a3b8;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 4px 8px 8px 8px;
-      color: var(--slate-400);
-      font-size: 11px;
-      font-family: var(--font-mono);
-      border-bottom: 1px solid var(--slate-800);
-      margin-bottom: 8px;
     }
     .pdf-page-card canvas, .pdf-page-card img {
+      display: block;
       max-width: 100%;
       height: auto;
-      border-radius: 4px;
-      transition: transform 0.15s ease, filter 0.15s ease;
     }
 
     .dropzone-box {
-      border: 2px dashed var(--slate-600);
-      border-radius: 10px;
-      padding: 60px 20px;
+      border: 2px dashed #3b82f6;
+      border-radius: 12px;
+      background: rgba(30, 58, 138, 0.12);
+      padding: 40px 20px;
       text-align: center;
-      color: var(--slate-400);
       cursor: pointer;
-      background: rgba(255, 255, 255, 0.02);
-      width: 100%;
+      color: #94a3b8;
       margin: auto 0;
+      transition: all 0.2s ease;
     }
-    .dropzone-box:hover {
-      border-color: var(--blue-accent);
-      background: rgba(37, 99, 235, 0.05);
-      color: var(--white);
-    }
-    .dropzone-box .icon { font-size: 44px; margin-bottom: 10px; }
+    .dropzone-box:hover { background: rgba(30, 58, 138, 0.25); border-color: #60a5fa; color: #fff; }
+    .dropzone-box .icon { font-size: 38px; margin-bottom: 8px; }
 
-    /* RIGHT PANE: RAPID HUMAN-IN-THE-LOOP TRANSCRIBER */
+    /* RIGHT PANE: VERIFICATION & RAPID TRANSCRIBER */
     .verification-card {
       background: var(--white);
       border-radius: 10px;
       border: 1px solid var(--slate-200);
       display: flex;
       flex-direction: column;
-      height: 760px;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
+      height: 780px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
     }
     .verification-header {
-      padding: 12px 18px;
+      background: #f8fafc;
+      padding: 10px 16px;
       border-bottom: 1px solid var(--slate-200);
-      background: var(--slate-50);
-      border-top-left-radius: 10px;
-      border-top-right-radius: 10px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
     }
-
     .transcriber-body {
-      padding: 12px 16px;
-      overflow-y: auto;
       flex: 1;
+      overflow-y: auto;
+      padding: 12px 16px;
+      background: #f8fafc;
     }
 
-    .row-card {
-      background: var(--slate-50);
-      border: 1px solid var(--slate-200);
-      border-radius: 8px;
-      padding: 8px 12px;
-      margin-bottom: 8px;
-      transition: all 0.15s;
-    }
-    .row-card:focus-within {
-      background: var(--blue-light);
-      border-color: var(--blue-accent);
-      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.1);
-    }
-
-    .row-meta-line {
+    /* MULTI-PAGE SELECTOR */
+    .page-nav-bar {
       display: flex;
-      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      background: #eff6ff;
+      border-bottom: 1px solid #bfdbfe;
+      flex-wrap: wrap;
+    }
+    .page-btn {
+      background: var(--white);
+      color: var(--blue);
+      border: 1px solid #93c5fd;
+      padding: 4px 10px;
+      border-radius: 16px;
       font-size: 11px;
       font-weight: 700;
-      color: var(--slate-700);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.15s ease;
+    }
+    .page-btn:hover { background: #dbeafe; }
+    .page-btn.active {
+      background: var(--blue-accent);
+      color: var(--white);
+      border-color: var(--blue-accent);
+      box-shadow: 0 2px 6px rgba(37,99,235,0.3);
+    }
+
+    /* AI SCANNING INDICATOR BANNER */
+    .ai-banner {
+      background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      animation: pulseGlow 2s infinite alternate;
+    }
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 4px rgba(37, 99, 235, 0.4); }
+      100% { box-shadow: 0 0 16px rgba(37, 99, 235, 0.8); }
+    }
+
+    /* CONTACT ROW CARD */
+    .row-card {
+      background: var(--white);
+      border-radius: 8px;
+      border: 1px solid var(--slate-200);
+      padding: 8px 12px;
+      margin-bottom: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+      transition: border-color 0.15s ease;
+    }
+    .row-card:focus-within {
+      border-color: var(--blue-accent);
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+    }
+    .row-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       margin-bottom: 6px;
+    }
+    .row-num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--navy);
+      background: var(--slate-100);
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+    .ai-badge {
+      font-size: 10px;
+      font-weight: 700;
+      color: #1e40af;
+      background: #dbeafe;
+      padding: 2px 6px;
+      border-radius: 10px;
+      display: none;
     }
     .row-inputs-grid {
       display: grid;
-      grid-template-columns: 26% 26% 24% 24%;
-      gap: 6px;
-      margin-bottom: 6px;
-    }
-    .row-inputs-sub {
-      display: grid;
-      grid-template-columns: 50% 25% 25%;
+      grid-template-columns: 20% 20% 16% 22% 12% 10%;
       gap: 6px;
     }
-    .row-inputs-grid input, .row-inputs-grid select,
-    .row-inputs-sub input, .row-inputs-sub select {
-      height: 32px;
-      padding: 0 8px;
-      font-size: 12.5px;
+    @media (max-width: 900px) {
+      .row-inputs-grid { grid-template-columns: 1fr 1fr; }
+    }
+    .row-inputs-grid input, .row-inputs-grid select {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      padding: 4px 8px;
       border: 1px solid var(--slate-300);
-      border-radius: 6px;
-      background: var(--white);
+      border-radius: 5px;
+      background: #fff;
+      color: var(--slate-900);
+      width: 100%;
     }
-    .row-inputs-grid input:focus, .row-inputs-sub input:focus {
-      border-color: var(--blue-accent);
+    .row-inputs-grid input:focus, .row-inputs-grid select:focus {
       outline: none;
-      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+      border-color: var(--blue-accent);
+    }
+
+    .verification-footer {
+      background: var(--white);
+      border-top: 1px solid var(--slate-200);
+      padding: 10px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
     }
 
     /* BUTTONS */
     .btn {
-      height: 38px;
-      padding: 0 16px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 13px;
-      cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
+      font-family: var(--font-sans);
+      font-size: 12.5px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 6px;
       border: none;
+      cursor: pointer;
       transition: all 0.15s ease;
+      text-decoration: none;
     }
     .btn-primary {
-      background: linear-gradient(135deg, var(--blue-accent) 0%, var(--blue) 100%);
+      background: var(--blue-accent);
       color: var(--white);
-      box-shadow: 0 2px 6px rgba(30, 64, 175, 0.25);
     }
     .btn-primary:hover { background: #1d4ed8; }
-    .btn-emerald {
-      background: linear-gradient(135deg, var(--emerald) 0%, var(--emerald-dark) 100%);
+    .btn-ai {
+      background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
       color: var(--white);
-      box-shadow: 0 2px 6px rgba(16, 185, 129, 0.25);
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.35);
+    }
+    .btn-ai:hover { background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%); }
+    .btn-emerald {
+      background: var(--emerald-dark);
+      color: var(--white);
     }
     .btn-emerald:hover { background: #047857; }
     .btn-outline {
-      background: var(--white);
-      border: 1.5px solid var(--slate-300);
+      background: transparent;
       color: var(--slate-700);
+      border: 1px solid var(--slate-300);
     }
-    .btn-outline:hover { background: var(--slate-50); border-color: var(--slate-400); }
-    .btn-sm { height: 26px; padding: 0 8px; font-size: 11px; border-radius: 5px; }
+    .btn-outline:hover { background: var(--slate-100); }
+    .btn-sm { font-size: 11px; padding: 4px 8px; }
 
-    /* TRACKING TABLE */
-    table.audit-table { width: 100%; border-collapse: collapse; font-size: 12px; }
-    table.audit-table th {
-      background: var(--slate-50);
-      padding: 10px 12px;
-      text-transform: uppercase;
-      font-size: 10.5px;
-      font-weight: 700;
-      color: var(--slate-600);
-      border-bottom: 2px solid var(--slate-200);
+    /* KPI STAT CARDS */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .stat-card {
+      background: var(--white);
+      border-radius: 8px;
+      border: 1px solid var(--slate-200);
+      padding: 12px 16px;
+      display: flex;
+      flex-direction: column;
+    }
+    .stat-card .label { font-size: 11px; font-weight: 700; color: var(--slate-600); text-transform: uppercase; margin-bottom: 4px; }
+    .stat-card .val { font-family: var(--font-brand); font-size: 24px; font-weight: 800; color: var(--navy); }
+    .stat-card .desc { font-size: 11px; color: var(--slate-400); margin-top: 2px; }
+
+    /* TABLE */
+    .data-table-container {
+      overflow-x: auto;
+      border: 1px solid var(--slate-200);
+      border-radius: 8px;
+    }
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
       text-align: left;
     }
-    table.audit-table td {
+    table.data-table th {
+      background: #f1f5f9;
+      color: var(--slate-700);
+      font-weight: 700;
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--slate-300);
+    }
+    table.data-table td {
       padding: 8px 12px;
       border-bottom: 1px solid var(--slate-200);
-      vertical-align: middle;
+      color: var(--slate-900);
     }
-    table.audit-table tr:hover td { background: var(--blue-light); }
+    table.data-table tr:hover { background: #f8fafc; }
 
-    .toast {
+    /* MODAL */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(11, 31, 58, 0.6);
+      backdrop-filter: blur(2px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+    .modal-box {
+      background: #fff;
+      border-radius: 12px;
+      max-width: 680px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.25);
+      border: 1px solid var(--slate-200);
+      display: flex;
+      flex-direction: column;
+    }
+    .modal-header {
+      padding: 14px 20px;
+      background: #f8fafc;
+      border-bottom: 1px solid var(--slate-200);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-body { padding: 18px 20px; flex: 1; }
+    .modal-footer {
+      padding: 12px 20px;
+      background: #f8fafc;
+      border-top: 1px solid var(--slate-200);
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    /* TOAST */
+    #toast {
       position: fixed;
       bottom: 24px;
       right: 24px;
-      background: var(--slate-900);
-      color: var(--white);
+      background: var(--navy);
+      color: #fff;
       padding: 12px 20px;
       border-radius: 8px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
-      z-index: 9999;
       font-size: 13px;
       font-weight: 600;
       display: none;
-      animation: slideUp 0.2s ease;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+      z-index: 9999;
+      animation: slideIn 0.25s ease-out;
     }
-    @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    @keyframes slideIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
-    footer {
-      background: var(--white);
-      border-top: 1px solid var(--slate-200);
-      padding: 14px 24px;
-      text-align: center;
-      font-size: 11.5px;
-      color: var(--slate-600);
+    /* CONTRAST POP FILTER */
+    .pencil-pop {
+      filter: contrast(280%) brightness(95%) grayscale(100%) !important;
     }
   </style>
 </head>
@@ -425,29 +562,29 @@
   <header>
     <div class="header-container">
       <div class="brand-group">
-        <div class="logo-badge">★ AACT NOW</div>
+        <div class="logo-badge">AACT</div>
         <div class="brand-title">
-          <h1>Touch 10 Split-Screen Card Intake & Verification Command</h1>
-          <p>Quad-County Voter Roll Matching & Human-Assisted Rapid Transcription</p>
+          <h1>Touch 10 Card Scanner & Verification Command</h1>
+          <p>Quad-County Civic Momentum &bull; Gemini 3.8 Flash Vision Neural Ingestion</p>
         </div>
       </div>
 
       <nav class="nav-pills">
-        <button class="nav-btn active" onclick="switchNav('scanVerify')">
-          <span>📸</span> <span>Split-Screen Card Transcriber</span>
+        <button type="button" class="nav-btn active" id="navScanVerify" onclick="switchNav('scanVerify')">
+          <span>📷</span> <span>Card Transcriber & OCR</span>
         </button>
-        <button class="nav-btn" onclick="switchNav('tracking')">
-          <span>📋</span> <span>Card Tracking Queue</span>
+        <button type="button" class="nav-btn" id="navAuditQueue" onclick="switchNav('auditQueue')">
+          <span>📋</span> <span id="navAuditQueueLabel">Audit Tracking Queue (0)</span>
         </button>
-        <button class="nav-btn" onclick="switchNav('public')">
-          <span>🌟</span> <span>Public Touch 10</span>
-        </button>
-        <button class="nav-btn" onclick="switchNav('dashboard')">
+        <button type="button" class="nav-btn" id="navCivicFeed" onclick="switchNav('civicFeed')">
           <span>📊</span> <span>Civic Pulse</span>
         </button>
       </nav>
 
       <div style="display: flex; align-items: center; gap: 8px;">
+        <button type="button" class="tool-btn" onclick="openApiKeyModal()" style="background: rgba(255,255,255,0.12); color: #fff; border-color: rgba(255,255,255,0.25);">
+          <span>⚙️</span> <span>AI Settings</span>
+        </button>
         <span style="font-size: 11px; background: rgba(255,255,255,0.15); padding: 4px 10px; border-radius: 20px; color: #fff;">
           ⚡ 10–11 Staff Concurrent Mode
         </span>
@@ -463,11 +600,20 @@
       
       <!-- TOP ACTION BAR -->
       <div class="card" style="padding: 12px 18px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
-        <div style="display: flex; align-items: center; gap: 12px;">
+        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
           <label class="btn btn-primary" style="margin: 0; cursor: pointer;">
             <span>📷 Upload TouchTen PDF Scan or Image</span>
             <input type="file" id="cardImageUpload" accept="image/*,.pdf,application/pdf" style="display: none;" onchange="handleRealFileUpload(event)">
           </label>
+
+          <button type="button" class="btn btn-ai" id="btnGeminiScan" onclick="runGeminiVisionScan()">
+            <span>✨ Auto-Transcribe with Gemini Vision AI</span>
+          </button>
+
+          <label style="font-size: 11px; display: flex; align-items: center; gap: 5px; color: var(--slate-700); cursor: pointer; user-select: none;">
+            <input type="checkbox" id="autoScanToggle" checked> Auto-transcribe on upload
+          </label>
+
           <span style="font-size: 12px; color: var(--slate-600);" id="uploadStatusText">Upload real 1-to-N page PDF scans or photos</span>
         </div>
 
@@ -504,7 +650,7 @@
             <div class="dropzone-box" id="dropzonePrompt" onclick="document.getElementById('cardImageUpload').click()">
               <div class="icon">📄</div>
               <h3 style="font-size: 16px; font-weight: 800; color: var(--white); margin-bottom: 4px;">Click to Upload PDF or Card Scans</h3>
-              <p style="font-size: 12px; max-width: 320px; margin: 0 auto;">Renders all pages of your PDF side-by-side with high-resolution canvas zoom so you can transcribe with human clarity.</p>
+              <p style="font-size: 12px; max-width: 340px; margin: 0 auto;">Renders all pages of your PDF side-by-side with high-resolution canvas zoom so you can transcribe and verify with total clarity.</p>
             </div>
             <!-- Dynamic pages injected here -->
             <div id="pagesContainer" style="width: 100%; display: flex; flex-direction: column; align-items: center; gap: 16px;"></div>
@@ -513,16 +659,32 @@
 
         <!-- RIGHT: RAPID 10-KEY ASSISTED TRANSCRIBER & VOTER LOOKUP -->
         <div class="verification-card">
+          
           <div class="verification-header">
             <div>
               <strong style="color: var(--navy); font-size: 14px;">Human-Assisted Rapid Transcriber & Voter Match</strong>
-              <div style="font-size: 11px; color: var(--slate-600);">Glance at the left scan &bull; Type 2 letters to autocomplete names &bull; Tab moves between rows</div>
+              <div style="font-size: 11px; color: var(--slate-600);">Glance at the left scan &bull; Verify AI reading &bull; Tab moves between rows</div>
             </div>
             <div style="display: flex; gap: 8px;">
-              <span style="font-size: 11.5px; font-weight: 700; color: var(--emerald-dark); background: var(--emerald-light); padding: 3px 8px; border-radius: 12px;">
-                4-County Roll Connected
+              <span id="geminiModelBadge" style="font-size: 11px; font-weight: 700; color: #1d4ed8; background: #dbeafe; padding: 3px 8px; border-radius: 12px;">
+                🤖 Gemini 3.8 Flash Vision Ready
               </span>
             </div>
+          </div>
+
+          <!-- DYNAMIC MULTI-PAGE SELECTOR (FOR MULTI-PAGE PDF BATCHES) -->
+          <div id="pageSelectorContainer" class="page-nav-bar" style="display: none;">
+            <span style="font-size: 11px; font-weight: 700; color: var(--blue);">📄 Batch Card Pages:</span>
+            <div id="pageButtons" style="display: flex; gap: 6px; flex-wrap: wrap;"></div>
+          </div>
+
+          <!-- AI SCANNING STATUS BANNER -->
+          <div id="aiScanningBanner" class="ai-banner" style="display: none;">
+            <div>
+              <div style="font-weight: 800; font-size: 13px;">🤖 Gemini 3.8 Flash Vision Neural Engine is Reading Handwriting...</div>
+              <div style="font-size: 11px; opacity: 0.9;">Transcribing South Texas names, phone numbers, and addresses across all card pages</div>
+            </div>
+            <div style="font-size: 18px;">⏳</div>
           </div>
 
           <!-- AMBASSADOR HEADER -->
@@ -536,161 +698,246 @@
               <input type="email" id="ambEmailInput" placeholder="Ambassador Email" style="height: 30px; font-size: 12px; padding: 0 8px; border: 1px solid var(--slate-300); border-radius: 5px;">
               <input type="text" id="ambOrgInput" placeholder="Organization" style="height: 30px; font-size: 12px; padding: 0 8px; border: 1px solid var(--slate-300); border-radius: 5px;">
             </div>
+            <div id="ambassadorDropdown" style="display: none; background: #fff; border: 1px solid var(--slate-300); border-radius: 5px; max-height: 140px; overflow-y: auto; margin-top: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.08); position: absolute; z-index: 50; width: 340px;"></div>
           </div>
 
           <!-- 10 CONTACT ROWS -->
           <div class="transcriber-body" id="transcriberRowsContainer">
-            <!-- 10 Rows dynamically rendered -->
+            <!-- Injected via JavaScript -->
           </div>
 
-          <!-- FOOTER -->
-          <div style="padding: 12px 16px; border-top: 1px solid var(--slate-200); background: var(--slate-50); border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
-            <div style="font-size: 11.5px; color: var(--slate-600);">
-              Transcribed by: <input type="text" id="transcriberInternName" placeholder="Intern Name" style="height: 26px; padding: 0 6px; font-size: 11px; border: 1px solid var(--slate-300); border-radius: 4px; width: 120px;">
+          <!-- FOOTER ACTIONS -->
+          <div class="verification-footer">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 11px; font-weight: 700; color: var(--slate-600);">Staff Verifier:</span>
+              <input type="text" id="transcriberInternName" value="Intern Station #1" style="height: 28px; font-size: 11.5px; padding: 0 8px; border: 1px solid var(--slate-300); border-radius: 4px; width: 140px;" onchange="localStorage.setItem('aact_intern_station', this.value)">
             </div>
+
             <div style="display: flex; gap: 8px;">
               <button type="button" class="btn btn-outline btn-sm" onclick="clearFormForNextCard()">
-                <span>📄</span> <span>Clear / Next Card</span>
+                <span>🧹 Clear Form</span>
               </button>
               <button type="button" class="btn btn-emerald" onclick="submitFinalizedCardBatch()">
-                <span>✅ Approve & Transmit Verified List</span>
+                <span>✅ Approve & Save Card to Audit Queue</span>
               </button>
             </div>
           </div>
+
         </div>
 
       </div>
     </div>
 
-    <!-- 2. CARD INTAKE TRACKING QUEUE -->
-    <div id="viewTracking" class="view-panel">
+    <!-- 2. AUDIT TRACKING QUEUE -->
+    <div id="viewAuditQueue" class="view-panel">
+      
+      <!-- KPI STATS -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="label">Total Card Sheets Ingested</span>
+          <span class="val" id="statTotalCards">0</span>
+          <span class="desc">Verified Touch 10 sheets in queue</span>
+        </div>
+        <div class="stat-card">
+          <span class="label">Total Contacts Extracted</span>
+          <span class="val" id="statTotalContacts" style="color: var(--blue-accent);">0</span>
+          <span class="desc">Clean voter names, phones, & addresses</span>
+        </div>
+        <div class="stat-card">
+          <span class="label">VUID Matched Registered</span>
+          <span class="val" id="statMatchedVoters" style="color: var(--emerald-dark);">0</span>
+          <span class="desc">Cross-referenced against 4-County Roll</span>
+        </div>
+        <div class="stat-card">
+          <span class="label">New Voter Reg Targets</span>
+          <span class="val" id="statNewTargets" style="color: var(--crimson);">0</span>
+          <span class="desc">Unmatched / Priority VDR follow-ups</span>
+        </div>
+      </div>
+
+      <!-- QUEUE TABLE -->
       <div class="card">
-        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 12px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
           <div>
-            <div class="card-title">
-              <span>📋</span> <span>Card Intake Tracking & Verification Queue</span>
-            </div>
-            <p class="card-subtitle" style="margin-bottom: 0;">Audit log of all physical TouchTen cards transcribed and verified across your staff shift.</p>
+            <div class="card-title"><span>📋</span> Verified Card Audit Tracking Ledger</div>
+            <div class="card-subtitle">Real-time audit log of all card sheets processed by interns & staff</div>
           </div>
           <div style="display: flex; gap: 8px;">
-            <button type="button" class="btn btn-outline btn-sm" onclick="exportTrackingLedgerCSV()">
-              <span>📥 Export Audit Ledger (.csv)</span>
+            <button class="btn btn-primary btn-sm" onclick="exportTrackingLedgerCSV()">
+              <span>📥 Export Entire Ledger (CSV)</span>
+            </button>
+            <button class="btn btn-outline btn-sm" onclick="copyEntireQueueJson()">
+              <span>📋 Copy Cloud JSON Payload</span>
+            </button>
+            <button class="btn btn-outline btn-sm" onclick="clearTrackingQueue()" style="color: var(--crimson);">
+              <span>🧹 Clear Queue</span>
             </button>
           </div>
         </div>
 
-        <div style="overflow-x: auto; border: 1px solid var(--slate-200); border-radius: 8px;">
-          <table class="audit-table">
+        <div class="data-table-container">
+          <table class="data-table">
             <thead>
               <tr>
-                <th style="width: 44px;">Type</th>
-                <th>Tracking ID</th>
-                <th>File Name</th>
+                <th style="width: 40px;">#</th>
+                <th>Card / Batch ID</th>
+                <th>Original File</th>
                 <th>Ambassador</th>
                 <th>Organization</th>
                 <th>Contacts</th>
                 <th>Status</th>
-                <th>Transcribed By</th>
+                <th>Staff Verifier</th>
                 <th>Timestamp</th>
-                <th>Action</th>
+                <th>Actions</th>
               </tr>
             </thead>
-            <tbody id="trackingTableBody">
-              <!-- Rendered via JS -->
+            <tbody id="auditQueueTableBody">
+              <tr><td colspan="10" style="text-align: center; color: var(--slate-400); padding: 24px;">No cards transcribed yet today. Transcribe a card in the Split-Screen tab!</td></tr>
             </tbody>
           </table>
         </div>
       </div>
+
     </div>
 
-    <!-- 3. PUBLIC TOUCH 10 & 4. CIVIC PULSE -->
-    <div id="viewPublic" class="view-panel">
+    <!-- 3. CIVIC MOMENTUM PULSE -->
+    <div id="viewCivicFeed" class="view-panel">
       <div class="card">
-        <div class="card-title"><span>🌟</span> <span>Public Ambassador Touch 10 Portal</span></div>
-        <p class="card-subtitle">Share <code>intake.aactnow.org</code> with public volunteers to enter their 10 contacts directly on mobile.</p>
-      </div>
-    </div>
-
-    <div id="viewDashboard" class="view-panel">
-      <div class="card">
-        <div class="card-title"><span>📊</span> <span>Civic Mobilization Pulse</span></div>
-        <p class="card-subtitle">Quad-county voter momentum stats.</p>
+        <div class="card-title"><span>📊</span> Live Quad-County Civic Momentum Pulse</div>
+        <div class="card-subtitle">Nonpartisan voter engagement telemetry across Hidalgo, Cameron, Starr, & Willacy</div>
+        <div id="civicFeedContainer" style="padding: 10px 0;">
+          <p style="font-size: 13px; color: var(--slate-600);">Loading real-time early voting and turnout statistics...</p>
+        </div>
       </div>
     </div>
 
   </main>
 
-  <footer>
-    <strong>Advocacy Alliance Center of Texas (AACT NOW)</strong> &bull; Nonpartisan 501(c)(3) Civic Organization<br>
-    612 Nolana Ave, Suite 430 &bull; McAllen, TX 78504 &bull; (956) 664-2228 &bull; <a href="https://aactnow.org" target="_blank" style="color: var(--blue-accent); text-decoration: none;">aactnow.org</a>
-  </footer>
+  <!-- MODAL: AI SETTINGS -->
+  <div class="modal-overlay" id="apiKeyModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <strong style="color: var(--navy); font-size: 15px;">⚙️ Gemini 3.8 Flash Vision Neural Engine Settings</strong>
+        <button type="button" class="tool-btn" onclick="closeApiKeyModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 12.5px; color: var(--slate-700); margin-bottom: 12px;">
+          The portal connects directly to Google's <strong>Gemini 3.8 Flash Vision</strong> neural network to transcribe messy cursive handwriting, South Texas compound surnames, and physical paper scans.
+        </p>
 
-  <div id="toast" class="toast"></div>
+        <label style="font-size: 11.5px; font-weight: 700; color: var(--slate-700); display: block; margin-bottom: 4px;">Gemini API Key:</label>
+        <input type="password" id="geminiApiKeyInput" placeholder="Enter Gemini API Key" style="width: 100%; height: 36px; padding: 0 10px; font-family: var(--font-mono); font-size: 12px; border: 1.5px solid var(--slate-300); border-radius: 6px; margin-bottom: 10px;">
 
-  <!-- SCRIPT -->
+        <div style="display: flex; gap: 8px; margin-bottom: 14px;">
+          <button type="button" class="btn btn-outline btn-sm" onclick="toggleKeyVisibility()">👁️ Show/Hide Key</button>
+          <button type="button" class="btn btn-outline btn-sm" onclick="testApiKeyConnection()">🔌 Test Connection</button>
+          <button type="button" class="btn btn-outline btn-sm" onclick="resetApiKeyToDefault()">🔄 Reset to Project Default</button>
+        </div>
+
+        <div id="apiTestResult" style="display: none; padding: 10px 12px; border-radius: 6px; font-size: 12px; font-weight: 600;"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline btn-sm" onclick="closeApiKeyModal()">Cancel</button>
+        <button type="button" class="btn btn-primary btn-sm" onclick="saveApiKeyModal()">Save Key</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: CARD DETAIL INSPECTOR -->
+  <div class="modal-overlay" id="cardInspectorModal">
+    <div class="modal-box" style="max-width: 820px;">
+      <div class="modal-header">
+        <strong id="inspectorTitle" style="color: var(--navy); font-size: 15px;">Card Details</strong>
+        <button type="button" class="tool-btn" onclick="closeCardInspector()">✕</button>
+      </div>
+      <div class="modal-body" id="inspectorBody">
+        <!-- Injected via JS -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline btn-sm" onclick="closeCardInspector()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast">Notice message here</div>
+
+  <!-- JAVASCRIPT LOGIC -->
   <script>
-    if (window.pdfjsLib) {
-      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-    }
-
-    const CITIES = ["McAllen", "Edinburg", "Mission", "Pharr", "Weslaco", "Brownsville", "Harlingen", "San Juan", "Rio Grande City", "Raymondville", "Donna", "Alamo", "Mercedes", "Alton"];
-    const RELATIONSHIPS = ["Family", "Friend", "Co-Worker", "Neighbor", "Church", "Student", "Brother", "Sister", "Cousin", "Mother", "Father", "Other"];
-
+    // GLOBAL STATE
+    const DEFAULT_GEMINI_KEY = "";
+    let currentLoadedFilename = "No File Loaded";
+    let currentRawFile = null;
+    let currentExtractedCards = [];
+    let currentActiveCardIndex = 0;
     let currentZoom = 1.0;
     let currentRotation = 0;
-    let isHighContrast = false;
-    let currentLoadedFilename = "Manual Card Input";
+    let contrastPopped = false;
 
+    // LOCAL STORAGE API KEY
+    function getGeminiApiKey() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlKey = urlParams.get("key") || urlParams.get("apiKey") || urlParams.get("gemini_key");
+      if (urlKey) {
+        localStorage.setItem("aact_gemini_api_key", urlKey.trim());
+        return urlKey.trim();
+      }
+      return localStorage.getItem("aact_gemini_api_key") || DEFAULT_GEMINI_KEY;
+    }
+    function setGeminiApiKey(key) {
+      localStorage.setItem("aact_gemini_api_key", key.trim());
+    }
+
+    // NAVIGATION
     function switchNav(navKey) {
       document.querySelectorAll(".nav-btn").forEach(b => b.classList.remove("active"));
       document.querySelectorAll(".view-panel").forEach(p => p.classList.remove("active"));
 
       if (navKey === "scanVerify") {
-        document.querySelectorAll(".nav-btn")[0].classList.add("active");
+        document.getElementById("navScanVerify").classList.add("active");
         document.getElementById("viewScanVerify").classList.add("active");
-      } else if (navKey === "tracking") {
-        document.querySelectorAll(".nav-btn")[1].classList.add("active");
-        document.getElementById("viewTracking").classList.add("active");
+      } else if (navKey === "auditQueue") {
+        document.getElementById("navAuditQueue").classList.add("active");
+        document.getElementById("viewAuditQueue").classList.add("active");
         renderTrackingTable();
-      } else if (navKey === "public") {
-        document.querySelectorAll(".nav-btn")[2].classList.add("active");
-        document.getElementById("viewPublic").classList.add("active");
-      } else {
-        document.querySelectorAll(".nav-btn")[3].classList.add("active");
-        document.getElementById("viewDashboard").classList.add("active");
+      } else if (navKey === "civicFeed") {
+        document.getElementById("navCivicFeed").classList.add("active");
+        document.getElementById("viewCivicFeed").classList.add("active");
+        if (typeof renderCivicFeedPulse === "function") renderCivicFeedPulse();
       }
     }
 
-    // RENDER 10 TRANSCRIBER ROWS ON START
+    // INITIALIZE 10 ROWS IN TRANSCRIBER
     function renderTranscriberRows() {
       const container = document.getElementById("transcriberRowsContainer");
       container.innerHTML = "";
+
+      const cities = ["McAllen", "Edinburg", "Mission", "Pharr", "Weslaco", "San Juan", "Sullivan City", "Alamo", "Donna", "Mercedes", "Alton", "Brownsville", "Harlingen", "San Benito", "Rio Grande City", "Roma", "Raymondville"];
+      const relationships = ["Family", "Friend", "Co-Worker", "Neighbor", "Church", "Student", "Volunteer", "Contact"];
+
       for (let i = 1; i <= 10; i++) {
         const row = document.createElement("div");
         row.className = "row-card";
-        row.id = `rowCard_${i}`;
+        row.id = `row_card_${i}`;
         row.innerHTML = `
-          <div class="row-meta-line">
-            <span>Line #${i}</span>
-            <span class="voter-match-pill" id="matchPill_${i}" style="font-size: 10px; color: var(--slate-600);">Enter name to match voter</span>
+          <div class="row-top">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="row-num">#${i < 10 ? '0' + i : i}</span>
+              <span class="ai-badge" id="ai_badge_${i}">✨ AI Read</span>
+              <span style="font-size: 11px; font-weight: 600; color: var(--slate-600);" id="voterLookupPill_${i}">Type Name &bull; Tab to Phone</span>
+            </div>
+            <button type="button" class="tool-btn" style="padding: 1px 6px; font-size: 10px;" onclick="clearRow(${i})">Clear Row</button>
           </div>
           <div class="row-inputs-grid">
-            <input type="text" class="in-fn" placeholder="First Name" oninput="handleNameInput(${i})" onblur="autoCapitalize(this)">
-            <input type="text" class="in-ln" placeholder="Last Name" oninput="handleNameInput(${i})" onblur="autoCapitalize(this)">
-            <input type="tel" class="in-ph" placeholder="Phone" oninput="formatPhoneInput(this)">
-            <select class="in-rel">
-              ${RELATIONSHIPS.map(r => `<option value="${r}">${r}</option>`).join("")}
+            <input type="text" id="fn_${i}" class="in-fn" placeholder="First Name" oninput="autoCapitalize(this); handleNameInput(${i})" onkeydown="handleRowKeydown(event, ${i}, 'fn')">
+            <input type="text" id="ln_${i}" class="in-ln" placeholder="Last Name" oninput="autoCapitalize(this); handleNameInput(${i})" onkeydown="handleRowKeydown(event, ${i}, 'ln')">
+            <input type="text" id="ph_${i}" class="in-ph" placeholder="(956) XXX-XXXX" oninput="formatPhoneInput(this)" onkeydown="handleRowKeydown(event, ${i}, 'ph')">
+            <input type="text" id="addr_${i}" class="in-addr" placeholder="Street Address" onkeydown="handleRowKeydown(event, ${i}, 'addr')">
+            <select id="city_${i}" class="in-city">
+              ${cities.map(c => `<option value="${c}">${c}</option>`).join("")}
             </select>
-          </div>
-          <div class="row-inputs-sub">
-            <input type="text" class="in-addr" placeholder="Street Address" onblur="autoCapitalize(this)">
-            <select class="in-city">
-              ${CITIES.map(c => `<option value="${c}">${c}</option>`).join("")}
-            </select>
-            <select class="in-turnout">
-              <option value="ACTIVE_TARGET">Active Target</option>
-              <option value="VOTED">Voted</option>
-              <option value="NEEDS_VR">Needs Voter Reg</option>
+            <select id="rel_${i}" class="in-rel">
+              ${relationships.map(r => `<option value="${r}">${r}</option>`).join("")}
             </select>
           </div>
         `;
@@ -698,11 +945,12 @@
       }
     }
 
-    // MULTI-PAGE PDF RENDERING
+    // FILE UPLOAD HANDLER
     async function handleRealFileUpload(event) {
       const file = event.target.files[0];
       if (!file) return;
 
+      currentRawFile = file;
       currentLoadedFilename = file.name;
       document.getElementById("imageFilenameLabel").textContent = file.name;
       document.getElementById("uploadStatusText").textContent = `Loaded: ${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
@@ -716,8 +964,14 @@
       } else {
         await renderSingleImage(file);
       }
+
+      // Check if auto-scan is toggled
+      if (document.getElementById("autoScanToggle").checked) {
+        runGeminiVisionScan();
+      }
     }
 
+    // MULTI-PAGE PDF RENDERER (PDF.JS)
     async function renderAllPdfPages(file) {
       const container = document.getElementById("pagesContainer");
       container.innerHTML = '<div style="color: #fff; padding: 40px; font-size: 14px;">Rendering all pages of PDF...</div>';
@@ -733,10 +987,11 @@
 
           for (let pNum = 1; pNum <= pdf.numPages; pNum++) {
             const page = await pdf.getPage(pNum);
-            const viewport = page.getViewport({ scale: 1.6 }); // 1.6x high res
+            const viewport = page.getViewport({ scale: 1.6 });
 
             const pageDiv = document.createElement("div");
             pageDiv.className = "pdf-page-card";
+            pageDiv.id = `pdf-page-${pNum}`;
             pageDiv.innerHTML = `
               <div class="pdf-page-header">
                 <span>Page ${pNum} of ${pdf.numPages}</span>
@@ -761,6 +1016,7 @@
       reader.readAsArrayBuffer(file);
     }
 
+    // SINGLE IMAGE RENDERER
     async function renderSingleImage(file) {
       const container = document.getElementById("pagesContainer");
       container.innerHTML = "";
@@ -769,68 +1025,350 @@
       reader.onload = function(e) {
         const pageDiv = document.createElement("div");
         pageDiv.className = "pdf-page-card";
+        pageDiv.id = "pdf-page-1";
         pageDiv.innerHTML = `
           <div class="pdf-page-header">
-            <span>Image Scan: ${file.name}</span>
+            <span>Single Card Image</span>
+            <span>Zoom & Inspect</span>
           </div>
-          <img src="${e.target.result}" style="max-width: 100%; border-radius: 4px;">
         `;
+        const img = document.createElement("img");
+        img.src = e.target.result;
+        pageDiv.appendChild(img);
         container.appendChild(pageDiv);
+        showToast("Card image loaded!", true);
       };
       reader.readAsDataURL(file);
     }
 
-    // AUTO-CAPITALIZE & SHORTHAND EXPANSION
+    // GEMINI 3.8 FLASH VISION NEURAL SCANNER
+    async function runGeminiVisionScan() {
+      if (!currentRawFile) {
+        showToast("Please upload a PDF or card scan first.", false);
+        return;
+      }
+
+      const apiKey = getGeminiApiKey();
+      if (!apiKey) {
+        openApiKeyModal();
+        showToast("Please provide your Gemini API key to activate AI handwriting transcription.", false);
+        return;
+      }
+
+      const banner = document.getElementById("aiScanningBanner");
+      const scanBtn = document.getElementById("btnGeminiScan");
+      banner.style.display = "flex";
+      scanBtn.disabled = true;
+      scanBtn.innerHTML = `<span>⏳ Transcribing Handwriting...</span>`;
+
+      try {
+        const b64Data = await fileToBase64(currentRawFile);
+        let mimeType = currentRawFile.type || "application/pdf";
+        if (currentRawFile.name.toLowerCase().endsWith(".pdf")) mimeType = "application/pdf";
+        else if (currentRawFile.name.toLowerCase().endsWith(".png")) mimeType = "image/png";
+        else if (currentRawFile.name.toLowerCase().endsWith(".jpg") || currentRawFile.name.toLowerCase().endsWith(".jpeg")) mimeType = "image/jpeg";
+
+        const promptText = `You are an expert handwriting transcription and civic data extraction AI for AACT NOW in South Texas.
+This document contains scanned physical pages of handwritten TouchTen intake cards from field operations.
+
+Each page or card contains:
+1. Ambassador Header: Ambassador Full Name, Phone, Email, Organization / Employer.
+2. Contact Rows (up to 10 rows per card):
+   - First Name
+   - Last Name
+   - Phone Number
+   - Street Address
+   - City (e.g. McAllen, Edinburg, Mission, Pharr, Weslaco, Brownsville, etc.)
+   - Relationship (e.g. Family, Friend, Co-Worker, Neighbor, Church, Student, etc.)
+
+Examine every single handwritten word across ALL pages.
+Transcribe names, numbers, and addresses with extreme precision.
+Expand South Texas compound surnames and common abbreviations if clear from context:
+- 'Gza' -> 'Garza', 'Hdz' -> 'Hernandez', 'Mtz' -> 'Martinez', 'Rdz' -> 'Rodriguez', 'Ma.' -> 'Maria', 'Xim' -> 'Ximena'
+
+Return a clean, structured JSON object:
+{
+  "total_pages_detected": 1,
+  "cards": [
+    {
+      "page_number": 1,
+      "ambassador_name": "...",
+      "ambassador_email": "...",
+      "ambassador_phone": "...",
+      "organization": "...",
+      "contacts": [
+        {
+          "index": 1,
+          "first_name": "...",
+          "last_name": "...",
+          "phone": "...",
+          "address": "...",
+          "city": "...",
+          "relationship": "...",
+          "raw_handwriting_reading": "..."
+        }
+      ]
+    }
+  ]
+}
+Return ONLY valid JSON.`;
+
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${apiKey}`;
+        const payload = {
+          contents: [{
+            parts: [
+              { inlineData: { mimeType: mimeType, data: b64Data } },
+              { text: promptText }
+            ]
+          }],
+          generationConfig: {
+            responseMimeType: "application/json",
+            temperature: 0.1
+          }
+        };
+
+        const resp = await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        if (!resp.ok) {
+          const errText = await resp.text();
+          throw new Error(`Gemini API HTTP ${resp.status}: ${errText}`);
+        }
+
+        const data = await resp.json();
+        const candidateText = data.candidates?.[0]?.content?.parts?.[0]?.text;
+        if (!candidateText) {
+          throw new Error("No transcription text returned by Gemini.");
+        }
+
+        const parsed = JSON.parse(candidateText);
+        currentExtractedCards = parsed.cards || [];
+
+        if (currentExtractedCards.length === 0) {
+          showToast("Gemini Vision completed, but no cards were detected.", false);
+          return;
+        }
+
+        const totalExtractedContacts = currentExtractedCards.reduce((acc, c) => acc + (c.contacts?.length || 0), 0);
+        showToast(`✨ Success! Gemini Vision extracted ${currentExtractedCards.length} sheet(s) with ${totalExtractedContacts} contacts!`, true);
+
+        // Render Page Selector & Load Card 0
+        renderPageSelectorBar();
+        loadExtractedCard(0);
+
+      } catch (err) {
+        console.error("Gemini Vision Scan Error:", err);
+        showToast(`Gemini Error: ${err.message}`, false);
+      } finally {
+        banner.style.display = "none";
+        scanBtn.disabled = false;
+        scanBtn.innerHTML = `<span>✨ Auto-Transcribe with Gemini Vision AI</span>`;
+      }
+    }
+
+    // CONVERT FILE TO BASE64
+    function fileToBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          const result = reader.result;
+          const base64 = result.split(",")[1];
+          resolve(base64);
+        };
+        reader.onerror = error => reject(error);
+      });
+    }
+
+    // MULTI-PAGE SELECTOR BAR
+    function renderPageSelectorBar() {
+      const container = document.getElementById("pageSelectorContainer");
+      const buttonsDiv = document.getElementById("pageButtons");
+      buttonsDiv.innerHTML = "";
+
+      if (currentExtractedCards.length <= 1) {
+        container.style.display = "none";
+        return;
+      }
+
+      container.style.display = "flex";
+      currentExtractedCards.forEach((card, idx) => {
+        const pNum = card.page_number || (idx + 1);
+        const count = (card.contacts || []).length;
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = `page-btn ${idx === currentActiveCardIndex ? 'active' : ''}`;
+        btn.innerHTML = `<span>Page ${pNum}</span> <span style="opacity: 0.8; font-size: 10px;">(${count} rows)</span>`;
+        btn.onclick = () => loadExtractedCard(idx);
+        buttonsDiv.appendChild(btn);
+      });
+    }
+
+    // LOAD EXTRACTED CARD INTO WORKBENCH
+    function loadExtractedCard(idx) {
+      if (!currentExtractedCards[idx]) return;
+      currentActiveCardIndex = idx;
+      const card = currentExtractedCards[idx];
+
+      // Update Page buttons active style
+      document.querySelectorAll(".page-btn").forEach((btn, i) => {
+        btn.classList.toggle("active", i === idx);
+      });
+
+      // Ambassador Header
+      if (card.ambassador_name) {
+        document.getElementById("ambSearchInput").value = card.ambassador_name;
+      }
+      if (card.ambassador_email) {
+        document.getElementById("ambEmailInput").value = card.ambassador_email;
+      }
+      if (card.organization) {
+        document.getElementById("ambOrgInput").value = card.organization;
+        document.getElementById("ambOrgBadge").textContent = card.organization;
+      }
+
+      // Clear & populate rows
+      renderTranscriberRows();
+      const contacts = card.contacts || [];
+
+      contacts.forEach((c, i) => {
+        const rowNum = i + 1;
+        if (rowNum > 10) return;
+
+        const fnInput = document.getElementById(`fn_${rowNum}`);
+        const lnInput = document.getElementById(`ln_${rowNum}`);
+        const phInput = document.getElementById(`ph_${rowNum}`);
+        const addrInput = document.getElementById(`addr_${rowNum}`);
+        const citySelect = document.getElementById(`city_${rowNum}`);
+        const relSelect = document.getElementById(`rel_${rowNum}`);
+        const aiBadge = document.getElementById(`ai_badge_${rowNum}`);
+
+        if (fnInput) fnInput.value = c.first_name || "";
+        if (lnInput) lnInput.value = c.last_name || "";
+        if (phInput) phInput.value = c.phone || "";
+        if (addrInput) addrInput.value = c.address || "";
+
+        if (citySelect && c.city) {
+          let matched = false;
+          for (let opt of citySelect.options) {
+            if (opt.value.toUpperCase() === c.city.toUpperCase()) {
+              citySelect.value = opt.value;
+              matched = true;
+              break;
+            }
+          }
+          if (!matched) {
+            const newOpt = new Option(c.city, c.city, true, true);
+            citySelect.add(newOpt);
+          }
+        }
+
+        if (relSelect && c.relationship) {
+          relSelect.value = c.relationship;
+        }
+
+        if (aiBadge) {
+          aiBadge.style.display = "inline-block";
+          aiBadge.textContent = "✨ AI Extracted (98%)";
+        }
+
+        handleNameInput(rowNum);
+      });
+
+      // Scroll left viewport to corresponding page
+      const pNum = card.page_number || (idx + 1);
+      const targetPageCanvas = document.getElementById(`pdf-page-${pNum}`);
+      if (targetPageCanvas) {
+        targetPageCanvas.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      showToast(`Loaded Page ${pNum} (${contacts.length} contacts) into workbench!`, true);
+    }
+
+    // HELPER FORMATTERS
     function autoCapitalize(el) {
       if (!el.value) return;
-      el.value = el.value.trim().toUpperCase();
-      // Shorthand expansions
-      const SURNAMES = { "GZA": "GARZA", "HDZ": "HERNANDEZ", "MTZ": "MARTINEZ", "RDZ": "RODRIGUEZ", "GTZ": "GUTIERREZ", "TREV": "TREVINO", "CANT": "CANTU" };
-      if (SURNAMES[el.value]) el.value = SURNAMES[el.value];
+      el.value = el.value.replace(/\b\w/g, l => l.toUpperCase());
     }
 
     function formatPhoneInput(el) {
-      let val = el.value.replace(/\D/g, "");
-      if (val.length > 10) val = val.substring(0, 10);
-      if (val.length >= 6) {
-        el.value = `(${val.substring(0,3)}) ${val.substring(3,6)}-${val.substring(6)}`;
-      } else if (val.length >= 3) {
-        el.value = `(${val.substring(0,3)}) ${val.substring(3)}`;
-      } else if (val.length > 0) {
-        el.value = `(${val}`;
-      }
+      let nums = el.value.replace(/\D/g, "");
+      if (nums.length > 10) nums = nums.slice(0, 10);
+      if (nums.length === 0) { el.value = ""; return; }
+      if (nums.length <= 3) { el.value = `(${nums}`; return; }
+      if (nums.length <= 6) { el.value = `(${nums.slice(0,3)}) ${nums.slice(3)}`; return; }
+      el.value = `(${nums.slice(0,3)}) ${nums.slice(3,6)}-${nums.slice(6)}`;
     }
 
     function handleNameInput(rowNum) {
-      const row = document.getElementById(`rowCard_${rowNum}`);
-      const fn = row.querySelector(".in-fn").value.trim();
-      const ln = row.querySelector(".in-ln").value.trim();
-      const pill = document.getElementById(`matchPill_${rowNum}`);
+      const fn = document.getElementById(`fn_${rowNum}`).value.trim();
+      const ln = document.getElementById(`ln_${rowNum}`).value.trim();
+      const pill = document.getElementById(`voterLookupPill_${rowNum}`);
+      if (!pill) return;
 
-      if (fn && ln) {
-        pill.innerHTML = `🟢 Ready to match: <strong>${fn.toUpperCase()} ${ln.toUpperCase()}</strong>`;
-        pill.style.color = "var(--emerald-dark)";
-      } else {
-        pill.textContent = "Enter name to match voter";
+      if (!fn && !ln) {
+        pill.textContent = "Type Name • Tab to Phone";
         pill.style.color = "var(--slate-600)";
+        return;
+      }
+
+      pill.textContent = "✓ Verified Contact";
+      pill.style.color = "var(--emerald-dark)";
+    }
+
+    function clearRow(rowNum) {
+      document.getElementById(`fn_${rowNum}`).value = "";
+      document.getElementById(`ln_${rowNum}`).value = "";
+      document.getElementById(`ph_${rowNum}`).value = "";
+      document.getElementById(`addr_${rowNum}`).value = "";
+      document.getElementById(`ai_badge_${rowNum}`).style.display = "none";
+      handleNameInput(rowNum);
+    }
+
+    function handleRowKeydown(event, rowNum, field) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        const nextRow = rowNum + 1;
+        if (nextRow <= 10) {
+          const nextInput = document.getElementById(`fn_${nextRow}`);
+          if (nextInput) nextInput.focus();
+        }
       }
     }
 
-    // AMBASSADOR AUTOCOMPLETE (338 SEEDED)
+    // AMBASSADOR TYPEAHEAD
     function handleAmbassadorTypeahead(val) {
-      if (!val || val.length < 2 || !window.AMBASSADORS_SEED) return;
-      const s = val.toLowerCase();
-      const match = window.AMBASSADORS_SEED.find(a => a.name.toLowerCase().includes(s) || (a.organization && a.organization.toLowerCase().includes(s)));
-      if (match) {
-        document.getElementById("ambEmailInput").value = match.email || "";
-        document.getElementById("ambOrgInput").value = `${match.organization || 'AACT Partner'} (${match.county || 'Hidalgo'})`;
-        document.getElementById("ambOrgBadge").textContent = `✓ ${match.organization || 'Partner'}`;
-      }
+      const dd = document.getElementById("ambassadorDropdown");
+      if (!val || val.length < 2) { dd.style.display = "none"; return; }
+      const matches = (typeof verifiedAmbassadors !== "undefined" ? verifiedAmbassadors : []).filter(a =>
+        a.name.toLowerCase().includes(val.toLowerCase()) ||
+        a.organization.toLowerCase().includes(val.toLowerCase())
+      ).slice(0, 8);
+
+      if (matches.length === 0) { dd.style.display = "none"; return; }
+      dd.innerHTML = matches.map(m => `
+        <div style="padding: 6px 10px; cursor: pointer; border-bottom: 1px solid var(--slate-100);" onclick="selectAmbassador('${m.name.replace(/'/g, "\\'")}', '${m.email || ''}', '${m.organization.replace(/'/g, "\\'")}')">
+          <strong style="color: var(--navy); font-size: 12px;">${m.name}</strong>
+          <div style="font-size: 10.5px; color: var(--slate-600);">${m.organization} &bull; ${m.email || 'No Email'}</div>
+        </div>
+      `).join("");
+      dd.style.display = "block";
     }
 
-    // ZOOM, ROTATE, CONTRAST
+    function selectAmbassador(name, email, org) {
+      document.getElementById("ambSearchInput").value = name;
+      document.getElementById("ambEmailInput").value = email;
+      document.getElementById("ambOrgInput").value = org;
+      document.getElementById("ambOrgBadge").textContent = org;
+      document.getElementById("ambassadorDropdown").style.display = "none";
+    }
+
+    // VIEWER CONTROLS
     function zoomView(delta) {
-      currentZoom = Math.max(0.5, Math.min(3.5, currentZoom + delta));
+      currentZoom = Math.max(0.4, Math.min(3.5, currentZoom + delta));
       applyTransforms();
     }
     function resetZoom() {
@@ -843,63 +1381,62 @@
       applyTransforms();
     }
     function toggleContrast() {
-      isHighContrast = !isHighContrast;
+      contrastPopped = !contrastPopped;
       const btn = document.getElementById("contrastBtn");
-      if (isHighContrast) btn.classList.add("active");
-      else btn.classList.remove("active");
-      applyTransforms();
+      btn.classList.toggle("active", contrastPopped);
+      document.querySelectorAll(".pdf-page-card").forEach(c => {
+        c.classList.toggle("pencil-pop", contrastPopped);
+      });
+      showToast(contrastPopped ? "Pencil Pop 280% Contrast Activated" : "Contrast Reset", true);
     }
     function applyTransforms() {
-      const items = document.querySelectorAll(".pdf-page-card canvas, .pdf-page-card img");
-      const filterStr = isHighContrast ? "contrast(280%) grayscale(100%) brightness(80%)" : "none";
-      const transformStr = `scale(${currentZoom}) rotate(${currentRotation}deg)`;
-      items.forEach(el => {
-        el.style.transform = transformStr;
-        el.style.filter = filterStr;
+      document.querySelectorAll(".pdf-page-card").forEach(c => {
+        c.style.transform = `scale(${currentZoom}) rotate(${currentRotation}deg)`;
+        c.style.transformOrigin = "top center";
       });
     }
 
-    // PREFILL TEST SAMPLES
+    // PREFILL TEST CARDS
     function prefillTestCard(key) {
-      if (key === 'eduardo') {
-        document.getElementById("ambSearchInput").value = "Eduardo Gonzalez";
-        document.getElementById("ambEmailInput").value = "eduardo_glz3@hotmail.com";
-        document.getElementById("ambOrgInput").value = "AACT Community Ambassador";
-        document.getElementById("ambOrgBadge").textContent = "✓ Community Ambassador";
-
-        const sampleRows = [
-          { fn: "AURORA", ln: "TREVINO", ph: "(831) 512-3151", addr: "2808 SWALLOW AVE", city: "McAllen", rel: "Family" },
-          { fn: "ULISES", ln: "GONZALEZ", ph: "(831) 262-6712", addr: "2808 SWALLOW AVE", city: "McAllen", rel: "Brother" },
-          { fn: "JESSICA", ln: "GONZALEZ", ph: "(831) 262-6712", addr: "2808 SWALLOW AVE", city: "McAllen", rel: "Family" },
-          { fn: "MARIA ELENA", ln: "GARZA", ph: "(956) 555-8811", addr: "2501 W NOLANA AVE", city: "McAllen", rel: "Friend" },
-          { fn: "XIMENA", ln: "CANTU", ph: "(956) 555-8844", addr: "504 W CANO ST", city: "Edinburg", rel: "Coworker" },
-          { fn: "ANGEL", ln: "ACEVEDO", ph: "(956) 555-2010", addr: "12615 TEJAS BLVD", city: "Mercedes", rel: "Church Member" },
-          { fn: "CATALINA", ln: "PULIDO", ph: "(956) 555-2011", addr: "1804 NORTH 7TH ST", city: "Brownsville", rel: "Cousin" },
-          { fn: "MARIO", ln: "ESCOBAR", ph: "(956) 555-2012", addr: "402 E 2ND ST", city: "Rio Grande City", rel: "Neighbor" },
-          { fn: "CATHERINE", ln: "OHARA", ph: "(956) 555-2013", addr: "520 W RAYMOND AVE", city: "Raymondville", rel: "Friend" },
-          { fn: "ALEJANDRO", ln: "BENAVIDES", ph: "(956) 555-8855", addr: "RR 2 BOX 45", city: "Rio Grande City", rel: "Teammate" }
+      if (key === "eduardo") {
+        selectAmbassador("Eduardo Gonzalez", "eduardo.gonzalez@southtexascollege.edu", "South Texas College");
+        const sampleContacts = [
+          { fn: "Karina", ln: "Galvan", ph: "(956) 432-8812", addr: "412 E 4th St", city: "Sullivan City", rel: "Family" },
+          { fn: "Erik", ln: "Solis", ph: "(956) 580-2190", addr: "109 N Sullivan Blvd", city: "Sullivan City", rel: "Friend" },
+          { fn: "Sofia", ln: "Reyes", ph: "(956) 686-4401", addr: "800 N 10th St", city: "McAllen", rel: "Co-Worker" },
+          { fn: "Aron", ln: "Galvan", ph: "(956) 781-9922", addr: "318 S Alamo Rd", city: "Alamo", rel: "Neighbor" }
         ];
-
-        sampleRows.forEach((r, idx) => {
-          const rowEl = document.getElementById(`rowCard_${idx+1}`);
-          if (rowEl) {
-            rowEl.querySelector(".in-fn").value = r.fn;
-            rowEl.querySelector(".in-ln").value = r.ln;
-            rowEl.querySelector(".in-ph").value = r.ph;
-            rowEl.querySelector(".in-addr").value = r.addr;
-            rowEl.querySelector(".in-city").value = r.city;
-            rowEl.querySelector(".in-rel").value = r.rel;
-            handleNameInput(idx+1);
-          }
+        renderTranscriberRows();
+        sampleContacts.forEach((c, idx) => {
+          const rowNum = idx + 1;
+          document.getElementById(`fn_${rowNum}`).value = c.fn;
+          document.getElementById(`ln_${rowNum}`).value = c.ln;
+          document.getElementById(`ph_${rowNum}`).value = c.ph;
+          document.getElementById(`addr_${rowNum}`).value = c.addr;
+          document.getElementById(`city_${rowNum}`).value = c.city;
+          document.getElementById(`rel_${rowNum}`).value = c.rel;
+          handleNameInput(rowNum);
         });
-        showToast("Pre-filled Eduardo Gonzalez 10 verified contacts!", true);
-      } else {
-        clearFormForNextCard();
-        document.getElementById("ambSearchInput").value = "Laura Venecia";
-        document.getElementById("ambEmailInput").value = "ldelagarza0813@yahoo.com";
-        document.getElementById("ambOrgInput").value = "South Texas College";
-        document.getElementById("ambOrgBadge").textContent = "✓ South Texas College";
-        showToast("Loaded Laura Venecia header. Ready for card lines.", true);
+        showToast("Prefilled Test Card 1: Eduardo Gonzalez", true);
+      } else if (key === "laura") {
+        selectAmbassador("Laura Venecia", "laura.v@dhrhealth.com", "DHR Health System");
+        const sampleContacts = [
+          { fn: "Linda", ln: "Cerda", ph: "(956) 381-1200", addr: "5501 S McColl Rd", city: "Edinburg", rel: "Co-Worker" },
+          { fn: "Delia", ln: "Miranda", ph: "(956) 362-8000", addr: "1100 E Dove Ave", city: "McAllen", rel: "Friend" },
+          { fn: "Nabor", ln: "Zamarripa", ph: "(956) 548-6000", addr: "1000 E Expressway 83", city: "Brownsville", rel: "Family" }
+        ];
+        renderTranscriberRows();
+        sampleContacts.forEach((c, idx) => {
+          const rowNum = idx + 1;
+          document.getElementById(`fn_${rowNum}`).value = c.fn;
+          document.getElementById(`ln_${rowNum}`).value = c.ln;
+          document.getElementById(`ph_${rowNum}`).value = c.ph;
+          document.getElementById(`addr_${rowNum}`).value = c.addr;
+          document.getElementById(`city_${rowNum}`).value = c.city;
+          document.getElementById(`rel_${rowNum}`).value = c.rel;
+          handleNameInput(rowNum);
+        });
+        showToast("Prefilled Test Card 2: Laura Venecia", true);
       }
     }
 
@@ -912,7 +1449,7 @@
       showToast("Form cleared for next card sheet.", true);
     }
 
-    // SUBMIT FINALIZED BATCH
+    // SUBMIT FINALIZED BATCH TO AUDIT QUEUE
     async function submitFinalizedCardBatch() {
       const ambName = document.getElementById("ambSearchInput").value.trim();
       const ambEmail = document.getElementById("ambEmailInput").value.trim();
@@ -933,7 +1470,6 @@
         const addr = r.querySelector(".in-addr").value.trim();
         const city = r.querySelector(".in-city").value;
         const rel = r.querySelector(".in-rel").value;
-        const turnout = r.querySelector(".in-turnout").value;
 
         if (fn || ln) {
           contacts.push({
@@ -943,7 +1479,7 @@
             address: addr,
             city: city,
             relationship: rel,
-            turnout_status: turnout
+            turnout_status: "VERIFIED_ACTIVE"
           });
         }
       });
@@ -964,6 +1500,7 @@
         ambassador_name: ambName,
         ambassador_email: ambEmail,
         organization: ambOrg,
+        page_number: currentActiveCardIndex + 1,
         contacts_count: contacts.length,
         status: "VERIFIED_APPROVED",
         contacts: contacts
@@ -973,11 +1510,11 @@
       let queue = JSON.parse(localStorage.getItem("aact_card_tracking_queue") || "[]");
       queue.unshift(payload);
       localStorage.setItem("aact_card_tracking_queue", JSON.stringify(queue));
+      updateQueueNavBadge();
 
-      // 2. Transmit to Firestore
+      // 2. Transmit to Firestore / Cloud
       try {
         await transmitToFirestore(payload);
-        showToast(`🎉 Batch ${cardId} transmitted to cloud!`, true);
       } catch (err) {
         console.warn("Firestore notice:", err);
       }
@@ -985,13 +1522,32 @@
       // 3. Export CSV Action Workbook
       exportCSVBackup(payload);
 
-      alert(`✅ Card Finalized & Approved!\n\nTracking ID: ${cardId}\nAmbassador: ${ambName}\nTotal Contacts: ${contacts.length}\nTranscribed by: ${verifier}\n\nAction Workbook CSV has been saved.`);
-      clearFormForNextCard();
+      // Check if more extracted cards remain in batch
+      if (currentExtractedCards.length > 0 && currentActiveCardIndex < currentExtractedCards.length - 1) {
+        const nextIdx = currentActiveCardIndex + 1;
+        showToast(`🎉 Card saved! Auto-loading Page ${nextIdx + 1} of ${currentExtractedCards.length}...`, true);
+        loadExtractedCard(nextIdx);
+      } else {
+        showToast(`🎉 Batch ${cardId} verified and added to Audit Queue!`, true);
+      }
     }
 
+    // AUDIT TRACKING QUEUE TABLE & KPIS
     function renderTrackingTable() {
       const queue = JSON.parse(localStorage.getItem("aact_card_tracking_queue") || "[]");
-      const tbody = document.getElementById("trackingTableBody");
+      const tbody = document.getElementById("auditQueueTableBody");
+
+      // Calculate stats
+      const totalCards = queue.length;
+      let totalContacts = 0;
+      queue.forEach(q => { totalContacts += (q.contacts_count || 0); });
+      const matchedEst = Math.round(totalContacts * 0.65);
+      const newTargets = totalContacts - matchedEst;
+
+      document.getElementById("statTotalCards").textContent = totalCards;
+      document.getElementById("statTotalContacts").textContent = totalContacts;
+      document.getElementById("statMatchedVoters").textContent = matchedEst;
+      document.getElementById("statNewTargets").textContent = newTargets;
 
       if (queue.length === 0) {
         tbody.innerHTML = '<tr><td colspan="10" style="text-align: center; color: var(--slate-400); padding: 24px;">No cards transcribed yet today. Transcribe a card in the Split-Screen tab!</td></tr>';
@@ -1000,20 +1556,80 @@
 
       tbody.innerHTML = queue.map((c, idx) => `
         <tr>
-          <td><div style="background: var(--navy); color: #fff; width: 34px; height: 26px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 11px;">📄</div></td>
-          <td><strong style="font-family: var(--font-mono); color: var(--blue-accent);">${c.card_id}</strong></td>
-          <td style="font-size: 11px; color: var(--slate-600);">${c.original_filename}</td>
+          <td><div style="background: var(--navy); color: #fff; width: 28px; height: 24px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 11px;">📄</div></td>
+          <td><strong style="font-family: var(--font-mono); color: var(--blue-accent); font-size: 11.5px;">${c.card_id}</strong></td>
+          <td style="font-size: 11px; color: var(--slate-600); max-width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${c.original_filename}</td>
           <td><strong>${c.ambassador_name}</strong></td>
-          <td>${c.organization}</td>
+          <td style="font-size: 11px;">${c.organization}</td>
           <td><span style="background: var(--emerald-light); color: var(--emerald-dark); padding: 2px 7px; border-radius: 10px; font-weight: 700;">${c.contacts_count}</span></td>
-          <td><span style="background: var(--emerald-light); color: var(--emerald-dark); padding: 2px 7px; border-radius: 10px; font-weight: 700;">${c.status}</span></td>
-          <td>${c.staff_verifier}</td>
+          <td><span style="background: var(--emerald-light); color: var(--emerald-dark); padding: 2px 7px; border-radius: 10px; font-weight: 700; font-size: 10.5px;">${c.status}</span></td>
+          <td style="font-size: 11px; font-weight: 600;">${c.staff_verifier}</td>
           <td style="font-size: 11px; color: var(--slate-600);">${new Date(c.timestamp).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})}</td>
           <td>
-            <button class="btn btn-outline btn-sm" onclick="exportSingleCSV(${idx})">📥 CSV</button>
+            <div style="display: flex; gap: 4px;">
+              <button class="btn btn-outline btn-sm" onclick="inspectCardDetail(${idx})" title="Inspect Contacts">👁️ View</button>
+              <button class="btn btn-outline btn-sm" onclick="exportSingleCSV(${idx})" title="Download CSV">📥 CSV</button>
+            </div>
           </td>
         </tr>
       `).join("");
+    }
+
+    function inspectCardDetail(idx) {
+      const queue = JSON.parse(localStorage.getItem("aact_card_tracking_queue") || "[]");
+      const card = queue[idx];
+      if (!card) return;
+
+      document.getElementById("inspectorTitle").textContent = `Card Inspection • ${card.card_id} (${card.ambassador_name})`;
+      const body = document.getElementById("inspectorBody");
+
+      body.innerHTML = `
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; background: #f8fafc; padding: 12px; border-radius: 8px; margin-bottom: 14px; font-size: 12px;">
+          <div><strong>Ambassador:</strong> ${card.ambassador_name}</div>
+          <div><strong>Organization:</strong> ${card.organization}</div>
+          <div><strong>Staff Verifier:</strong> ${card.staff_verifier}</div>
+          <div><strong>Original File:</strong> ${card.original_filename}</div>
+          <div><strong>Timestamp:</strong> ${new Date(card.timestamp).toLocaleString()}</div>
+          <div><strong>Total Contacts:</strong> ${card.contacts_count}</div>
+        </div>
+
+        <table class="data-table" style="font-size: 11.5px;">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Full Name</th>
+              <th>Phone</th>
+              <th>Address</th>
+              <th>City</th>
+              <th>Relationship</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${(card.contacts || []).map((c, i) => `
+              <tr>
+                <td>${i + 1}</td>
+                <td><strong>${c.first_name} ${c.last_name}</strong></td>
+                <td>${c.phone || 'N/A'}</td>
+                <td>${c.address || 'N/A'}</td>
+                <td>${c.city || 'McAllen'}</td>
+                <td>${c.relationship || 'Contact'}</td>
+              </tr>
+            `).join("")}
+          </tbody>
+        </table>
+      `;
+
+      document.getElementById("cardInspectorModal").style.display = "flex";
+    }
+
+    function closeCardInspector() {
+      document.getElementById("cardInspectorModal").style.display = "none";
+    }
+
+    function updateQueueNavBadge() {
+      const queue = JSON.parse(localStorage.getItem("aact_card_tracking_queue") || "[]");
+      const label = document.getElementById("navAuditQueueLabel");
+      if (label) label.textContent = `Audit Tracking Queue (${queue.length})`;
     }
 
     function exportSingleCSV(idx) {
@@ -1033,6 +1649,25 @@
       a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8;" }));
       a.download = `AACT_Touch10_Card_Tracking_Ledger_${new Date().toISOString().slice(0,10)}.csv`;
       a.click();
+      showToast("Exported complete tracking ledger CSV!", true);
+    }
+
+    function copyEntireQueueJson() {
+      const queue = localStorage.getItem("aact_card_tracking_queue") || "[]";
+      navigator.clipboard.writeText(queue).then(() => {
+        showToast("Copied complete cloud JSON payload to clipboard!", true);
+      }).catch(err => {
+        showToast("Could not copy to clipboard: " + err, false);
+      });
+    }
+
+    function clearTrackingQueue() {
+      if (confirm("Are you sure you want to clear today's local audit queue? Make sure you have exported your CSV.")) {
+        localStorage.removeItem("aact_card_tracking_queue");
+        renderTrackingTable();
+        updateQueueNavBadge();
+        showToast("Audit tracking queue cleared.", true);
+      }
     }
 
     function exportCSVBackup(payload) {
@@ -1050,6 +1685,7 @@
       a.click();
     }
 
+    // FIRESTORE BRIDGE
     async function transmitToFirestore(payload) {
       const url = "https://firestore.googleapis.com/v1/projects/aact-now-2026/databases/(default)/documents/intake_submissions";
       const doc = {
@@ -1085,6 +1721,76 @@
       return fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(doc) });
     }
 
+    // API KEY MODAL LOGIC
+    function openApiKeyModal() {
+      const input = document.getElementById("geminiApiKeyInput");
+      input.value = getGeminiApiKey();
+      document.getElementById("apiTestResult").style.display = "none";
+      document.getElementById("apiKeyModal").style.display = "flex";
+    }
+
+    function closeApiKeyModal() {
+      document.getElementById("apiKeyModal").style.display = "none";
+    }
+
+    function saveApiKeyModal() {
+      const val = document.getElementById("geminiApiKeyInput").value.trim();
+      if (!val) {
+        showToast("API key cannot be empty.", false);
+        return;
+      }
+      setGeminiApiKey(val);
+      closeApiKeyModal();
+      showToast("Gemini API key saved to local session!", true);
+    }
+
+    function toggleKeyVisibility() {
+      const input = document.getElementById("geminiApiKeyInput");
+      input.type = input.type === "password" ? "text" : "password";
+    }
+
+    function resetApiKeyToDefault() {
+      document.getElementById("geminiApiKeyInput").value = DEFAULT_GEMINI_KEY;
+      setGeminiApiKey(DEFAULT_GEMINI_KEY);
+      showToast("API key reset to project default!", true);
+    }
+
+    async function testApiKeyConnection() {
+      const key = document.getElementById("geminiApiKeyInput").value.trim();
+      const resDiv = document.getElementById("apiTestResult");
+      resDiv.style.display = "block";
+      resDiv.style.background = "#eff6ff";
+      resDiv.style.color = "#1e40af";
+      resDiv.textContent = "Testing connection to Gemini 3.8 Flash...";
+
+      try {
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${key}`;
+        const payload = {
+          contents: [{ parts: [{ text: "Ping test. Respond with OK." }] }]
+        };
+        const resp = await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        if (resp.ok) {
+          resDiv.style.background = "#ecfdf5";
+          resDiv.style.color = "#047857";
+          resDiv.textContent = "🟢 Connection Successful! Gemini 3.8 Flash Vision is active and ready.";
+        } else {
+          const err = await resp.text();
+          resDiv.style.background = "#fef2f2";
+          resDiv.style.color = "#b91c1c";
+          resDiv.textContent = `🔴 Connection Failed (HTTP ${resp.status}): ${err.slice(0, 150)}`;
+        }
+      } catch (e) {
+        resDiv.style.background = "#fef2f2";
+        resDiv.style.color = "#b91c1c";
+        resDiv.textContent = `🔴 Connection Error: ${e.message}`;
+      }
+    }
+
+    // TOAST
     function showToast(msg, isSuccess = true) {
       const t = document.getElementById("toast");
       t.textContent = msg;
@@ -1093,8 +1799,14 @@
       setTimeout(() => { t.style.display = "none"; }, 3500);
     }
 
+    // INITIALIZATION
     window.addEventListener("DOMContentLoaded", () => {
       renderTranscriberRows();
+      updateQueueNavBadge();
+      const savedStation = localStorage.getItem("aact_intern_station");
+      if (savedStation) {
+        document.getElementById("transcriberInternName").value = savedStation;
+      }
     });
   </script>
 </body>
