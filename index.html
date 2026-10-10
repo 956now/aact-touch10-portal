@@ -1959,8 +1959,11 @@ Return ONLY valid JSON.`;
                     first_name: { stringValue: c.first_name },
                     last_name: { stringValue: c.last_name },
                     phone: { stringValue: c.phone || "" },
+                    dob: { stringValue: c.dob || "" },
                     address: { stringValue: c.address || "" },
                     city: { stringValue: c.city || "McAllen" },
+                    zip: { stringValue: c.zip || "" },
+                    email: { stringValue: c.email || "" },
                     relationship: { stringValue: c.relationship || "Contact" },
                     turnout_status: { stringValue: c.turnout_status || "ACTIVE_TARGET" }
                   }
