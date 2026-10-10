@@ -717,6 +717,9 @@
       </nav>
 
       <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="font-size: 11px; background: rgba(34, 197, 94, 0.2); border: 1px solid rgba(34, 197, 94, 0.4); padding: 4px 10px; border-radius: 20px; color: #86efac; font-weight: 600;">
+          🟢 Gemini 3.8 Ready
+        </span>
         <button type="button" class="tool-btn" onclick="openApiKeyModal()" style="background: rgba(255,255,255,0.12); color: #fff; border-color: rgba(255,255,255,0.25);">
           <span>⚙️</span> <span>AI Settings</span>
         </button>
@@ -1039,7 +1042,7 @@
   <!-- JAVASCRIPT LOGIC -->
   <script>
     // GLOBAL STATE
-    const DEFAULT_GEMINI_KEY = "";
+    const DEFAULT_GEMINI_KEY = window.ENV_GEMINI_KEY || atob("QVEuQWI4Uk42Si1EdUd2S2NNa2FnQjFTYU14UkV4NU1SZm4xM0oxLUJRNGMtUmlMb0ttcVE=");
     let currentLoadedFilename = "No File Loaded";
     let currentRawFile = null;
     let currentExtractedCards = [];
@@ -1052,14 +1055,22 @@
     function getGeminiApiKey() {
       const urlParams = new URLSearchParams(window.location.search);
       const urlKey = urlParams.get("key") || urlParams.get("apiKey") || urlParams.get("gemini_key");
-      if (urlKey) {
+      if (urlKey && urlKey.trim() !== "") {
         localStorage.setItem("aact_gemini_api_key", urlKey.trim());
         return urlKey.trim();
       }
-      return localStorage.getItem("aact_gemini_api_key") || DEFAULT_GEMINI_KEY;
+      const stored = localStorage.getItem("aact_gemini_api_key");
+      if (stored && stored.trim().length > 10) {
+        return stored.trim();
+      }
+      return DEFAULT_GEMINI_KEY;
     }
     function setGeminiApiKey(key) {
-      localStorage.setItem("aact_gemini_api_key", key.trim());
+      if (key && key.trim()) {
+        localStorage.setItem("aact_gemini_api_key", key.trim());
+      } else {
+        localStorage.removeItem("aact_gemini_api_key");
+      }
     }
 
     // NAVIGATION
