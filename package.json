@@ -1,0 +1,16 @@
+{
+  "name": "aact-touch10-portal",
+  "version": "1.0.0",
+  "description": "AACT NOW 2026 • Official Ambassador & Staff Proxy Touch 10 Intake Portal",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve -l 3000 .",
+    "dev": "npx serve -l 3000 ."
+  },
+  "dependencies": {
+    "serve": "^14.2.4"
+  },
+  "keywords": ["aact", "touch10", "civic-intake", "nonpartisan", "rgv"],
+  "author": "AACT NOW Civic Operations",
+  "license": "UNLICENSED"
+}

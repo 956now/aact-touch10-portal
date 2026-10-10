@@ -1,0 +1,13 @@
+run = "npx serve -l 3000 ."
+entrypoint = "index.html"
+
+[nix]
+channel = "stable-24_05"
+
+[deployment]
+run = ["npx", "serve", "-l", "3000", "."]
+deploymentTarget = "autoscale"
+
+[[ports]]
+localPort = 3000
+externalPort = 80
