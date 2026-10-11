@@ -838,16 +838,23 @@
             <div style="font-size: 18px;">⏳</div>
           </div>
 
-          <!-- AMBASSADOR HEADER -->
+          <!-- AMBASSADOR & EVENT PROVENANCE HEADER -->
           <div style="padding: 10px 16px; border-bottom: 1px solid var(--slate-200); background: #fdfefe;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
-              <span style="font-size: 10.5px; font-weight: 700; text-transform: uppercase; color: var(--slate-600);">Ambassador Info (338 Seeded)</span>
+              <span style="font-size: 10.5px; font-weight: 700; text-transform: uppercase; color: var(--slate-600);">Ambassador & Sourcing Provenance</span>
               <span id="ambOrgBadge" style="font-size: 11px; font-weight: 700; color: var(--blue-accent);"></span>
             </div>
-            <div style="display: grid; grid-template-columns: 35% 35% 30%; gap: 6px;">
+            <!-- Row 1: Ambassador Name, Email, Organization -->
+            <div style="display: grid; grid-template-columns: 35% 35% 30%; gap: 6px; margin-bottom: 6px;">
               <input type="text" id="ambSearchInput" placeholder="Type Ambassador (e.g. Eduardo, Laura, STC)" oninput="handleAmbassadorTypeahead(this.value)" style="height: 30px; font-size: 12px; font-weight: 700; padding: 0 8px; border: 1.5px solid var(--slate-300); border-radius: 5px;">
               <input type="email" id="ambEmailInput" placeholder="Ambassador Email" style="height: 30px; font-size: 12px; padding: 0 8px; border: 1px solid var(--slate-300); border-radius: 5px;">
-              <input type="text" id="ambOrgInput" placeholder="Organization" style="height: 30px; font-size: 12px; padding: 0 8px; border: 1px solid var(--slate-300); border-radius: 5px;">
+              <input type="text" id="ambOrgInput" placeholder="Organization (e.g. Lone Star Bank)" style="height: 30px; font-size: 12px; padding: 0 8px; border: 1px solid var(--slate-300); border-radius: 5px;">
+            </div>
+            <!-- Row 2: Event / Origin Source, Collection Date, Notes / Drop-off Details -->
+            <div style="display: grid; grid-template-columns: 35% 25% 40%; gap: 6px;">
+              <input type="text" id="cardEventSource" placeholder="Event / Source (e.g. Avocado Festival, Branch Drop-off)" style="height: 28px; font-size: 11.5px; padding: 0 8px; border: 1px solid var(--slate-300); border-radius: 5px; background: #fff;">
+              <input type="date" id="cardCollectionDate" style="height: 28px; font-size: 11.5px; padding: 0 6px; border: 1px solid var(--slate-300); border-radius: 5px; background: #fff;" title="Card Collection / Event Date">
+              <input type="text" id="cardSourcingNotes" placeholder="Drop-off notes (e.g. 'Turned in by Mrs. Saenz at McAllen HQ')" style="height: 28px; font-size: 11.5px; padding: 0 8px; border: 1px solid var(--slate-300); border-radius: 5px; background: #fff;">
             </div>
             <div id="ambassadorDropdown" style="display: none; background: #fff; border: 1px solid var(--slate-300); border-radius: 5px; max-height: 140px; overflow-y: auto; margin-top: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.08); position: absolute; z-index: 50; width: 340px;"></div>
           </div>
@@ -1695,6 +1702,9 @@ Return ONLY valid JSON.`;
       const ambEmail = document.getElementById("ambEmailInput").value.trim();
       const ambOrg = document.getElementById("ambOrgInput").value.trim() || "AACT Partner";
       const verifier = document.getElementById("transcriberInternName").value.trim() || "Staff Intern";
+      const eventSource = document.getElementById("cardEventSource")?.value.trim() || "Physical Intake";
+      const collectionDate = document.getElementById("cardCollectionDate")?.value || new Date().toISOString().slice(0, 10);
+      const dropoffNotes = document.getElementById("cardSourcingNotes")?.value.trim() || "";
 
       if (!ambName) {
         showToast("Please enter or select an Ambassador Name.", false);
@@ -1743,6 +1753,9 @@ Return ONLY valid JSON.`;
         source: "STAFF_SPLIT_SCREEN_TRANSCRIBER",
         original_filename: currentLoadedFilename,
         staff_verifier: verifier,
+        event_source: eventSource,
+        collection_date: collectionDate,
+        dropoff_notes: dropoffNotes,
         ambassador_name: ambName,
         ambassador_email: ambEmail,
         organization: ambOrg,
@@ -1758,23 +1771,29 @@ Return ONLY valid JSON.`;
       localStorage.setItem("aact_card_tracking_queue", JSON.stringify(queue));
       updateQueueNavBadge();
 
-      // 2. Transmit to Firestore / Cloud
+      // 2. Transmit to Pipeline
+      let syncResult = null;
       try {
-        await transmitToFirestore(payload);
+        syncResult = await transmitToFirestore(payload);
       } catch (err) {
-        console.warn("Firestore notice:", err);
+        console.warn("Intake submission notice:", err);
       }
 
       // 3. Export CSV Action Workbook
       exportCSVBackup(payload);
 
+      let successMsg = `🎉 Batch ${cardId} verified and added to Audit Queue!`;
+      if (syncResult && syncResult.local && syncResult.data) {
+        successMsg = `🎉 Card Approved! Filed to Ambassador_Kits/${syncResult.data.org_folder}/${syncResult.data.amb_folder}/ & Google Drive!`;
+      }
+
       // Check if more extracted cards remain in batch
       if (currentExtractedCards.length > 0 && currentActiveCardIndex < currentExtractedCards.length - 1) {
         const nextIdx = currentActiveCardIndex + 1;
-        showToast(`🎉 Card saved! Auto-loading Page ${nextIdx + 1} of ${currentExtractedCards.length}...`, true);
+        showToast(`${successMsg} Auto-loading Page ${nextIdx + 1} of ${currentExtractedCards.length}...`, true);
         loadExtractedCard(nextIdx);
       } else {
-        showToast(`🎉 Batch ${cardId} verified and added to Audit Queue!`, true);
+        showToast(successMsg, true);
       }
     }
 
@@ -1834,9 +1853,12 @@ Return ONLY valid JSON.`;
           <div><strong>Ambassador:</strong> ${card.ambassador_name}</div>
           <div><strong>Organization:</strong> ${card.organization}</div>
           <div><strong>Staff Verifier:</strong> ${card.staff_verifier}</div>
-          <div><strong>Original File:</strong> ${card.original_filename}</div>
-          <div><strong>Timestamp:</strong> ${new Date(card.timestamp).toLocaleString()}</div>
+          <div><strong>Event / Source:</strong> <span style="color: var(--blue-accent); font-weight: 700;">${card.event_source || 'Direct Intake'}</span></div>
+          <div><strong>Collection Date:</strong> <span style="font-weight: 600;">${card.collection_date || 'N/A'}</span></div>
           <div><strong>Total Contacts:</strong> ${card.contacts_count}</div>
+          <div style="grid-column: span 3; border-top: 1px solid var(--slate-200); padding-top: 6px; color: var(--slate-600);">
+            <strong>Sourcing / Drop-Off Notes:</strong> ${card.dropoff_notes || 'No specific drop-off notes provided.'}
+          </div>
         </div>
 
         <table class="data-table" style="font-size: 11.5px;">
@@ -1937,8 +1959,25 @@ Return ONLY valid JSON.`;
       a.click();
     }
 
-    // FIRESTORE BRIDGE
+    // INTAKE BRIDGE (LOCAL ENGINE + FIRESTORE FALLBACK)
     async function transmitToFirestore(payload) {
+      // 1. Try Local Python Server API Endpoint (writes directly to local & Google Drive folders)
+      try {
+        const localResp = await fetch("/api/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        if (localResp.ok) {
+          const resJson = await localResp.json();
+          console.log("Local folder pipeline processed submission successfully:", resJson);
+          return { success: true, local: true, data: resJson };
+        }
+      } catch (e) {
+        console.log("Local /api/submit endpoint not reachable, attempting cloud bridge...");
+      }
+
+      // 2. Cloud Firestore Fallback
       const url = "https://firestore.googleapis.com/v1/projects/aact-now-2026/databases/(default)/documents/intake_submissions";
       const doc = {
         fields: {
@@ -1973,7 +2012,12 @@ Return ONLY valid JSON.`;
           }
         }
       };
-      return fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(doc) });
+      try {
+        const cloudResp = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(doc) });
+        return { success: cloudResp.ok, local: false };
+      } catch (err) {
+        return { success: false, error: err };
+      }
     }
 
     // API KEY MODAL LOGIC
